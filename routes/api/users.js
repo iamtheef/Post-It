@@ -1,47 +1,58 @@
 const express = require("express");
 const User = require("../../models/User");
+const Profile = require("../../models/Profile");
 const router = express.Router();
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const passport = require("passport");
+const ValidateLogin = require("../../validation/login");
+const ValidateRegister = require("../../validation/register");
 
 //routes ===================================
 
-router.get("/test", (req, res) => res.json({ message: "users works!" }));
-
 router.post("/register", (req, res) => {
-  User.findOne({ email: req.body.email }).then(user => {
-    if (user) {
-      res.status(400).json({ email: "Email already exists" });
-    } else {
-      const avatar = gravatar.url(req.body.email, {
-        s: "200", // Size
-        r: "pg", // Rating
-        d: "mm" // Default
-      });
+  const { errors, isValid } = ValidateRegister(req.body);
+  if (!isValid) return res.status(400).json(errors);
 
-      const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        avatar,
-        password: req.body.password
-      });
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (user) {
+        res.status(400).json({ email: "Email already exists" });
+      } else {
+        const avatar = gravatar.url(req.body.email, {
+          s: "200", // Size
+          r: "pg", // Rating
+          d: "mm" // Default
+        });
 
-      let hash = bcrypt.hashSync(req.body.password, 12);
-      newUser.password = hash;
-      newUser
-        .save()
-        .then(user => res.json(user))
-        .catch(e => console.log(e));
-    }
-  });
+        const newUser = new User({
+          username: req.body.username,
+          email: req.body.email,
+          avatar,
+          password: req.body.password,
+          profile: new Profile()
+        });
+
+        let hash = bcrypt.hashSync(req.body.password, 12);
+        newUser.password = hash;
+        newUser
+          .save()
+          .then(user => res.json(user))
+          .catch(e => console.log(e));
+      }
+    })
+    .catch(e => res.json(e));
 });
 
 router.post("/login", (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
+
+  const { errors, isValid } = ValidateLogin(req.body);
+  if (!isValid) {
+    return res.json(errors);
+  }
 
   User.findOne({ email }).then(user => {
     if (!user) {
@@ -67,17 +78,5 @@ router.post("/login", (req, res) => {
     });
   });
 });
-
-router.get(
-  "/current",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.json({
-      id: req.user.id,
-      name: req.user.name,
-      email: req.user.email
-    });
-  }
-);
 
 module.exports = router;

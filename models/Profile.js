@@ -8,32 +8,35 @@ const profSchema = new mongoose.Schema({
   posts: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Post"
+      ref: "Post",
+      default: []
     }
   ],
 
   upvoted: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Post"
+      ref: "Post",
+      default: []
     }
   ],
 
   downvoted: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Post"
+      ref: "Post",
+      default: []
     }
   ],
 
   hidden: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Post"
+      ref: "Post",
+      default: []
     }
   ],
-  username: { type: String },
-  avatar: { type: String, default: null },
+
   cover: { type: String, default: null },
   age: { type: Date, default: Date.now }
 });

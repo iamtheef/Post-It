@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 //Creating Schema
 const UserSchema = new Schema({
-  name: {
+  username: {
     type: String,
     required: true
   },
@@ -17,12 +17,19 @@ const UserSchema = new Schema({
   },
 
   avatar: {
-    type: String
+    type: String,
+    default: null,
+    required: false
   },
 
   date: {
     type: Date,
     default: Date.now
+  },
+
+  profile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Profile"
   }
 });
 
