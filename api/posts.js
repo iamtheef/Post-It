@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
-const Post = require("../../models/Post");
-const User = require("../../models/User");
-const Profile = require("../../models/Profile");
-const validatePost = require("../../validation/post");
-const validateComment = require("../../validation/comment");
+const Post = require("../models/Post");
+const User = require("../models/User");
+const Profile = require("../models/Profile");
+const validatePost = require("../validation/post");
+const validateComment = require("../validation/comment");
 
 router.post(
   "/new",

@@ -1,13 +1,13 @@
 const express = require("express");
-const User = require("../../models/User");
-const Profile = require("../../models/Profile");
+const User = require("../models/User");
+const Profile = require("../models/Profile");
 const router = express.Router();
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const keys = require("../../config/keys");
-const ValidateLogin = require("../../validation/login");
-const ValidateRegister = require("../../validation/register");
+const keys = require("../config/keys");
+const ValidateLogin = require("../validation/login");
+const ValidateRegister = require("../validation/register");
 
 //routes ===================================
 

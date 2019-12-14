@@ -16,9 +16,9 @@ MongoClient.connect("mongodb://localhost/postIt", {
   .catch(err => console.log(err));
 
 // config apis ==================================
-const users = require("./routes/api/users");
-const posts = require("./routes/api/posts");
-const profile = require("./routes/api/profile");
+const users = require("./api/users");
+const posts = require("./api/posts");
+const profile = require("./api/profile");
 
 app.use("/api/users", users);
 app.use("/api/posts", posts);

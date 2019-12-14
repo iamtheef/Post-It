@@ -4,8 +4,8 @@ const passport = require("passport");
 
 // Models ===========================================
 
-const Profile = require("../../models/Profile");
-const User = require("../../models/User");
+const Profile = require("../models/Profile");
+const User = require("../models/User");
 
 // Routes ===========================================
 
