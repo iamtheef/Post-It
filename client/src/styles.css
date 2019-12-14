@@ -1,0 +1,29 @@
+.navbar-brand h1 {
+  font-size: 27px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: #3bf09f9e;
+  font-weight: 600;
+}
+.navbar-brand img {
+  margin-right: 6px;
+}
+
+#search {
+  width: 60%;
+  margin: auto;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 3px;
+}
+
+#navDrop {
+  width: 1200px !important;
+  padding: 0%;
+  margin: 0;
+}
+
+.navbar-menu {
+  width: 1200px;
+  padding: 0%;
+  margin: 0;
+}
