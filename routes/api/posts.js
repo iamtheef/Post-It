@@ -6,6 +6,7 @@ const Post = require("../../models/Post");
 const User = require("../../models/User");
 const Profile = require("../../models/Profile");
 const validatePost = require("../../validation/post");
+const validateComment = require("../../validation/comment");
 
 router.post(
   "/new",
@@ -93,6 +94,48 @@ router.post(
           .status(401)
           .json({ unathorized: "You are unauthorized for this action" })
       );
+  }
+);
+
+// Add comment to post
+router.post(
+  "/:post_id/comment",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateComment(req.body);
+    if (!isValid) return res.status(400).json(errors);
+
+    Post.findById(req.params.post_id)
+      .then(post => {
+        const newComment = {
+          username: req.user.username,
+          user: req.user.id,
+          body: req.body.body,
+          avatar: req.user.avatar
+        };
+        post.comments.unshift(newComment);
+        post.save().then(post => res.json(post));
+      })
+      .catch(e => res.json(e));
+  }
+);
+
+// Remove comment
+router.delete(
+  "/:post_id/:comment_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.findById(req.params.post_id)
+      .then(post => {
+        const removeIndex = post.comments.indexOf(req.params.comment_id);
+        if (req.user.id === removeIndex.user.id) {
+          post.comments.splice(removeIndex, 1);
+          post.save().then(post => res.json(post));
+        } else {
+          res.status(401).json({ msg: "Unathorized action" });
+        }
+      })
+      .catch(e => res.json(e));
   }
 );
 

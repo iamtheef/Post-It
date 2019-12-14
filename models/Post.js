@@ -43,6 +43,11 @@ const Post = new Schema({
         type: mongoose.Types.ObjectId,
         ref: "users"
       },
+      username: {
+        type: String,
+        required: true
+      },
+
       date: {
         type: Date,
         default: Date.now
