@@ -12,6 +12,7 @@ const ValidateRegister = require("../validation/register");
 //routes ===================================
 
 router.post("/register", (req, res) => {
+  console.log(req.body);
   const { errors, isValid } = ValidateRegister(req.body);
   if (!isValid) return res.status(400).json(errors);
 

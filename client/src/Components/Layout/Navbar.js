@@ -8,15 +8,18 @@ function Navbar() {
       role="navigation"
       aria-label="main navigation"
     >
-      <Link to="/" className="navbar-brand">
-        <a className="navbar-item">
-          <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.stickpng.com%2Fassets%2Fimages%2F587389d8f3a71010b5e8ef4b.png&f=1&nofb=1" />
-          <h1>postit</h1>
-        </a>
+      <Link to="/" className="navbar-brand navbar-item">
+        <img
+          src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.stickpng.com%2Fassets%2Fimages%2F587389d8f3a71010b5e8ef4b.png&f=1&nofb=1"
+          alt="noPicFound"
+        />
+        <h1>postit</h1>
       </Link>
 
       <div className="navbar-item has-dropdown is-hoverable">
-        <a className="navbar-link">Sort By</a>
+        <Link className="navbar-link" to="/">
+          Sort By
+        </Link>
 
         <div className="navbar-dropdown">
           <a className="navbar-item">Hot</a>
