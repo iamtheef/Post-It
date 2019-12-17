@@ -3,7 +3,8 @@ class Login extends Component {
   state = {
     username: "",
     password: "",
-    errors: {}
+    errors: {},
+    visibleModal: false
   };
 
   onChange = e => {
@@ -17,7 +18,6 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
-    console.log(user);
   };
 
   render() {

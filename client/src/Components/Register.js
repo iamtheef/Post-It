@@ -33,11 +33,17 @@ class Register extends Component {
     const { errors } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
-        <div
-          className="container columns is-centered"
-          style={{ marginTop: "80px" }}
-        >
-          <div className="column is-half">
+        <div className="container columns is-centered">
+          <div className="column is-one-quarter">
+            <img
+              style={{ minWidth: "480px", opacity: "0.3", minHeight: "700px" }}
+              src="https://media.giphy.com/media/l4FGGAlWYVMUciiJy/giphy.gif"
+            />
+          </div>
+          <div
+            className="column is-centered"
+            style={{ marginTop: "10%", marginLeft: "-80px" }}
+          >
             <h1 id="header">
               Create your account on <span id="middle-header">postit</span> to
               create posts and comment
@@ -63,16 +69,14 @@ class Register extends Component {
               <label className="label">Email</label>
               <div className="control">
                 <input
-                  className={`input ${errors.email ? "is-danger" : ""}`}
+                  className={`input ${errors.email && "is-danger"}`}
                   type="text"
                   placeholder="Your Email"
                   name="email"
                   value={this.state.email}
                   onChange={this.onChange}
                 ></input>
-                <p className="help is-danger">
-                  {errors.email ? errors.email : ""}
-                </p>
+                <p className="help is-danger">{errors.email && errors.email}</p>
               </div>
             </div>
 
@@ -80,7 +84,7 @@ class Register extends Component {
               <label className="label">Password</label>
               <div className="control">
                 <input
-                  className={`input ${errors.password ? "is-danger" : ""}`}
+                  className={`input ${errors.password && "is-danger"}`}
                   type="password"
                   placeholder="Create a strong password"
                   name="password"
@@ -97,7 +101,7 @@ class Register extends Component {
               <label className="label">Confirm Password</label>
               <div className="control">
                 <input
-                  className={`input ${errors.password2 ? "is-danger" : ""}`}
+                  className={`input ${errors.password2 && "is-danger"}`}
                   type="password"
                   placeholder="Confirm your password"
                   name="password2"
@@ -105,7 +109,7 @@ class Register extends Component {
                   onChange={this.onChange}
                 ></input>
                 <p className="help is-danger">
-                  {errors.password2 ? errors.password2 : ""}
+                  {errors.password2 && errors.password2}
                 </p>
               </div>
             </div>
