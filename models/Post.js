@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const User = require("./User");
 
-const Post = new Schema({
+const Post = new mongoose.Schema({
   user: {
     type: mongoose.Types.ObjectId,
     ref: "User"
@@ -57,7 +57,8 @@ const Post = new Schema({
         required: true
       },
       avatar: {
-        type: String
+        type: String,
+        default: ""
       }
     }
   ],

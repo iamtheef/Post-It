@@ -55,9 +55,16 @@ router.post(
 // Public profiles (By Id)
 router.get("/:user_id", (req, res) => {
   User.findById({ _id: req.params.user_id })
-    .populate("user", ["username", "avatar"])
+    .populate("user", [
+      "username",
+      "avatar",
+      "upvoted",
+      "downvoted",
+      "hidden",
+      "posts"
+    ])
     .then(profile => {
-      if (!profile) res.status(404).json("No user found");
+      if (!profile) res.status(404).json("Empty profile");
       res.json(profile);
     })
     .catch(e => res.json({ e: "No profiles found" }));

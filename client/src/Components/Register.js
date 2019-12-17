@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+
 class Register extends Component {
   state = {
     username: "",
@@ -21,10 +23,14 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2
     };
-    console.log(newUser);
+    axios
+      .post("/api/users/register", newUser)
+      .then(res => console.log(res.data))
+      .catch(e => this.setState({ errors: e.response.data }));
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
         <div
@@ -40,13 +46,16 @@ class Register extends Component {
               <label className="label">Username</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors.username ? "is-danger" : ""}`}
                   type="text"
                   placeholder="Your username"
                   name="username"
                   value={this.state.username}
                   onChange={this.onChange}
                 ></input>
+                <p className="help is-danger">
+                  {errors.username ? errors.username : ""}
+                </p>
               </div>
             </div>
 
@@ -54,13 +63,16 @@ class Register extends Component {
               <label className="label">Email</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors.email ? "is-danger" : ""}`}
                   type="text"
                   placeholder="Your Email"
                   name="email"
                   value={this.state.email}
                   onChange={this.onChange}
                 ></input>
+                <p className="help is-danger">
+                  {errors.email ? errors.email : ""}
+                </p>
               </div>
             </div>
 
@@ -68,13 +80,16 @@ class Register extends Component {
               <label className="label">Password</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors.password ? "is-danger" : ""}`}
                   type="password"
                   placeholder="Create a strong password"
                   name="password"
                   value={this.state.password}
                   onChange={this.onChange}
                 ></input>
+                <p className="help is-danger">
+                  {errors.password ? errors.password : ""}
+                </p>
               </div>
             </div>
 
@@ -82,13 +97,16 @@ class Register extends Component {
               <label className="label">Confirm Password</label>
               <div className="control">
                 <input
-                  className="input"
+                  className={`input ${errors.password2 ? "is-danger" : ""}`}
                   type="password"
                   placeholder="Confirm your password"
                   name="password2"
                   value={this.state.password2}
                   onChange={this.onChange}
                 ></input>
+                <p className="help is-danger">
+                  {errors.password2 ? errors.password2 : ""}
+                </p>
               </div>
             </div>
 

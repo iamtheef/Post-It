@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const User = require("./User");
+const Post = require("./Post");
+
 const profSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -37,7 +40,7 @@ const profSchema = new mongoose.Schema({
     }
   ],
 
-  cover: { type: String, default: null },
+  cover: { type: String },
   age: { type: Date, default: Date.now }
 });
 

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Profile = require("./Profile");
 
 //Creating Schema
 const UserSchema = new mongoose.Schema({
@@ -17,7 +18,7 @@ const UserSchema = new mongoose.Schema({
 
   avatar: {
     type: String,
-    default: null,
+    default: "",
     required: false
   },
 
@@ -32,4 +33,4 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-module.exports = User = mongoose.model("users", UserSchema);
+module.exports = mongoose.model("User", UserSchema);
