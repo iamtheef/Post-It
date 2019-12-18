@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import onClickOutside from "react-onclickoutside";
 
 class Register extends Component {
   state = {
@@ -13,6 +14,10 @@ class Register extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  // handleClickOutside = () => {
+  //   this.style.display = "none";
+  // };
 
   onSubmit = e => {
     e.preventDefault();
@@ -36,20 +41,28 @@ class Register extends Component {
         <div className="container columns is-centered">
           <div className="column is-one-quarter">
             <img
-              style={{ minWidth: "480px", opacity: "0.3", minHeight: "700px" }}
+              style={{
+                minWidth: "780px",
+                opacity: "0.3",
+                minHeight: "850px"
+              }}
               src="https://media.giphy.com/media/l4FGGAlWYVMUciiJy/giphy.gif"
+              alt="robot gif"
             />
           </div>
           <div
-            className="column is-centered"
-            style={{ marginTop: "10%", marginLeft: "-80px" }}
+            className="column is-three-quarters is-centered"
+            style={{
+              marginTop: "10%",
+              marginRight: "200px"
+            }}
           >
             <h1 id="header">
               Create your account on <span id="middle-header">postit</span> to
               create posts and comment
             </h1>
             <div className="field">
-              <label className="label">Username</label>
+              <label className="label">Username *</label>
               <div className="control">
                 <input
                   className={`input ${errors.username ? "is-danger" : ""}`}
@@ -66,12 +79,12 @@ class Register extends Component {
             </div>
 
             <div className="field">
-              <label className="label">Email</label>
+              <label className="label">Email *</label>
               <div className="control">
                 <input
                   className={`input ${errors.email && "is-danger"}`}
                   type="text"
-                  placeholder="Your Email"
+                  placeholder="Your email"
                   name="email"
                   value={this.state.email}
                   onChange={this.onChange}
@@ -81,7 +94,7 @@ class Register extends Component {
             </div>
 
             <div className="field">
-              <label className="label">Password</label>
+              <label className="label">Password *</label>
               <div className="control">
                 <input
                   className={`input ${errors.password && "is-danger"}`}
@@ -98,7 +111,7 @@ class Register extends Component {
             </div>
 
             <div className="field">
-              <label className="label">Confirm Password</label>
+              <label className="label">Confirm Password *</label>
               <div className="control">
                 <input
                   className={`input ${errors.password2 && "is-danger"}`}
@@ -117,8 +130,8 @@ class Register extends Component {
             <div className="field">
               <div className="control">
                 <label className="checkbox">
-                  <input type="checkbox" required /> I agree to the{" "}
-                  <a href="/">terms and conditions</a>
+                  <input type="checkbox" required /> We love robots,{" "}
+                  <a href="/">but we need to confirm you are not one. :]</a>
                 </label>
               </div>
             </div>
@@ -138,4 +151,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default onClickOutside(Register);

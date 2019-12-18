@@ -24,6 +24,7 @@
     "mongoose": "^5.7.14",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "react-onclickoutside": "^6.9.0",
     "validator": "^12.1.0"
   },
   "devDependencies": {

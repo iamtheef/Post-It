@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Post } from "./Post";
 
 class Landing extends Component {
   render() {
