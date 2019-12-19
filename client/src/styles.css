@@ -1,6 +1,10 @@
+body {
+  font-family: "PT Sans Narrow", sans-serif;
+}
+
 .navbar-brand h1 {
   font-size: 27px;
-  /* font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif; */
+
   color: hsl(38, 86%, 64%);
   font-weight: 600;
 }
@@ -44,12 +48,16 @@
 }
 
 .modal-content {
-  overflow-y: hidden !important;
-  overflow-x: hidden !important;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .login-prompts {
   font-size: 15px;
   font-weight: unset;
   margin-top: 240px;
+}
+
+#login {
+  font-weight: bolder;
 }

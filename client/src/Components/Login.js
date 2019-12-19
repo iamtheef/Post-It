@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import onClickOutside from "react-onclickoutside";
 
 class Login extends Component {
   state = {
@@ -96,8 +95,8 @@ class Login extends Component {
               </div>
             </div>
             <div className="login-prompts label">
-              <a href="/" style={{ marginRight: "15px" }}>
-                Forgot your username?
+              <a href="/" style={{ marginRight: "4px" }}>
+                Forgot your username? ·
               </a>
               <a href="/">Forgot your password?</a>
               <p style={{ marginTop: "20px" }}>
@@ -111,4 +110,4 @@ class Login extends Component {
   }
 }
 
-export default onClickOutside(Login);
+export default Login;

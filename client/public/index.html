@@ -20,9 +20,30 @@
     ></script>
 
     <script>
+      // modal scripts
       let modal = document.getElementsByClassName("modal");
-      window.onClick = function(e) {
-        console.log(e.target);
+      let background = document.getElementsByClassName("modal-background");
+      let loginButton = document.getElementsByClassName("login");
+      let registerButton = document.getElementsByClassName("register");
+
+      // prettier-ignore
+      window.onclick = function(e) {
+        if (e.target === background[0] && modal[0].style.display === "block") {
+          modal[0].style.display = "none";
+        } else if (e.target === background[1] && modal[1].style.display === "block") {
+          modal[1].style.display = "none";
+        }else if(e.target === loginButton[0]) {
+            modal[1].style.display = 'block'
+        }else if(e.target === registerButton[0]){
+          modal[0].style.display = 'block'
+        }
+      };
+
+      //escape key for modals
+      document.onkeydown = function(event) {
+        if (event.keyCode == 27) {
+          (modal[0].style.display = "none"), (modal[1].style.display = "none");
+        }
       };
     </script>
 

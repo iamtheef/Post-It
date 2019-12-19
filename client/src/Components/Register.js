@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import onClickOutside from "react-onclickoutside";
 
 class Register extends Component {
   state = {
@@ -14,10 +13,6 @@ class Register extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
-  // handleClickOutside = () => {
-  //   this.style.display = "none";
-  // };
 
   onSubmit = e => {
     e.preventDefault();
@@ -151,4 +146,4 @@ class Register extends Component {
   }
 }
 
-export default onClickOutside(Register);
+export default Register;
