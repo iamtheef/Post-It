@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useToggle from "../../Hooks/useToggle";
 
 import Login from "../Login";
 import Register from "../Register";
 
 function Navbar() {
+  const [regModal, toggleRegModal] = useToggle(false);
+  const [logModal, toggleLogModal] = useToggle(false);
+
   return (
     <nav
       className="navbar is-light is-fixed-top"
@@ -42,30 +46,27 @@ function Navbar() {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <button
-              className="button register"
-              style={{
-                backgroundColor: "hsla(38, 93%, 68%, 0.694)",
-                fontWeight: "bold"
-              }}
-            >
+            <button className="button register" onClick={toggleRegModal}>
               Sign up
             </button>
-            <div className="modal">
-              <div className="modal-background"></div>
+            <div
+              className="modal"
+              style={{ display: regModal ? "block" : "none" }}
+            >
+              <div className="modal-background" onClick={toggleRegModal}></div>
               <div className="modal-content has-background-white is-centered">
                 <Register />
               </div>
             </div>
 
-            <button
-              className="button is-light login"
-              style={{ border: " 1px solid black", fontWeight: "bold" }}
-            >
+            <button className="button is-light login" onClick={toggleLogModal}>
               Login
             </button>
-            <div className="modal">
-              <div className="modal-background"></div>
+            <div
+              className="modal"
+              style={{ display: logModal ? "block" : "none" }}
+            >
+              <div className="modal-background" onClick={toggleLogModal}></div>
               <div className="modal-content has-background-white is-centered">
                 <Login />
               </div>
