@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import useToggle from "../../Hooks/useToggle";
-
 import Login from "../Login";
 import Register from "../Register";
+import { UserContext, UserProvider } from "../../Context/UserContext";
 
 function Navbar() {
+  const msg = useContext(UserContext);
   const [regModal, toggleRegModal] = useToggle(false);
   const [logModal, toggleLogModal] = useToggle(false);
 
@@ -20,7 +21,7 @@ function Navbar() {
           src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.stickpng.com%2Fassets%2Fimages%2F587389d8f3a71010b5e8ef4b.png&f=1&nofb=1"
           alt="logo"
         />
-        <h1>postit</h1>
+        <h1>{msg}</h1>
       </Link>
 
       <div className="navbar-item has-dropdown is-hoverable">

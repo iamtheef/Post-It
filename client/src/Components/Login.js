@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { login, errors } from "../Context/UserContext";
 
 class Login extends Component {
   state = {
@@ -14,16 +14,12 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     const user = {
-      username: this.state.email,
+      email: this.state.email,
       password: this.state.password
     };
-
-    axios
-      .post("api/users/login", user)
-      .then(user => console.log(user))
-      .catch(e => this.setState({ errors: e.response.data }));
+    login(user);
+    this.setState({ errors: res.errors });
   };
 
   render() {

@@ -5,17 +5,20 @@ import Navbar from "./Components/Layout/Navbar";
 import Landing from "./Components/Landing";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import { UserProvider } from "./Context/UserContext";
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <Navbar></Navbar>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-        </div>
+        <UserProvider>
+          <div className="App">
+            <Navbar></Navbar>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+          </div>
+        </UserProvider>
       </Router>
     );
   }
