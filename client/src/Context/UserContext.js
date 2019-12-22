@@ -1,18 +1,22 @@
 import React, { createContext, useState } from "react";
 import axios from "axios";
 
-export const login = credits => {
-  console.log(credits);
-  axios
-    .post("api/users/login", credits)
-    .then(user => console.log(user))
-    .catch(e => this.setState({ errors: e.response.data }));
-};
-
-export const UserContext = createContext(null);
+export const UserContext = createContext();
 
 export function UserProvider(props) {
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+
+  const login = credits => {
+    axios
+      .post("api/users/login", credits)
+      .then(user => setUser(user))
+      .catch(e => setError(e.response.data));
+  };
+
   return (
-    <UserContext.Provider value={login}>{props.children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, login, error }}>
+      {props.children}
+    </UserContext.Provider>
   );
 }
