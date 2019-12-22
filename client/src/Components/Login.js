@@ -3,7 +3,7 @@ import { UserContext } from "../Context/UserContext";
 import useInputState from "../Hooks/useInputState";
 
 function Login() {
-  const { login, error } = useContext(UserContext);
+  const { login, errors } = useContext(UserContext);
   const [emailValue, handleEmailChange, resetEmail] = useInputState("");
   const [passValue, handlePassChange, resetPass] = useInputState("");
   const handleSubmit = e => {
@@ -43,7 +43,7 @@ function Login() {
           </h1>
 
           <h1 className="help is-danger" style={{ fontSize: "15px" }}>
-            {error && error.msg}
+            {errors && errors.msg}
           </h1>
 
           <div className="field">

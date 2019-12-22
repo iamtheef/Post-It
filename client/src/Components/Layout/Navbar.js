@@ -6,7 +6,7 @@ import Register from "../Register";
 import { UserContext } from "../../Context/UserContext";
 
 function Navbar() {
-  const { user } = useContext(UserContext);
+  const { user, errors } = useContext(UserContext);
   const [regModal, toggleRegModal] = useToggle(false);
   const [logModal, toggleLogModal] = useToggle(false);
 
@@ -59,7 +59,12 @@ function Navbar() {
                   className="modal-background"
                   onClick={toggleRegModal}
                 ></div>
-                <div className="modal-content has-background-white is-centered">
+                <div
+                  className="modal-content has-background-white is-centered"
+                  onClick={errors => {
+                    if (!errors) toggleRegModal();
+                  }}
+                >
                   <Register />
                 </div>
               </div>
@@ -79,7 +84,11 @@ function Navbar() {
                   onClick={toggleLogModal}
                 ></div>
                 <div className="modal-content has-background-white is-centered">
-                  <Login />
+                  <Login
+                    onClick={errors => {
+                      if (!errors) toggleLogModal();
+                    }}
+                  />
                 </div>
               </div>
             </div>

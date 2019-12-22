@@ -5,17 +5,24 @@ export const UserContext = createContext();
 
 export function UserProvider(props) {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const login = credits => {
     axios
       .post("api/users/login", credits)
       .then(user => setUser(user))
-      .catch(e => setError(e.response.data));
+      .catch(e => setErrors(e.response.data));
+  };
+
+  const register = newUser => {
+    axios
+      .post("/api/users/register", newUser)
+      .then(res => setUser(res.data))
+      .catch(e => setErrors(e.response.data));
   };
 
   return (
-    <UserContext.Provider value={{ user, login, error }}>
+    <UserContext.Provider value={{ user, login, register, errors }}>
       {props.children}
     </UserContext.Provider>
   );
