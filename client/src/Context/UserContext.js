@@ -11,9 +11,17 @@ export function UserProvider(props) {
 
   // initial user
   useEffect(() => {
+    const decoded = jwt_decode(localStorage.jwtToken);
+
+    // check for valid token (if so, give persmissions)
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
       setUser(jwt_decode(localStorage.jwtToken));
+    }
+
+    //check for expired token (if so, lougout)
+    if (decoded.exp < Date.now / 1000) {
+      logout();
     }
   }, [setUser]);
 
@@ -38,8 +46,15 @@ export function UserProvider(props) {
       .catch(e => setErrors(e.response.data));
   };
 
+  // handling logout
+  const logout = () => {
+    delete localStorage.getItem("jwtToken");
+    setAuthToken(null);
+    setUser(null);
+  };
+
   return (
-    <UserContext.Provider value={{ user, login, register, errors }}>
+    <UserContext.Provider value={{ user, login, register, errors, logout }}>
       {props.children}
     </UserContext.Provider>
   );

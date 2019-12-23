@@ -6,7 +6,7 @@ import Register from "../Register";
 import { UserContext } from "../../Context/UserContext";
 
 function Navbar() {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
   const [regModal, toggleRegModal] = useToggle(false);
   const [logModal, toggleLogModal] = useToggle(false);
 
@@ -21,7 +21,7 @@ function Navbar() {
           src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.stickpng.com%2Fassets%2Fimages%2F587389d8f3a71010b5e8ef4b.png&f=1&nofb=1"
           alt="logo"
         />
-        <h1>postit</h1>
+        <img src="https://media.giphy.com/media/QTfXEhq05P5snynFt5/giphy.gif"></img>
       </Link>
 
       <div className="navbar-item has-dropdown is-hoverable">
@@ -62,7 +62,7 @@ function Navbar() {
                 <div
                   className="modal-content has-background-white is-centered"
                   onClick={errors => {
-                    if (!errors) toggleRegModal();
+                    if (!errors && regModal) toggleRegModal();
                   }}
                 >
                   <Register />
@@ -86,7 +86,7 @@ function Navbar() {
                 <div className="modal-content has-background-white is-centered">
                   <Login
                     onClick={errors => {
-                      if (!errors) toggleLogModal();
+                      if (!errors && logModal) toggleLogModal();
                     }}
                   />
                 </div>
@@ -95,7 +95,27 @@ function Navbar() {
           </div>
         </div>
       ) : (
-        <h1>Profile</h1>
+        <div className="navbar-item has-dropdown is-hoverable">
+          <Link className="navbar-link" to="">
+            <img
+              className="user-avatar"
+              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstyles.redditmedia.com%2Ft5_ag5gy%2Fstyles%2FprofileIcon_kveeu0ih46901.png%3Fwidth%3D256%26height%3D256%26crop%3D256%3A256%2Csmart%26s%3Dd68b7fef8cd1bf7d4d6e6c06c57bc80083909665&f=1&nofb=1"
+            ></img>
+            {user.username}
+          </Link>
+
+          <div className="navbar-dropdown">
+            <a href="" className="navbar-item">
+              Profile
+            </a>
+            <a href="" className="navbar-item">
+              Settings
+            </a>
+            <a onClick={logout} className="navbar-item">
+              Logout
+            </a>
+          </div>
+        </div>
       )}
     </nav>
   );

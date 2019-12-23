@@ -63,11 +63,16 @@ body {
 }
 
 .register {
-  background-color: rgb(245, 213, 130);
+  background-color: rgb(200, 202, 208);
   font-weight: bold;
 }
 
 .login {
   border: 1px solid black !important;
   font-weight: bold;
+}
+
+.user-avatar {
+  margin: auto;
+  margin-right: 15px;
 }
