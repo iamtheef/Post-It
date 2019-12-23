@@ -6,7 +6,7 @@ import Register from "../Register";
 import { UserContext } from "../../Context/UserContext";
 
 function Navbar() {
-  const { user, errors } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [regModal, toggleRegModal] = useToggle(false);
   const [logModal, toggleLogModal] = useToggle(false);
 

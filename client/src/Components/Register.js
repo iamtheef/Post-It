@@ -19,7 +19,6 @@ function Register() {
     register(newUser);
     resetPass();
     resetPass2();
-    console.log(errors);
   };
 
   return (
