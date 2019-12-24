@@ -10,6 +10,14 @@ function Navbar() {
   const [regModal, toggleRegModal] = useToggle(false);
   const [logModal, toggleLogModal] = useToggle(false);
 
+  // handling esc key (closes modals if any open)
+  document.onkeydown = e => {
+    if (e.keyCode === 27) {
+      if (logModal) toggleLogModal();
+      if (regModal) toggleRegModal();
+    }
+  };
+
   return (
     <nav
       className="navbar is-light is-fixed-top"
@@ -105,15 +113,13 @@ function Navbar() {
           </Link>
 
           <div className="navbar-dropdown">
-            <a href="" className="navbar-item">
+            <Link className="navbar-item" to="/profile">
               Profile
-            </a>
-            <a href="" className="navbar-item">
-              Settings
-            </a>
-            <a onClick={logout} className="navbar-item">
+            </Link>
+            <Link className="navbar-item">Settings</Link>
+            <Link onClick={logout} className="navbar-item" to="/">
               Logout
-            </a>
+            </Link>
           </div>
         </div>
       )}

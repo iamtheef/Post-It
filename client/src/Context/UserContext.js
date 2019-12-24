@@ -11,17 +11,16 @@ export function UserProvider(props) {
 
   // initial user
   useEffect(() => {
-    const decoded = jwt_decode(localStorage.jwtToken);
-
     // check for valid token (if so, give persmissions)
     if (localStorage.jwtToken) {
+      const decoded = jwt_decode(localStorage.jwtToken);
       setAuthToken(localStorage.jwtToken);
-      setUser(jwt_decode(localStorage.jwtToken));
-    }
+      setUser(decoded);
 
-    //check for expired token (if so, lougout)
-    if (decoded.exp < Date.now / 1000) {
-      logout();
+      //check for expired token (if so, lougout)
+      if (decoded.exp < Date.now / 1000) {
+        logout();
+      }
     }
   }, [setUser]);
 
@@ -48,7 +47,7 @@ export function UserProvider(props) {
 
   // handling logout
   const logout = () => {
-    delete localStorage.getItem("jwtToken");
+    delete localStorage.jwtToken;
     setAuthToken(null);
     setUser(null);
   };

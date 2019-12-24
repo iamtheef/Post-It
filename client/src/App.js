@@ -4,14 +4,16 @@ import { UserProvider } from "./Context/UserContext";
 import "./App.css";
 import Navbar from "./Components/Layout/Navbar";
 import Landing from "./Components/Landing";
+import Profile from "./Components/Profile";
 
 function App() {
   return (
     <Router>
       <UserProvider>
+        <Navbar></Navbar>
         <div className="App">
-          <Navbar></Navbar>
-          <Route path="/" component={Landing} />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/profile" component={Profile} />
         </div>
       </UserProvider>
     </Router>

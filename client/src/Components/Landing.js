@@ -4,7 +4,7 @@ class Landing extends Component {
   render() {
     return (
       <div>
-        <h1 style={{ fontSide: "120px" }}>Landing</h1>
+        <h1 style={{ fontSize: "120px" }}>Landing</h1>
       </div>
     );
   }
