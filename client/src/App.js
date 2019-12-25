@@ -5,6 +5,7 @@ import "./App.css";
 import Navbar from "./Components/Layout/Navbar";
 import Landing from "./Components/Landing";
 import Profile from "./Components/Profile";
+import NewPost from "./Components/NewPost";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <div className="App">
           <Route exact path="/" component={Landing} />
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/newpost" component={NewPost} />
         </div>
       </UserProvider>
     </Router>

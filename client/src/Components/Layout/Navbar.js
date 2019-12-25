@@ -29,7 +29,10 @@ function Navbar() {
           src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.stickpng.com%2Fassets%2Fimages%2F587389d8f3a71010b5e8ef4b.png&f=1&nofb=1"
           alt="logo"
         />
-        <img src="https://media.giphy.com/media/QTfXEhq05P5snynFt5/giphy.gif"></img>
+        <img
+          src="https://media.giphy.com/media/QTfXEhq05P5snynFt5/giphy.gif"
+          alt="logo"
+        ></img>
       </Link>
 
       <div className="navbar-item has-dropdown is-hoverable">
@@ -106,6 +109,7 @@ function Navbar() {
         <div className="navbar-item has-dropdown is-hoverable">
           <Link className="navbar-link" to="">
             <img
+              alt="user logo"
               className="user-avatar"
               src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstyles.redditmedia.com%2Ft5_ag5gy%2Fstyles%2FprofileIcon_kveeu0ih46901.png%3Fwidth%3D256%26height%3D256%26crop%3D256%3A256%2Csmart%26s%3Dd68b7fef8cd1bf7d4d6e6c06c57bc80083909665&f=1&nofb=1"
             ></img>
