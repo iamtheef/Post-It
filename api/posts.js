@@ -7,6 +7,7 @@ const User = require("../models/User");
 const Profile = require("../models/Profile");
 const validatePost = require("../validation/post");
 const validateComment = require("../validation/comment");
+const Community = require("../models/Community");
 
 router.post(
   "/new",
@@ -138,5 +139,12 @@ router.delete(
       .catch(e => res.json(e));
   }
 );
+
+// All communities
+router.get("/communities/all", (req, res) => {
+  Community.find({})
+    .then(communities => res.json(communities))
+    .catch(e => res.json(e.response.data));
+});
 
 module.exports = router;
