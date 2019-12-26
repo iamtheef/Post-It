@@ -79,6 +79,10 @@ body {
 
 .header3 {
   font-size: 30px;
-
   font-weight: bold;
+}
+
+.comLogo {
+  max-width: 30px;
+  max-height: 30px;
 }
