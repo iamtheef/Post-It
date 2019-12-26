@@ -13,8 +13,7 @@ function NewPost() {
   const handleCommunityChange = e => {
     e.preventDefault();
     setCom(e.target.name);
-    setIcon(e.target.src);
-    console.log(e.target.class);
+    setIcon(e.target.href);
     toggleDropdown();
   };
 
@@ -26,73 +25,82 @@ function NewPost() {
   }, [setCommunities]);
 
   return (
-    <div>
-      <div className="container columns is-centered">
-        <div className="column is-6 ">
+    <div className="container column is-8" style={{ marginTop: "60px" }}>
+      <p className="header3">Create Post</p>
+      <hr></hr>
+      <div className=" columns ">
+        <div className="column is-6 is-left">
           <input
             className="input"
             type="text"
             placeholder="Write a nice title"
-            style={{ marginTop: "80px" }}
           ></input>
         </div>
-      </div>
-      <strong>
-        <p className="help is-danger is-centered">{error && error}</p>
-      </strong>
-      <div
-        className={`dropdown ${dropdown && "is-active"}`}
-        style={{ marginLeft: "1100px", marginTop: "-65px" }}
-      >
-        <div className="dropdown-trigger">
-          <button
-            className="button"
-            aria-haspopup="true"
-            aria-controls="dropdown-menu"
-            onClick={toggleDropdown}
-          >
-            <span style={{ width: "170px" }}>
-              {com ? com : "Choose community"}
-              {icon && (
-                <figure className="image is-32x32">
-                  <img
-                    className="is-rounded is-left"
-                    src={icon}
-                    alt="community logo"
-                  ></img>
-                </figure>
-              )}
-            </span>
-            {/* <p className=" help is-danger">
+
+        <strong>
+          <p className="help is-danger is-centered">{error && error}</p>
+        </strong>
+
+        <div className={`dropdown ${dropdown && "is-active"} column is-right`}>
+          <div className="dropdown-trigger">
+            <button
+              className="button"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu"
+              onClick={toggleDropdown}
+            >
+              <span style={{ width: "170px" }}>
+                {com ? com : "Choose community"}
+                <div>
+                  {icon && (
+                    <figure className="image is-32x32">
+                      <img
+                        className="is-rounded"
+                        src={icon}
+                        alt="community logo"
+                      ></img>
+                    </figure>
+                  )}
+                </div>
+              </span>
+
+              {/* <p className=" help is-danger">
               {com ? "" : "Community is required"}
             </p> */}
-            <span className="icon is-small">
-              <i className="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-          </button>
-        </div>
-        <div className="dropdown-menu" id="dropdown-menu" role="menu">
-          <div className="dropdown-content">
-            <ul>
-              {communities.map(com => (
-                <>
-                  <a
-                    style={{ marginLeft: "50px" }}
-                    href="/"
-                    className="dropdown-item is-right"
-                    key={com._id}
-                    name={com.name}
-                    src={com.img}
-                    onClick={handleCommunityChange}
-                  >
-                    {com.name}
-                  </a>
-                </>
-              ))}
-            </ul>
+              <span className="icon is-small">
+                <i className="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div className="dropdown-menu" id="dropdown-menu" role="menu">
+            <div className="dropdown-content">
+              <ul>
+                {communities.map(com => (
+                  <>
+                    <a
+                      href={com.img}
+                      className="dropdown-item"
+                      key={com._id}
+                      name={com.name}
+                      onClick={handleCommunityChange}
+                    >
+                      {com.name}
+                    </a>
+                  </>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+
+      <input
+        className="textarea"
+        placeholder="10 lines of textarea"
+        rows="10"
+      ></input>
+      <button class="button is-dark">Submit</button>
+      <button class="button is-light">Cancel</button>
     </div>
   );
 }

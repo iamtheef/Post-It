@@ -76,3 +76,9 @@ body {
   margin: auto;
   margin-right: 15px;
 }
+
+.header3 {
+  font-size: 30px;
+
+  font-weight: bold;
+}
