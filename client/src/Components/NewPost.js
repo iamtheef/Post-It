@@ -163,7 +163,7 @@ function NewPost() {
       </div>
       {/*  text field  */}
       <div style={{ display: textPost ? "block" : "none" }}>
-        <input className="textarea" placeholder="Text"></input>
+        <textarea className="textarea" placeholder="Text"></textarea>
       </div>
 
       {/* media field */}
