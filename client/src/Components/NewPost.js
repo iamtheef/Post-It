@@ -14,6 +14,7 @@ function NewPost() {
   const [textPost, toggleTextPost] = useToggle(true);
   const [mediaPost, toggleMediaPost] = useToggle(false);
   const [linkPost, toggleLinkPost] = useToggle(false);
+  const [postType, setPostType] = useState("textPost");
 
   // error handling
   const [error, setError] = useState(undefined);
@@ -24,24 +25,57 @@ function NewPost() {
       if (linkPost) toggleLinkPost();
       if (mediaPost) toggleMediaPost();
       if (!textPost) toggleTextPost();
+      setPostType("textPost");
     }
     if (e.target.name === "mediaPost") {
       if (textPost) toggleTextPost();
       if (linkPost) toggleLinkPost();
       if (!mediaPost) toggleMediaPost();
+      setPostType("mediaPost");
     }
     if (e.target.name === "linkPost") {
       if (mediaPost) toggleMediaPost();
       if (textPost) toggleTextPost();
       if (!linkPost) toggleLinkPost();
+      setPostType("linkPost");
     }
   };
+
+  // inputs
+  const [title, changeTitle] = useInputState("");
+  const [body, changeBody] = useInputState("");
+  const [link, changeLink] = useInputState("");
 
   const handleCommunityChange = e => {
     e.preventDefault();
     setCom(e.target.name);
     setIcon(e.target.href);
     toggleDropdown();
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const newPost = { title };
+
+    switch (postType) {
+      case "textPost":
+        newPost.body = body;
+        break;
+      // case "mediaPost":
+      //   newPost[file] = file;
+      //   break;
+      case "linkPost":
+        newPost.link = link;
+        break;
+      default:
+        console.log("No post type selectd!");
+    }
+
+    console.log(newPost);
+    // axios
+    //   .post("api/posts/new", newPost)
+    //   .then(post)
+    //   .catch(err => setErrors(err));
   };
 
   useEffect(() => {
@@ -53,15 +87,17 @@ function NewPost() {
 
   return (
     // HEADER & TITLE
-    <div className="container column is-8" style={{ marginTop: "60px" }}>
+    <div className="container column is-8 newPost">
       <p className="header3">Create Post</p>
-      <hr></hr>
+      <hr style={{ marginBottom: "60px" }}></hr>
       <div className="columns levels">
-        <div className="column">
+        <div className="column" style={{ marginBottom: "10px" }}>
           <input
             className="input"
             type="text"
             placeholder="Write a nice title"
+            onChange={changeTitle}
+            value={title}
           ></input>
         </div>
 
@@ -157,7 +193,12 @@ function NewPost() {
       </div>
       {/*  text field  */}
       <div style={{ display: textPost ? "block" : "none" }}>
-        <textarea className="textarea" placeholder="Text"></textarea>
+        <textarea
+          className="textarea"
+          placeholder="Text"
+          onChange={changeBody}
+          value={body}
+        ></textarea>
       </div>
 
       {/* media field */}
@@ -183,12 +224,18 @@ function NewPost() {
           className="textarea"
           placeholder="URL(required)"
           rows="10"
+          onChange={changeLink}
+          value={link}
         ></input>
       </div>
 
       {/* BUTTONS*/}
       <div style={{ marginTop: "20px" }}>
-        <button className="button is-dark" style={{ marginRight: "10px" }}>
+        <button
+          className="button is-dark"
+          style={{ marginRight: "10px" }}
+          onClick={handleSubmit}
+        >
           Submit
         </button>
         <button className="button is-light">Cancel</button>

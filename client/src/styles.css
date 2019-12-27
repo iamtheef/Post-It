@@ -1,9 +1,8 @@
-body {
+html {
   font-family: "PT Sans Narrow", sans-serif;
+  background-color: #dae0e6;
 }
-/* #body {
-  background-color: red;
-} */
+
 .navbar-brand h1 {
   font-size: 27px;
 
@@ -91,4 +90,10 @@ body {
 
 .icon {
   pointer-events: none;
+}
+
+.newPost {
+  margin-top: 60px;
+  background-color: white;
+  border-radius: 1ex;
 }

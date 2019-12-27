@@ -22,7 +22,8 @@ router.post(
       title: req.body.title,
       body: req.body.body,
       avatar: req.user.avatar,
-      likes: [],
+      upvotes: [],
+      downvotes: [],
       comments: []
     });
 
