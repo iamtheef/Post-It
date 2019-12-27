@@ -1,7 +1,9 @@
 body {
   font-family: "PT Sans Narrow", sans-serif;
 }
-
+/* #body {
+  background-color: red;
+} */
 .navbar-brand h1 {
   font-size: 27px;
 
@@ -85,4 +87,8 @@ body {
 .comLogo {
   max-width: 30px;
   max-height: 30px;
+}
+
+.icon {
+  pointer-events: none;
 }

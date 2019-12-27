@@ -129,7 +129,7 @@ function NewPost() {
       {/* TABS */}
 
       <div className="tabs is-centered is-boxed" onClick={handlePostSection}>
-        <ul style={{ podition: "relative" }}>
+        <ul>
           <li className={textPost && "is-active"}>
             <a name="textPost">
               <span className="icon is-small">
@@ -141,20 +141,14 @@ function NewPost() {
 
           <li className={mediaPost && "is-active"}>
             <a name="mediaPost">
-              <span className="icon is-small">
-                <i className="fa fa-camera" aria-hidden="true"></i>
-              </span>
+              <i className="icon is-small fa fa-camera" aria-hidden="true"></i>
               Image/Video
             </a>
           </li>
           <li className={linkPost && "is-active"}>
             <a name="linkPost">
               <span className="icon is-small">
-                <i
-                  className="fa fa-link"
-                  aria-hidden="true"
-                  style={{ marginRight: "5px" }}
-                ></i>
+                <i className="fa fa-link" aria-hidden="true"></i>
               </span>
               Link
             </a>
