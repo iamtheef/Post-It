@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import useInputState from "../Hooks/useInputState";
 import { PostContext } from "../Context/PostContext";
 import CommunitySelector from "./CommunitiesSelector";
-import Editor from "./Editor";
+import TextEditor from "./TextEditor";
 import FileManager from "./FileManager";
 
 function NewPost() {
@@ -103,7 +103,7 @@ function NewPost() {
         //
         Text post*/}
         <div style={{ display: textPost ? "block" : "none" }}>
-          <Editor />
+          <TextEditor />
         </div>
         {/*
         //

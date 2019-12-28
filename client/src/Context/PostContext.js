@@ -1,8 +1,8 @@
 import React, { createContext, useState } from "react";
+import { EditorState } from "draft-js";
 import useToggle from "../Hooks/useToggle";
-import useInputState from "../Hooks/useInputState";
-export const PostContext = createContext();
 
+export const PostContext = createContext();
 export function PostProvider(props) {
   //
   //
@@ -35,7 +35,7 @@ export function PostProvider(props) {
   const [linkPost, toggleLinkPost] = useToggle(false);
   const [postType, setPostType] = useState("textPost");
   // inputs
-  const [body, setBody] = useInputState("");
+  const [body, setBody] = useState(EditorState.createEmpty());
 
   return (
     <PostContext.Provider
