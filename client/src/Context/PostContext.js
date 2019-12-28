@@ -1,9 +1,11 @@
 import React, { createContext, useState } from "react";
 import useToggle from "../Hooks/useToggle";
+import useInputState from "../Hooks/useInputState";
 export const PostContext = createContext();
 
-// inputs
 export function PostProvider(props) {
+  //
+  //
   // functions
   const handlePostSection = e => {
     e.preventDefault();
@@ -32,6 +34,8 @@ export function PostProvider(props) {
   const [mediaPost, toggleMediaPost] = useToggle(false);
   const [linkPost, toggleLinkPost] = useToggle(false);
   const [postType, setPostType] = useState("textPost");
+  // inputs
+  const [body, setBody] = useInputState("");
 
   return (
     <PostContext.Provider
@@ -40,7 +44,9 @@ export function PostProvider(props) {
         textPost,
         mediaPost,
         linkPost,
-        postType
+        postType,
+        body,
+        setBody
       }}
     >
       {props.children}

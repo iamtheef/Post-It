@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import useInputState from "../Hooks/useInputState";
 import { PostContext } from "../Context/PostContext";
 import CommunitySelector from "./CommunitiesSelector";
+import Editor from "./Editor";
+import FileManager from "./FileManager";
 
 function NewPost() {
   const {
@@ -9,11 +11,11 @@ function NewPost() {
     textPost,
     mediaPost,
     linkPost,
-    postType
+    postType,
+    body
   } = useContext(PostContext);
 
   const [title, changeTitle] = useInputState("");
-  const [body, changeBody] = useInputState("");
   const [link, changeLink] = useInputState("");
 
   const handleSubmit = e => {
@@ -25,13 +27,13 @@ function NewPost() {
         newPost.body = body;
         break;
       // case "mediaPost":
-      //   newPost[file] = file;
+      //   newPost.file = file;
       //   break;
       case "linkPost":
         newPost.link = link;
         break;
       default:
-        console.log("No post type selectd!");
+        console.log("No post type selected!");
     }
     console.log(newPost);
     // axios
@@ -63,9 +65,7 @@ function NewPost() {
             <CommunitySelector />
           </div>
         </div>
-
         {/* TABS */}
-
         <div className="tabs is-centered is-boxed" onClick={handlePostSection}>
           <ul>
             <li className={`${textPost && "is-active"}`}>
@@ -96,39 +96,28 @@ function NewPost() {
             </li>
           </ul>
         </div>
-
         {/* Sections */}
 
-        {/* Text post*/}
-
+        {/* 
+        //
+        //
+        Text post*/}
         <div style={{ display: textPost ? "block" : "none" }}>
-          <textarea
-            className="textarea"
-            placeholder="Text"
-            onChange={changeBody}
-            value={body}
-          ></textarea>
+          <Editor />
         </div>
-
-        {/* Media post*/}
-
+        {/*
+        //
+        //
+        Media post*/}
         <div style={{ display: mediaPost ? "block" : "none" }}>
-          <div className="field">
-            <div className="file">
-              <label className="file-label">
-                <input className="file-input" type="file" name="resume" />
-                <span className="file-cta">
-                  <span className="file-icon">
-                    <i className="fas fa-upload"></i>
-                  </span>
-                  <span className="file-label">Normal file…</span>
-                </span>
-              </label>
-            </div>
-          </div>
+          <FileManager />
         </div>
 
-        {/* Link post*/}
+        {/* 
+        //
+        //
+        
+        Link post*/}
         <div style={{ display: linkPost ? "block" : "none" }}>
           <input
             className="textarea"
