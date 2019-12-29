@@ -1,8 +1,19 @@
 import React, { useContext } from "react";
 import { PostContext } from "../Context/PostContext";
-import { Editor } from "draft-js";
+import ReactQuill from "react-quill"; // ES6
 
-export default function TextEditor() {
+import "react-quill/dist/quill.snow.css"; // ES6
+
+function TextEditor() {
   const { body, setBody } = useContext(PostContext);
-  return <Editor editorState={body} onChange={setBody} />;
+
+  return (
+    <ReactQuill
+      value={body}
+      onChange={setBody}
+      placeholder="Write your post here"
+    />
+  );
 }
+
+export default TextEditor;

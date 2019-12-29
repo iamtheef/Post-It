@@ -10,18 +10,20 @@ import { PostProvider } from "./Context/PostContext";
 
 function App() {
   return (
-    <Router>
-      <UserProvider>
-        <Navbar></Navbar>
-        <div className="App">
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/profile" component={Profile} />
-          <PostProvider>
-            <Route exact path="/newpost" component={NewPost} />
-          </PostProvider>
-        </div>
-      </UserProvider>
-    </Router>
+    <React.StrictMode>
+      <Router>
+        <UserProvider>
+          <Navbar></Navbar>
+          <div className="App">
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/profile" component={Profile} />
+            <PostProvider>
+              <Route exact path="/newpost" component={NewPost} />
+            </PostProvider>
+          </div>
+        </UserProvider>
+      </Router>
+    </React.StrictMode>
   );
 }
 

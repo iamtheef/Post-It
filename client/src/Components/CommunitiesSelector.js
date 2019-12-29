@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useToggle from "../Hooks/useToggle";
 import axios from "axios";
 
-export default function CommunitySelector() {
+function CommunitySelector() {
   // communities hooks
   const [dropdown, toggleDropdown] = useToggle(false);
   const [communities, setCommunities] = useState([]);
@@ -67,25 +67,23 @@ export default function CommunitySelector() {
         </div>
         <div className="dropdown-menu" id="dropdown-menu" role="menu">
           <div className="dropdown-content">
-            <ul>
-              {communities.map(com => (
-                <>
-                  <li key={com._id.toString()}>
-                    <a
-                      href={com.img}
-                      className="dropdown-item"
-                      name={com.name}
-                      onClick={handleCommunityChange}
-                    >
-                      {com.name}
-                    </a>
-                  </li>
-                </>
-              ))}
-            </ul>
+            {communities.map(com => (
+              <ul key={com._id}>
+                <a
+                  href={com.img}
+                  className="dropdown-item"
+                  name={com.name}
+                  onClick={handleCommunityChange}
+                >
+                  {com.name}
+                </a>
+              </ul>
+            ))}
           </div>
         </div>
       </div>
     </>
   );
 }
+
+export default CommunitySelector;
