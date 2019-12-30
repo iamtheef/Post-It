@@ -1,11 +1,18 @@
-import React, { Component } from "react";
+import React, { useEffect, useContext } from "react";
+import axios from "axios";
+import { PostContext } from "../Context/PostContext";
 
-class Post extends Component {
-  render() {
-    return (
-      <div>
-        <h3>post</h3>
-      </div>
-    );
-  }
+export default function Post() {
+  const { currentPost } = useContext(PostContext);
+
+  // useEffect(() => {
+  //   axios.get(`api/posts/${id}`);
+  // });
+  return (
+    <div>
+      {/* <h3>{post.title}</h3>
+      <p>{post.body}</p> */}
+      <h1>{currentPost.title}</h1>
+    </div>
+  );
 }

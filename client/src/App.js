@@ -6,6 +6,7 @@ import Navbar from "./Components/Layout/Navbar";
 import Landing from "./Components/Landing";
 import Profile from "./Components/Profile";
 import NewPost from "./Components/NewPost";
+import Post from "./Components/Post";
 import { PostProvider } from "./Context/PostContext";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/profile" component={Profile} />
             <PostProvider>
               <Route exact path="/newpost" component={NewPost} />
+              <Route path="/post/:id" component={Post} />
             </PostProvider>
           </div>
         </UserProvider>

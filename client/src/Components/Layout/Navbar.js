@@ -120,7 +120,9 @@ function Navbar() {
             <Link className="navbar-item" to="/profile">
               Profile
             </Link>
-            <Link className="navbar-item">Settings</Link>
+            <Link className="navbar-item" to="/">
+              Settings
+            </Link>
             <Link onClick={logout} className="navbar-item" to="/">
               Logout
             </Link>

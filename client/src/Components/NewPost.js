@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import useInputState from "../Hooks/useInputState";
 import { PostContext } from "../Context/PostContext";
 import CommunitySelector from "./CommunitiesSelector";
 import TextEditor from "./TextEditor";
@@ -11,36 +10,13 @@ function NewPost() {
     textPost,
     mediaPost,
     linkPost,
-    postType,
-    body
+    handleSubmit,
+    title,
+    changeTitle,
+    changeLink,
+    link,
+    errors
   } = useContext(PostContext);
-
-  const [title, changeTitle] = useInputState("");
-  const [link, changeLink] = useInputState("");
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    const newPost = { title };
-
-    switch (postType) {
-      case "textPost":
-        newPost.body = body;
-        break;
-      // case "mediaPost":
-      //   newPost.file = file;
-      //   break;
-      case "linkPost":
-        newPost.link = link;
-        break;
-      default:
-        console.log("No post type selected!");
-    }
-    console.log(newPost);
-    // axios
-    //   .post("api/posts/new", newPost)
-    //   .then(post)
-    //   .catch(err => setErrors(err));
-  };
 
   return (
     <>
@@ -57,6 +33,7 @@ function NewPost() {
               onChange={changeTitle}
               value={title}
             ></input>
+            <p className="help is-danger">{errors.title && errors.title}</p>
           </div>
           <div
             className="column"
@@ -102,8 +79,12 @@ function NewPost() {
         //
         //
         Text post*/}
-        <div style={{ display: textPost ? "block" : "none" }}>
+        <div>
           <TextEditor />
+          <p className="help is-danger">
+            {errors.body && errors.body}
+            {errors.length && errors.length}
+          </p>
         </div>
         {/*
         //
