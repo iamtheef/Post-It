@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const passport = require("passport");
 const Post = require("../models/Post");
 const Profile = require("../models/Profile");
@@ -10,8 +9,9 @@ const Community = require("../models/Community");
 
 router.post(
   "/new",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log(req.user);
     const { errors, isValid } = validatePost(req.body);
     if (!isValid) return res.status(400).json(errors);
 
@@ -25,12 +25,9 @@ router.post(
       comments: []
     });
 
-    newPost
-      .save()
-      .then(post => {
-        res.json(post);
-      })
-      .catch(err => res.json(errors));
+    newPost.save().then(post => {
+      res.json(post);
+    });
   }
 );
 

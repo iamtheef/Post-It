@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
 const ValidateLogin = require("../validation/login");
 const ValidateRegister = require("../validation/register");
+const passport = require("passport");
 
 //routes ===================================
 
@@ -44,6 +45,14 @@ router.post("/register", (req, res) => {
     })
     .catch(e => res.json(e));
 });
+
+// router.get(
+//   "/current",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     res.json(req.user);
+//   }
+// );
 
 router.post("/login", (req, res) => {
   let email = req.body.email;

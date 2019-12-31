@@ -32,7 +32,7 @@ export function UserProvider(props) {
         const token = user.data.token;
         localStorage.setItem("jwtToken", token);
         setAuthToken(token);
-        setUser(jwt_decode(user.data.token));
+        setUser(jwt_decode(token));
       })
       .catch(e => setErrors(e.response.data));
   };

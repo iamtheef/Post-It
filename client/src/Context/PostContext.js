@@ -2,7 +2,6 @@ import React, { createContext, useState, useContext } from "react";
 import useToggle from "../Hooks/useToggle";
 import axios from "axios";
 import useInputState from "../Hooks/useInputState";
-import { UserContext } from "./UserContext";
 
 export const PostContext = createContext();
 //
@@ -34,10 +33,9 @@ export function PostProvider(props) {
     }
   };
 
-  const { user } = useContext(UserContext);
   const handleSubmit = e => {
     e.preventDefault();
-    const newPost = { user, title };
+    const newPost = { title };
 
     switch (postType) {
       case "textPost":
@@ -58,9 +56,11 @@ export function PostProvider(props) {
       .then(post => {
         setCurrentPost(post);
         window.location = `posts/${post._id}`;
-        console.log(post);
       })
-      .catch(e => setErrors(e.response.data));
+
+      .catch(e => {
+        setErrors(e.response.data);
+      });
   };
 
   // post section hooks
