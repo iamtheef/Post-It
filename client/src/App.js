@@ -20,7 +20,7 @@ function App() {
             <Route exact path="/profile" component={Profile} />
             <PostProvider>
               <Route exact path="/newpost" component={NewPost} />
-              <Route path="/post/:id" component={Post} />
+              <Route exact path="/posts/:id" component={Post} />
             </PostProvider>
           </div>
         </UserProvider>

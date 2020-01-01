@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState } from "react";
+import { Redirect, withRouter } from "react-router-dom";
 import useToggle from "../Hooks/useToggle";
 import axios from "axios";
 import useInputState from "../Hooks/useInputState";
@@ -9,6 +10,19 @@ export const PostContext = createContext();
 //
 
 export function PostProvider(props) {
+  // post section hooks
+  const [textPost, toggleTextPost] = useToggle(true);
+  const [mediaPost, toggleMediaPost] = useToggle(false);
+  const [linkPost, toggleLinkPost] = useToggle(false);
+  const [postType, setPostType] = useState("textPost");
+
+  // inputs
+  const [title, changeTitle] = useInputState("");
+  const [body, setBody] = useState("");
+  // const [file, setFile] = useState(undefined)  ;
+  const [link, changeLink] = useInputState("");
+  const [errors, setErrors] = useState({});
+
   //
   // functions
   const handlePostSection = e => {
@@ -54,28 +68,12 @@ export function PostProvider(props) {
     axios
       .post("api/posts/new", newPost)
       .then(post => {
-        setCurrentPost(post);
-        window.location = `posts/${post._id}`;
+        window.location.assign(`/posts/${post.data._id}`);
       })
-
       .catch(e => {
         setErrors(e.response.data);
       });
   };
-
-  // post section hooks
-  const [textPost, toggleTextPost] = useToggle(true);
-  const [mediaPost, toggleMediaPost] = useToggle(false);
-  const [linkPost, toggleLinkPost] = useToggle(false);
-  const [postType, setPostType] = useState("textPost");
-  const [currentPost, setCurrentPost] = useState(undefined);
-
-  // inputs
-  const [title, changeTitle] = useInputState("");
-  const [body, setBody] = useState("");
-  // const [file, setFile] = useState(undefined)  ;
-  const [link, changeLink] = useInputState("");
-  const [errors, setErrors] = useState({});
 
   return (
     <PostContext.Provider
@@ -94,8 +92,7 @@ export function PostProvider(props) {
         postType,
         changeLink,
         changeTitle,
-        errors,
-        currentPost
+        errors
       }}
     >
       {props.children}

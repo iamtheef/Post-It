@@ -1,18 +1,24 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { PostContext } from "../Context/PostContext";
 
-export default function Post() {
-  const { currentPost } = useContext(PostContext);
+export default function Post(props) {
+  const postId = props.match.params.id;
+  const [post, setPost] = useState({});
+  useEffect(() => {
+    axios
+      .get(`/api/posts/${postId}`)
+      .then(res => {
+        setPost(res.data);
+      })
+      .catch(e => console.log(e));
+  }, [setPost]);
 
-  // useEffect(() => {
-  //   axios.get(`api/posts/${id}`);
-  // });
   return (
     <div>
-      {/* <h3>{post.title}</h3>
-      <p>{post.body}</p> */}
-      <h1>{currentPost.title}</h1>
+      <div style={{ display: post ? "block" : "none" }}>
+        <h1 style={{ marginTop: "200px" }}>{post.title}</h1>
+        <h4>{post.body}</h4>
+      </div>
     </div>
   );
 }
