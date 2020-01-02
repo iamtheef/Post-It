@@ -10,7 +10,7 @@ export function UserProvider(props) {
   const [errors, setErrors] = useState({});
 
   // initial user
-  useEffect(() => {
+  const initialUser = () => {
     // check for valid token (if so, give persmissions)
     if (localStorage.jwtToken) {
       const decoded = jwt_decode(localStorage.jwtToken);
@@ -22,7 +22,7 @@ export function UserProvider(props) {
         logout();
       }
     }
-  }, [setUser]);
+  };
 
   // hadling login
   const login = credits => {
@@ -53,7 +53,9 @@ export function UserProvider(props) {
   };
 
   return (
-    <UserContext.Provider value={{ user, login, register, errors, logout }}>
+    <UserContext.Provider
+      value={{ user, login, register, errors, logout, initialUser }}
+    >
       {props.children}
     </UserContext.Provider>
   );
