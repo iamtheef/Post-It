@@ -1,25 +1,27 @@
 import React, { createContext, useState } from "react";
-import useToggle from "../Hooks/useToggle";
-import axios from "axios";
-import useInputState from "../Hooks/useInputState";
 import { useHistory } from "react-router-dom";
+import useToggle from "../Hooks/useToggle";
+import useInputState from "../Hooks/useInputState";
+import axios from "axios";
 
 export const PostContext = createContext();
-//
-//
-//
 
 export function PostProvider(props) {
+  //
+  //
+  const history = useHistory();
+  //
   // post section hooks
   const [textPost, toggleTextPost] = useToggle(true);
   const [mediaPost, toggleMediaPost] = useToggle(false);
   const [linkPost, toggleLinkPost] = useToggle(false);
   const [postType, setPostType] = useState("textPost");
+  const [community, setCommunity] = useState("");
 
   // inputs
   const [title, changeTitle] = useInputState("");
   const [body, setBody] = useState("");
-  // const [file, setFile] = useState(undefined)  ;
+  const [file, setFile] = useState("");
   const [link, changeLink] = useInputState("");
   const [errors, setErrors] = useState({});
 
@@ -47,19 +49,19 @@ export function PostProvider(props) {
     }
   };
 
-  const history = useHistory();
-
   const handleSubmit = e => {
     e.preventDefault();
-    const newPost = { title };
+    const newPost = { title, type: postType, community };
 
     switch (postType) {
       case "textPost":
         newPost.body = body;
         break;
-      // case "mediaPost":
-      //   newPost.file = file;
-      //   break;
+      case "mediaPost":
+        const formData = new FormData();
+        formData.append("file", file);
+
+        break;
       case "linkPost":
         newPost.link = link;
         break;
@@ -88,13 +90,15 @@ export function PostProvider(props) {
         setPostType,
         body,
         setBody,
-        // file,
-        // setFile,
+        file,
+        setFile,
         handleSubmit,
         postType,
         changeLink,
         changeTitle,
-        errors
+        errors,
+        community,
+        setCommunity
       }}
     >
       {props.children}

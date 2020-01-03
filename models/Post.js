@@ -20,6 +20,16 @@ const Post = new mongoose.Schema({
     type: String
   },
 
+  type: {
+    type: String,
+    required: true
+  },
+
+  community: {
+    type: mongoose.Types.ObjectId,
+    ref: "Community"
+  },
+
   upvotes: [
     {
       user: {

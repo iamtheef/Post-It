@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import useToggle from "../Hooks/useToggle";
 import axios from "axios";
+import { PostContext } from "../Context/PostContext";
 
 function CommunitySelector() {
   // communities hooks
   const [dropdown, toggleDropdown] = useToggle(false);
   const [communities, setCommunities] = useState([]);
-  const [com, setCom] = useState(undefined);
   const [icon, setIcon] = useState(undefined);
+  const { community, setCommunity, errors } = useContext(PostContext);
 
   useEffect(() => {
     axios
@@ -18,7 +19,7 @@ function CommunitySelector() {
 
   const handleCommunityChange = e => {
     e.preventDefault();
-    setCom(e.target.name);
+    setCommunity(e.target.name);
     setIcon(e.target.href);
     toggleDropdown();
   };
@@ -53,18 +54,17 @@ function CommunitySelector() {
                 </figure>
               )}
             </div>
+
             <span style={{ width: "140px" }}>
-              {com ? com : "Choose community"}
+              {community ? community : "Choose community"}
             </span>
 
-            {/* <p className=" help is-danger">
-              {com ? "" : "Community is required"}
-            </p> */}
             <span className="icon is-small">
               <i className="fas fa-angle-down" aria-hidden="true"></i>
             </span>
           </button>
         </div>
+
         <div className="dropdown-menu" id="dropdown-menu" role="menu">
           <div className="dropdown-content">
             {communities.map(com => (
@@ -82,6 +82,7 @@ function CommunitySelector() {
           </div>
         </div>
       </div>
+      <p className=" help is-danger">{errors.community && errors.community}</p>
     </>
   );
 }
