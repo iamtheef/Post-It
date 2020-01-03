@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import axios from "axios";
 import setAuthToken from "../AxiosRequestAuthUtil";
 import jwt_decode from "jwt-decode";
@@ -18,7 +18,7 @@ export function UserProvider(props) {
       setUser(decoded);
 
       //check for expired token (if so, lougout)
-      if (decoded.exp < Date.now / 1000) {
+      if (decoded.exp < Date.now() / 1000) {
         logout();
       }
     }

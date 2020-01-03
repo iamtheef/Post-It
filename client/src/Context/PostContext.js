@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 import useToggle from "../Hooks/useToggle";
 import axios from "axios";
 import useInputState from "../Hooks/useInputState";
+import { useHistory } from "react-router-dom";
 
 export const PostContext = createContext();
 //
@@ -46,6 +47,8 @@ export function PostProvider(props) {
     }
   };
 
+  const history = useHistory();
+
   const handleSubmit = e => {
     e.preventDefault();
     const newPost = { title };
@@ -65,9 +68,9 @@ export function PostProvider(props) {
     }
 
     axios
-      .post("api/posts/new", newPost)
+      .post("/api/posts/new", newPost)
       .then(post => {
-        window.location.assign(`/posts/${post.data._id}`);
+        history.push(`/posts/${post.data._id}`);
       })
       .catch(e => {
         setErrors(e.response.data);

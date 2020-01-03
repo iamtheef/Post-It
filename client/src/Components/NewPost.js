@@ -3,6 +3,7 @@ import { PostContext } from "../Context/PostContext";
 import CommunitySelector from "./CommunitiesSelector";
 import TextEditor from "./TextEditor";
 import FileManager from "./FileManager";
+import { Redirect } from "react-router-dom";
 
 function NewPost() {
   const {
@@ -17,6 +18,10 @@ function NewPost() {
     link,
     errors
   } = useContext(PostContext);
+
+  const redirect = () => {
+    return <Redirect to="/posts/" />;
+  };
 
   return (
     <>
