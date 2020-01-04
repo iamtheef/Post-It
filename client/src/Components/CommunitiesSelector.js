@@ -45,7 +45,7 @@ function CommunitySelector() {
           >
             <div style={{ marginTop: "5px" }}>
               {icon && (
-                <figure className="image is-48x48 comLogo">
+                <figure className="image comLogo">
                   <img
                     className="is-rounded"
                     src={icon}
@@ -82,7 +82,7 @@ function CommunitySelector() {
           </div>
         </div>
       </div>
-      <p className=" help is-danger">{errors.community && errors.community}</p>
+      <p className="help is-danger">{errors.community && errors.community}</p>
     </>
   );
 }

@@ -21,7 +21,7 @@ export function PostProvider(props) {
   // inputs
   const [title, changeTitle] = useInputState("");
   const [body, setBody] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState({});
   const [link, changeLink] = useInputState("");
   const [errors, setErrors] = useState({});
 
@@ -60,6 +60,8 @@ export function PostProvider(props) {
       case "mediaPost":
         const formData = new FormData();
         formData.append("file", file);
+
+        newPost.file = file.File;
 
         break;
       case "linkPost":

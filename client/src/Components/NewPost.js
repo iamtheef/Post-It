@@ -81,10 +81,14 @@ function NewPost() {
         Text post*/}
         <div style={{ display: textPost ? "block" : "none" }}>
           <TextEditor />
-          <p className="help is-danger">
-            {errors.body && errors.body}
-            {errors.length && errors.length}
-          </p>
+          <ul>
+            <li>
+              <p className="help is-danger">{errors.body && errors.body}</p>
+            </li>
+            <li>
+              <p className="help is-danger">{errors.length && errors.length}</p>
+            </li>
+          </ul>
         </div>
         {/*
         //
@@ -107,6 +111,16 @@ function NewPost() {
             onChange={changeLink}
             value={link}
           ></input>
+          <ul>
+            <li>
+              <p className="help is-danger">{errors.link && errors.link}</p>
+            </li>
+            <li>
+              <p className="help is-danger">
+                {errors.validLink && errors.validLink}
+              </p>
+            </li>
+          </ul>
         </div>
 
         {/* BUTTONS*/}

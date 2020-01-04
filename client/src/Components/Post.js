@@ -17,7 +17,7 @@ export default function Post(props) {
     <div>
       <div style={{ display: post ? "block" : "none" }}>
         <h1 style={{ marginTop: "200px" }}>{post.title}</h1>
-        <h4>{post.body}</h4>
+        <h4>{post.body ? post.body : "other type of post"}</h4>
       </div>
     </div>
   );

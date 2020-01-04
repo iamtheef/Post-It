@@ -17,6 +17,8 @@ router.post(
     const newPost = new Post({
       user: req.user.id,
       title: req.body.title,
+      community: req.body.community,
+      type: req.body.postType,
       body: req.body.body,
       avatar: req.user.avatar,
       upvotes: [],

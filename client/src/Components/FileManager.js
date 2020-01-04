@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { PostContext } from "../Context/PostContext";
 
 export default function FileManager() {
-  const { setFile } = useContext(PostContext);
+  const { setFile, errors } = useContext(PostContext);
   const [filename, setFilename] = useState("Choose File");
 
   const handleChange = e => {
@@ -30,6 +30,7 @@ export default function FileManager() {
           </form>
         </label>
       </div>
+      <p className="help is-danger is-centered">{errors.file && errors.file}</p>
     </div>
   );
 }
