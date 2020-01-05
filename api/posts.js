@@ -1,4 +1,7 @@
 const express = require("express");
+const fileUpload = require("express-fileupload");
+const app = express();
+app.use(fileUpload());
 const router = express.Router();
 const passport = require("passport");
 const Post = require("../models/Post");
@@ -11,20 +14,38 @@ router.post(
   "/new",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePost(req.body);
+    const { errors, isValid } = validatePost(req);
     if (!isValid) return res.status(400).json(errors);
+    console.log(req);
 
     const newPost = new Post({
       user: req.user.id,
       title: req.body.title,
       community: req.body.community,
       type: req.body.postType,
-      body: req.body.body,
       avatar: req.user.avatar,
       upvotes: [],
       downvotes: [],
       comments: []
     });
+
+    switch (req.body.type) {
+      case "textPost":
+        newPost.body = req.body.body;
+        break;
+      case "mediaPost":
+        const file = req.body.file;
+        newPost.file = file;
+        file.mv(`${__dirname}/userUploads/${file.name}`, err => {
+          if (err) console.error(err);
+        });
+        break;
+      case "linkPost":
+        newPost.link = req.body.link;
+        break;
+      default:
+        res.json("No Post found");
+    }
 
     newPost.save().then(post => {
       res.json(post);

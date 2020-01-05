@@ -58,10 +58,9 @@ export function PostProvider(props) {
         newPost.body = body;
         break;
       case "mediaPost":
-        const formData = new FormData();
+        var formData = new FormData();
         formData.append("file", file);
-
-        newPost.file = file.File;
+        newPost.file = formData.getAll("file")[0];
 
         break;
       case "linkPost":
@@ -73,6 +72,7 @@ export function PostProvider(props) {
 
     axios
       .post("/api/posts/new", newPost)
+
       .then(post => {
         history.push(`/posts/${post.data._id}`);
       })
@@ -95,7 +95,6 @@ export function PostProvider(props) {
         file,
         setFile,
         handleSubmit,
-        postType,
         changeLink,
         changeTitle,
         errors,
