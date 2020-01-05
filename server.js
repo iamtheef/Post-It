@@ -1,11 +1,16 @@
 // app config ===================================
 const express = require("express");
 const app = express();
+var bb = require("express-busboy");
+bb.extend(app);
+
 const passport = require("passport");
 let MongoClient = require("mongoose");
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// const fileUpload = require("express-fileupload");
+// app.use(fileUpload());
+// const bodyParser = require("body-parser");
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
 // db config ====================================
 MongoClient.connect("mongodb://localhost/postIt", {

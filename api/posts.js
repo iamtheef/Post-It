@@ -1,7 +1,4 @@
 const express = require("express");
-const fileUpload = require("express-fileupload");
-const app = express();
-app.use(fileUpload());
 const router = express.Router();
 const passport = require("passport");
 const Post = require("../models/Post");
@@ -12,12 +9,12 @@ const Community = require("../models/Community");
 
 router.post(
   "/new",
+
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log(req.files);
     const { errors, isValid } = validatePost(req);
     if (!isValid) return res.status(400).json(errors);
-    console.log(req);
-
     const newPost = new Post({
       user: req.user.id,
       title: req.body.title,
@@ -34,7 +31,7 @@ router.post(
         newPost.body = req.body.body;
         break;
       case "mediaPost":
-        const file = req.body.file;
+        const file = req.files.file;
         newPost.file = file;
         file.mv(`${__dirname}/userUploads/${file.name}`, err => {
           if (err) console.error(err);

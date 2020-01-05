@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import useToggle from "../Hooks/useToggle";
 import useInputState from "../Hooks/useInputState";
@@ -21,7 +21,7 @@ export function PostProvider(props) {
   // inputs
   const [title, changeTitle] = useInputState("");
   const [body, setBody] = useState("");
-  const [file, setFile] = useState({});
+  const [file, setFile] = useState(null);
   const [link, changeLink] = useInputState("");
   const [errors, setErrors] = useState({});
 
@@ -58,10 +58,9 @@ export function PostProvider(props) {
         newPost.body = body;
         break;
       case "mediaPost":
-        var formData = new FormData();
+        const formData = new FormData();
         formData.append("file", file);
-        newPost.file = formData.getAll("file")[0];
-
+        newPost.file = formData;
         break;
       case "linkPost":
         newPost.link = link;
@@ -72,7 +71,6 @@ export function PostProvider(props) {
 
     axios
       .post("/api/posts/new", newPost)
-
       .then(post => {
         history.push(`/posts/${post.data._id}`);
       })
