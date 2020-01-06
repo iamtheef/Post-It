@@ -52,15 +52,15 @@ export function PostProvider(props) {
   const handleSubmit = e => {
     e.preventDefault();
     const newPost = { title, type: postType, community };
+    const formData = new FormData();
 
     switch (postType) {
       case "textPost":
         newPost.body = body;
         break;
       case "mediaPost":
-        const formData = new FormData();
         formData.append("file", file);
-        newPost.file = formData;
+
         break;
       case "linkPost":
         newPost.link = link;
@@ -68,9 +68,10 @@ export function PostProvider(props) {
       default:
         console.log("No post type selected!");
     }
+    formData.append("data", JSON.stringify(newPost));
 
     axios
-      .post("/api/posts/new", newPost)
+      .post("/api/posts/new", formData)
       .then(post => {
         history.push(`/posts/${post.data._id}`);
       })

@@ -12,41 +12,50 @@ router.post(
 
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log(req.files);
-    const { errors, isValid } = validatePost(req);
+    console.log(req.body.data);
+    const body = JSON.parse(req.body.data);
+    const { errors, isValid } = validatePost(body);
+
     if (!isValid) return res.status(400).json(errors);
+
     const newPost = new Post({
-      user: req.user.id,
-      title: req.body.title,
-      community: req.body.community,
-      type: req.body.postType,
+      user: req.user._id,
+      title: body.title,
+      community: body.community,
+      type: body.postType,
       avatar: req.user.avatar,
       upvotes: [],
       downvotes: [],
       comments: []
     });
 
-    switch (req.body.type) {
+    switch (body.type) {
       case "textPost":
-        newPost.body = req.body.body;
+        newPost.body = body.body;
         break;
       case "mediaPost":
-        const file = req.files.file;
+        const file = req.body.file;
         newPost.file = file;
         file.mv(`${__dirname}/userUploads/${file.name}`, err => {
           if (err) console.error(err);
         });
         break;
       case "linkPost":
-        newPost.link = req.body.link;
+        newPost.link = body.link;
         break;
       default:
         res.json("No Post found");
     }
 
-    newPost.save().then(post => {
-      res.json(post);
-    });
+    console.log(newPost);
+
+    newPost
+      .save()
+      .then(post => {
+        console.log(post);
+        res.json(post);
+      })
+      .catch(e => console.log(e));
   }
 );
 
