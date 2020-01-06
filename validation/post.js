@@ -1,8 +1,10 @@
 const Validator = require("validator");
 const isEmpty = require("./isEmpty");
 
-module.exports = function validatePost(data) {
+module.exports = function validatePost(req) {
   let errors = {};
+  const data = JSON.parse(req.body.data);
+  console.log(data.title);
 
   if (isEmpty(data.title)) errors.title = "Title is required";
   if (isEmpty(data.community)) errors.community = "Community is required";
@@ -16,7 +18,7 @@ module.exports = function validatePost(data) {
       break;
 
     case "mediaPost":
-      // if (body.file === undefined) errors.file = "File is required";
+      if (isEmpty(req.files)) errors.file = "File is required";
       break;
 
     case "linkPost":

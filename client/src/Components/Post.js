@@ -9,6 +9,7 @@ export default function Post(props) {
       .get(`/api/posts/${postId}`)
       .then(res => {
         setPost(res.data);
+        console.log(res);
       })
       .catch(e => console.log(e));
   }, [setPost]);

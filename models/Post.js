@@ -10,6 +10,24 @@ const Post = new mongoose.Schema({
     required: true
   },
 
+  body: {
+    type: String,
+    required: false,
+    default: undefined
+  },
+
+  file: {
+    type: String,
+    required: false,
+    default: undefined
+  },
+
+  link: {
+    type: String,
+    required: false,
+    default: undefined
+  },
+
   avatar: {
     type: String
   },
@@ -20,8 +38,8 @@ const Post = new mongoose.Schema({
   },
 
   community: {
-    type: mongoose.Types.ObjectId,
-    ref: "Community"
+    type: String,
+    required: true
   },
 
   upvotes: [

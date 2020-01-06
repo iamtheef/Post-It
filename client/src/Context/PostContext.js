@@ -19,40 +19,51 @@ export function PostProvider(props) {
   const [community, setCommunity] = useState("");
 
   // inputs
-  const [title, changeTitle] = useInputState("");
+  const [title, changeTitle, resetTitle] = useInputState("");
   const [body, setBody] = useState("");
   const [file, setFile] = useState(null);
-  const [link, changeLink] = useInputState("");
+  const [link, changeLink, resetLink] = useInputState("");
   const [errors, setErrors] = useState({});
 
   //
   // functions
   const handlePostSection = e => {
     e.preventDefault();
-    if (e.target.name === "textPost") {
-      if (linkPost) toggleLinkPost();
-      if (mediaPost) toggleMediaPost();
-      if (!textPost) toggleTextPost();
-      setPostType("textPost");
-    }
-    if (e.target.name === "mediaPost") {
-      if (textPost) toggleTextPost();
-      if (linkPost) toggleLinkPost();
-      if (!mediaPost) toggleMediaPost();
-      setPostType("mediaPost");
-    }
-    if (e.target.name === "linkPost") {
-      if (mediaPost) toggleMediaPost();
-      if (textPost) toggleTextPost();
-      if (!linkPost) toggleLinkPost();
-      setPostType("linkPost");
+    switch (e.target.name) {
+      case "textPost":
+        if (linkPost) toggleLinkPost();
+        if (mediaPost) toggleMediaPost();
+        if (!textPost) toggleTextPost();
+        setPostType("textPost");
+        break;
+
+      case "mediaPost":
+        if (textPost) toggleTextPost();
+        if (linkPost) toggleLinkPost();
+        if (!mediaPost) toggleMediaPost();
+        setPostType("mediaPost");
+        break;
+      case "linkPost":
+        if (mediaPost) toggleMediaPost();
+        if (textPost) toggleTextPost();
+        if (!linkPost) toggleLinkPost();
+        setPostType("linkPost");
     }
   };
 
+  function resetAllFields() {
+    setCommunity("");
+    resetTitle();
+    setBody("");
+    setFile(null);
+    resetLink();
+    setErrors({});
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
-    const newPost = { title, type: postType, community };
     const formData = new FormData();
+    const newPost = { title, type: postType, community };
 
     switch (postType) {
       case "textPost":
@@ -73,6 +84,7 @@ export function PostProvider(props) {
     axios
       .post("/api/posts/new", formData)
       .then(post => {
+        resetAllFields();
         history.push(`/posts/${post.data._id}`);
       })
       .catch(e => {

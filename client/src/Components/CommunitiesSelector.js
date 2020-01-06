@@ -9,6 +9,7 @@ function CommunitySelector() {
   const [communities, setCommunities] = useState([]);
   const [icon, setIcon] = useState(undefined);
   const { community, setCommunity, errors } = useContext(PostContext);
+  const [error, setError] = useState(undefined);
 
   useEffect(() => {
     axios
@@ -23,9 +24,6 @@ function CommunitySelector() {
     setIcon(e.target.href);
     toggleDropdown();
   };
-
-  // error handling
-  const [error, setError] = useState(undefined);
 
   return (
     <>

@@ -96,6 +96,7 @@ function NewPost() {
         Media post*/}
         <div style={{ display: mediaPost ? "block" : "none" }}>
           <FileManager />
+          <p className="help is-danger">{errors.file && errors.file}</p>
         </div>
 
         {/* 
