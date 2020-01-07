@@ -101,3 +101,8 @@ html {
 .DraftEditor-root {
   border: 1px solid black;
 }
+
+.postCard1-header {
+  font-size: 13px;
+  color: grey;
+}

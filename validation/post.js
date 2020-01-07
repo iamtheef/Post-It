@@ -4,7 +4,6 @@ const isEmpty = require("./isEmpty");
 module.exports = function validatePost(req) {
   let errors = {};
   const data = JSON.parse(req.body.data);
-  console.log(data.title);
 
   if (isEmpty(data.title)) errors.title = "Title is required";
   if (isEmpty(data.community)) errors.community = "Community is required";

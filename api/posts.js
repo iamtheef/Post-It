@@ -9,16 +9,17 @@ const Community = require("../models/Community");
 
 router.post(
   "/new",
-
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const body = JSON.parse(req.body.data);
-
     const { errors, isValid } = validatePost(req);
+
     if (!isValid) return res.status(400).json(errors);
+    console.log(req.user);
 
     const newPost = new Post({
       user: req.user._id,
+      username: req.user.username,
       avatar: req.user.avatar,
       title: body.title,
       type: body.type,
@@ -46,7 +47,7 @@ router.post(
 
 // All posts
 router.get("/all", (req, res) => {
-  Post.find()
+  Post.find({})
     .sort({ date: -1 })
     .then(posts => res.json(posts))
     .catch(e => res.json(e));
