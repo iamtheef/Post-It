@@ -15,7 +15,6 @@ router.post(
     const { errors, isValid } = validatePost(req);
 
     if (!isValid) return res.status(400).json(errors);
-    console.log(req.user);
 
     const newPost = new Post({
       user: req.user._id,
@@ -157,6 +156,13 @@ router.delete(
 router.get("/communities/all", (req, res) => {
   Community.find({})
     .then(communities => res.json(communities))
+    .catch(e => res.json(e.response.data));
+});
+
+// Communities by id
+router.get("/communities/:id", (req, res) => {
+  Community.findOne({ _id: req.params.id })
+    .then(community => res.json(community))
     .catch(e => res.json(e.response.data));
 });
 

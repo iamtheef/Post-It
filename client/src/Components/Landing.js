@@ -27,6 +27,7 @@ export default function Landing() {
               style={{ marginTop: "80px" }}
             ></input>
           </Link>
+
           <ul>
             {posts.map(post => (
               <li key={post._id}>

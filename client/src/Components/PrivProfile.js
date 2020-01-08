@@ -1,6 +1,6 @@
 import React from "react";
 
-function Profile() {
+function PrivProfile() {
   return (
     <div>
       <h1 style={{ fontSize: "120px" }}>Welcome to the user profile!</h1>
@@ -8,4 +8,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default PrivProfile;
