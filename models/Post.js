@@ -7,11 +7,6 @@ const Post = new mongoose.Schema({
     ref: "User"
   },
 
-  username: {
-    type: String,
-    required: true
-  },
-
   title: {
     type: String,
     required: true
@@ -45,8 +40,9 @@ const Post = new mongoose.Schema({
   },
 
   community: {
-    type: String,
-    required: true
+    required: true,
+    type: mongoose.Types.ObjectId,
+    ref: "Community"
   },
 
   upvotes: [

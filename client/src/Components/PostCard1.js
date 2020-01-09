@@ -11,16 +11,37 @@ export default function PostCard1(props) {
       return (
         <div className="is-parent">
           <article className="tile notification">
+            <figure className="image">
+              <img
+                className="is-rounded community-icon-landing"
+                src={post.community.img}
+                alt="community logo"
+              ></img>
+            </figure>
             <div className="content">
               <p className="postCard1-header">
-                <Link to="/communities/:id">{post.community}</Link>
+                <Link to={`/communities/${post.community._id}`}>
+                  <strong>
+                    <span
+                      style={{
+                        color: "#3f3d3e"
+                      }}
+                    >
+                      {post.community.name}
+                    </span>
+                  </strong>
+                </Link>
                 {" • "}
                 Posted by{" "}
-                <Link to={`/profile/${post.user}`}>{post.username}</Link>{" "}
+                <Link to={`/profile/${post.user}`}>
+                  {post.user.username}
+                </Link>{" "}
                 {moment(post.date).fromNow()}
               </p>
-              <p className="postCard1-title">{post.title}</p>
-              <div className="content">{post.body}</div>
+              <div className="postCard1-body">
+                <p className="postCard1-title">{post.title}</p>
+                <div className="content">{post.body}</div>
+              </div>
             </div>
           </article>
         </div>

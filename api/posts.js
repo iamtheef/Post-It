@@ -18,8 +18,6 @@ router.post(
 
     const newPost = new Post({
       user: req.user._id,
-      username: req.user.username,
-      avatar: req.user.avatar,
       title: body.title,
       type: body.type,
       community: body.community,
@@ -31,14 +29,14 @@ router.post(
       comments: []
     });
 
-    Community.findOne({ name: body.community }).then(community => {
+    Community.findOne({ _id: body.community }).then(community => {
       community.posts.push(newPost._id);
     });
 
     newPost
       .save()
       .then(post => {
-        res.json(post);
+        res.json(post.populate("user").populate("community"));
       })
       .catch(e => res.json(e));
   }
@@ -47,6 +45,8 @@ router.post(
 // All posts
 router.get("/all", (req, res) => {
   Post.find({})
+    .populate("community")
+    .populate("user")
     .sort({ date: -1 })
     .then(posts => res.json(posts))
     .catch(e => res.json(e));
@@ -155,6 +155,7 @@ router.delete(
 // All communities
 router.get("/communities/all", (req, res) => {
   Community.find({})
+    .populate("Community")
     .then(communities => res.json(communities))
     .catch(e => res.json(e.response.data));
 });

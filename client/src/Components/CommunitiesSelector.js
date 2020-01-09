@@ -7,6 +7,7 @@ function CommunitySelector() {
   // communities hooks
   const [dropdown, toggleDropdown] = useToggle(false);
   const [communities, setCommunities] = useState([]);
+  const [name, setName] = useState(undefined);
   const [icon, setIcon] = useState(undefined);
   const { community, setCommunity, errors } = useContext(PostContext);
   const [error, setError] = useState(undefined);
@@ -18,9 +19,10 @@ function CommunitySelector() {
       .catch(e => setError(e.response.data));
   }, [setCommunities]);
 
-  const handleCommunityChange = e => {
+  const handleCommunityChange = (e, name, id) => {
+    setName(name);
     e.preventDefault();
-    setCommunity(e.target.name);
+    setCommunity(id);
     setIcon(e.target.href);
     toggleDropdown();
   };
@@ -54,7 +56,7 @@ function CommunitySelector() {
             </div>
 
             <span style={{ width: "140px" }}>
-              {community ? community : "Choose community"}
+              {name ? name : "Choose community"}
             </span>
 
             <span className="icon is-small">
@@ -71,7 +73,7 @@ function CommunitySelector() {
                   href={com.img}
                   className="dropdown-item"
                   name={com.name}
-                  onClick={handleCommunityChange}
+                  onClick={e => handleCommunityChange(e, com.name, com._id)}
                 >
                   {com.name}
                 </a>

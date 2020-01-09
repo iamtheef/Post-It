@@ -71,7 +71,6 @@ export function PostProvider(props) {
         break;
       case "mediaPost":
         formData.append("file", file);
-
         break;
       case "linkPost":
         newPost.link = link;

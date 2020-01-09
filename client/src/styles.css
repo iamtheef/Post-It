@@ -121,3 +121,23 @@ html {
 .is-parent:hover {
   border: 1px solid #afafaf;
 }
+
+.community-icon-landing {
+  max-width: 20px;
+  max-height: 20px;
+  margin-right: 10px;
+  margin-left: -10px;
+  margin-top: 4px;
+}
+
+.postCard1-body {
+  margin-left: -30px;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+a :hover {
+  text-decoration: underline !important;
+}
