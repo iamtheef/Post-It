@@ -125,7 +125,7 @@ function NewPost() {
         </div>
 
         {/* BUTTONS*/}
-        <div style={{ marginTop: "20px" }}>
+        <div style={{ marginTop: "60px" }}>
           <button
             className="button is-dark"
             style={{ marginRight: "10px" }}

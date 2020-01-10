@@ -9,6 +9,7 @@ function TextEditor() {
   return (
     <ReactQuill
       value={body}
+      style={{ height: "100px" }}
       onChange={setBody}
       placeholder="Write your post here"
     />

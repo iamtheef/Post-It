@@ -13,6 +13,7 @@ router.post(
   (req, res) => {
     const body = JSON.parse(req.body.data);
     const { errors, isValid } = validatePost(req);
+    console.log(req.files.file.file);
 
     if (!isValid) return res.status(400).json(errors);
 
@@ -22,7 +23,7 @@ router.post(
       type: body.type,
       community: body.community,
       body: body.body,
-      file: req.files.uuid,
+      file: req.files.file.file,
       link: body.link,
       upvotes: [],
       downvotes: [],

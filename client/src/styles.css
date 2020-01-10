@@ -136,8 +136,17 @@ html {
 
 a {
   text-decoration: none !important;
+  color: #040404;
 }
 
 a :hover {
+  text-decoration: none !important;
+}
+
+.underline {
+  color: #54564d;
+}
+
+.underline:hover {
   text-decoration: underline !important;
 }
