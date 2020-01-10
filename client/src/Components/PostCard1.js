@@ -8,6 +8,7 @@ export default function PostCard1(props) {
 
   return (
     <Link to={`/posts/${post._id}`}>
+      <div className="postCard1-sidebar"></div>
       <div className="is-parent">
         <article className="tile notification">
           <figure className="image">
@@ -17,6 +18,7 @@ export default function PostCard1(props) {
               alt="community logo"
             ></img>
           </figure>
+
           <div className="content">
             <p className="postCard1-header">
               <Link to={`/communities/${post.community._id}`}>
@@ -43,12 +45,27 @@ export default function PostCard1(props) {
                 <div className="content">{post.body}</div>
               )}
               {post.type === "mediaPost" && (
-                <figure className="image is-128x128 content">
-                  <img src={`../../../${post.file}`} />
+                <figure
+                  className="image is-4by5 content"
+                  style={{ width: "30vw", marginTop: "-10px" }}
+                >
+                  <img
+                    src={`uploads/${post.file.id}/file/${post.file.filename}`}
+                  />
                 </figure>
               )}
 
               {post.type === "linkPost" && <iframe src=""></iframe>}
+            </div>
+            <div className="postInfo columns">
+              <div className="postInfoChild column is-1">
+                <i class="fa fa-comment" aria-hidden="true" />
+                <p className="infoTitle">{post.comments.length} comments</p>
+              </div>
+              <div className="postInfoChild column is-1">
+                <i class="fa fa-trophy" aria-hidden="true" />
+                <p className="infoTitle">Give Award</p>
+              </div>
             </div>
           </div>
         </article>

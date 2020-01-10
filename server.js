@@ -6,7 +6,7 @@ let MongoClient = require("mongoose");
 const bb = require("express-busboy");
 bb.extend(app, {
   upload: true,
-  path: "./uploads",
+  path: "./client/public/uploads/",
   allowedPath: /./
 });
 

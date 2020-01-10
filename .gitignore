@@ -2,4 +2,4 @@
 package-lock.json
 /config
 /client/node_modules
-/uploads
+/client/public/uploads

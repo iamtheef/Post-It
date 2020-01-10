@@ -19,9 +19,13 @@ const Post = new mongoose.Schema({
   },
 
   file: {
-    type: String,
     required: false,
-    default: undefined
+    filename: {
+      type: String
+    },
+    id: {
+      type: String
+    }
   },
 
   link: {
