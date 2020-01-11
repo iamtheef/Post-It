@@ -105,13 +105,12 @@ html {
 .postCard1-header {
   font-size: 13px;
   color: grey;
-  margin-left: 40px;
+  margin-left: -30px;
 }
 
 .postCard1-title {
   font-size: 20px;
   font-weight: bold;
-  margin-left: 30px;
 }
 .is-parent {
   margin-top: 15px;
@@ -125,11 +124,9 @@ html {
 }
 
 .community-icon-landing {
-  max-width: 20px;
-  max-height: 20px;
-  margin-left: 40px !important;
-  margin-right: -30px;
-  margin-top: -2px;
+  margin-top: -14px;
+  min-width: 30px;
+  margin-left: -70px;
 }
 
 .postCard1-body {
@@ -153,14 +150,18 @@ a :hover {
   text-decoration: underline !important;
 }
 
-.postCard1-sidebar {
-  color: grey;
-  margin-right: 30px;
+.sidebar-column {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: 33px !important;
+  background-color: #f0eff2;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 .postInfo {
   margin-top: 24px;
-  margin-left: 14px;
   margin-bottom: -15px;
   opacity: 0.5;
 }
@@ -173,4 +174,11 @@ a :hover {
 }
 .infoTitle {
   font-size: 13px;
+}
+
+.notification {
+  margin-left: 0;
+  border-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }

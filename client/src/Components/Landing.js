@@ -18,7 +18,7 @@ export default function Landing() {
       <div className="container columns is-centered">
         <p className="help is-danger">{error && error}</p>
 
-        <div className="column is-6 ">
+        <div className="column is-6 is-centered">
           <Link to="/newpost">
             <input
               className="input"
