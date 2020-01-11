@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/.github.io/postit/static/css/main.1e66f4fc.chunk.css",
+    "main.js": "/.github.io/postit/static/js/main.96daff7d.chunk.js",
+    "main.js.map": "/.github.io/postit/static/js/main.96daff7d.chunk.js.map",
+    "runtime-main.js": "/.github.io/postit/static/js/runtime-main.f6b0c444.js",
+    "runtime-main.js.map": "/.github.io/postit/static/js/runtime-main.f6b0c444.js.map",
+    "static/css/2.4b3ccb6c.chunk.css": "/.github.io/postit/static/css/2.4b3ccb6c.chunk.css",
+    "static/js/2.84ac2761.chunk.js": "/.github.io/postit/static/js/2.84ac2761.chunk.js",
+    "static/js/2.84ac2761.chunk.js.map": "/.github.io/postit/static/js/2.84ac2761.chunk.js.map",
+    "index.html": "/.github.io/postit/index.html",
+    "precache-manifest.fa8a3415a3ed4b04f3ac403990bb1d0b.js": "/.github.io/postit/precache-manifest.fa8a3415a3ed4b04f3ac403990bb1d0b.js",
+    "service-worker.js": "/.github.io/postit/service-worker.js",
+    "static/css/2.4b3ccb6c.chunk.css.map": "/.github.io/postit/static/css/2.4b3ccb6c.chunk.css.map",
+    "static/css/main.1e66f4fc.chunk.css.map": "/.github.io/postit/static/css/main.1e66f4fc.chunk.css.map",
+    "static/js/2.84ac2761.chunk.js.LICENSE": "/.github.io/postit/static/js/2.84ac2761.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f6b0c444.js",
+    "static/css/2.4b3ccb6c.chunk.css",
+    "static/js/2.84ac2761.chunk.js",
+    "static/css/main.1e66f4fc.chunk.css",
+    "static/js/main.96daff7d.chunk.js"
+  ]
+}
