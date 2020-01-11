@@ -28,10 +28,10 @@ const Post = new mongoose.Schema({
     }
   },
 
-  link: {
-    type: String,
-    required: false,
-    default: undefined
+  metadata: {
+    type: Object,
+    default: undefined,
+    required: false
   },
 
   avatar: {

@@ -6,46 +6,69 @@ const Profile = require("../models/Profile");
 const validatePost = require("../validation/post");
 const validateComment = require("../validation/comment");
 const Community = require("../models/Community");
-const isEmpty = require("../validation/isEmpty");
+
+const ogs = require("open-graph-scraper");
 
 router.post(
   "/new",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    //extracting data from the form
     const body = JSON.parse(req.body.data);
-    const { errors, isValid } = validatePost(req);
 
+    //validation
+    const { errors, isValid } = validatePost(req);
     if (!isValid) return res.status(400).json(errors);
 
+    // saving function
+    const savePost = newPost => {
+      newPost
+        .save()
+        .then(post => {
+          Community.findOne({ _id: body.community }).then(community => {
+            community.posts.push(newPost._id);
+          });
+          res.json(post.populate("user").populate("community"));
+        })
+        .catch(e => res.json(e));
+    };
+
+    // creating object
     const newPost = new Post({
       user: req.user._id,
       title: body.title,
       type: body.type,
       community: body.community,
-      body: body.body,
-      link: body.link,
       upvotes: [],
       downvotes: [],
       comments: []
     });
 
-    if (!isEmpty(req.files)) {
-      newPost.file = {
-        filename: req.files.file.filename,
-        id: req.files.file.uuid
-      };
+    switch (body.type) {
+      case "textPost":
+        newPost.body = body.body;
+        savePost(newPost);
+        break;
+      case "mediaPost":
+        newPost.file = {
+          filename: req.files.file.filename,
+          id: req.files.file.uuid
+        };
+        savePost(newPost);
+        break;
+      case "linkPost":
+        const options = { url: body.link };
+        ogs(options)
+          .then(results => {
+            newPost.metadata = results.data;
+            savePost(newPost);
+          })
+          .catch(error => {
+            newPost.metadata.error = error;
+            savePost(newPost);
+          });
+        break;
     }
-
-    Community.findOne({ _id: body.community }).then(community => {
-      community.posts.push(newPost._id);
-    });
-
-    newPost
-      .save()
-      .then(post => {
-        res.json(post.populate("user").populate("community"));
-      })
-      .catch(e => res.json(e));
   }
 );
 
