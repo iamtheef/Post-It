@@ -173,8 +173,7 @@ a:hover {
 }
 
 .postInfoChild:hover {
-  color: grey;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 .infoTitle {
   font-size: 13px;
@@ -194,4 +193,8 @@ a:hover {
   color: grey;
   font-size: 21px;
   text-shadow: 1px 1px green !important;
+}
+
+.share-icon {
+  margin-left: -120px;
 }

@@ -9,7 +9,7 @@ function CommunitySelector() {
   const [communities, setCommunities] = useState([]);
   const [name, setName] = useState(undefined);
   const [icon, setIcon] = useState(undefined);
-  const { community, setCommunity, errors } = useContext(PostContext);
+  const { setCommunity, errors } = useContext(PostContext);
   const [error, setError] = useState(undefined);
 
   useEffect(() => {

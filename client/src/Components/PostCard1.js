@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import moment from "moment";
-import ogs from "open-graph-scraper";
 
 import { Link } from "react-router-dom";
 
 export default function PostCard1(props) {
   const post = props.post;
+  console.log(post);
 
   return (
     <Link to={`/posts/${post._id}`}>
@@ -88,14 +87,15 @@ export default function PostCard1(props) {
                       Award
                     </p>
                   </div>
-                  <div className="postInfoChild column is-3">
+
+                  <div className="postInfoChild column is-2">
                     <p className="infoTitle">
-                      <i className="fa fa-trophy" aria-hidden="true"></i> Save
+                      <i className="fa fa-bookmark" aria-hidden="true"></i> Save
                     </p>
                   </div>
                   <div className="postInfoChild column is-3">
-                    <p className="infoTitle">
-                      <i className="fa fa-trophy" aria-hidden="true"></i> Share
+                    <p className="infoTitle" id="share-icon">
+                      <i className="fa fa-share" aria-hidden="true"></i> Share
                     </p>
                   </div>
                 </div>
