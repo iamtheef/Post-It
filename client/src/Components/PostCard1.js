@@ -7,23 +7,17 @@ import { Link } from "react-router-dom";
 
 export default function PostCard1(props) {
   const post = props.post;
-  console.log(post);
-
-  const [metadata, setMetadata] = useState();
-  if (post.link) {
-    // useEffect(post => {
-    //   axios.get(
-    //     "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=S55hwA2RjHY&format=json"
-    //   );
-    // });
-  }
 
   return (
     <Link to={`/posts/${post._id}`}>
       <div className="is-parent">
         <div className="column body-column">
           <div className="columns">
-            <div className="column is-1 sidebar-column"></div>
+            <div className="column is-1 sidebar-column is-vcentered">
+              <i className="fa fa-arrow-up arrow" aria-hidden="true"></i>
+              <i id="dot"> • </i>
+              <i className="fa fa-arrow-down arrow" aria-hidden="true"></i>
+            </div>
             <article className="tile notification">
               <div className="content">
                 <div className="columns">
@@ -82,13 +76,27 @@ export default function PostCard1(props) {
                   {post.type === "linkPost" && <img></img>}
                 </div>
                 <div className="postInfo columns">
-                  <div className="postInfoChild column">
-                    <i className="fa fa-comment" aria-hidden="true" />
-                    <p className="infoTitle">{post.comments.length} comments</p>
+                  <div className="postInfoChild column is-3">
+                    <p className="infoTitle">
+                      <i className="fa fa-comment" aria-hidden="true"></i>{" "}
+                      {post.comments.length} comments
+                    </p>
                   </div>
-                  <div className="postInfoChild column">
-                    <i className="fa fa-trophy" aria-hidden="true" />
-                    <p className="infoTitle">Give Award</p>
+                  <div className="postInfoChild column is-3">
+                    <p className="infoTitle">
+                      <i className="fa fa-trophy" aria-hidden="true"></i> Give
+                      Award
+                    </p>
+                  </div>
+                  <div className="postInfoChild column is-3">
+                    <p className="infoTitle">
+                      <i className="fa fa-trophy" aria-hidden="true"></i> Save
+                    </p>
+                  </div>
+                  <div className="postInfoChild column is-3">
+                    <p className="infoTitle">
+                      <i className="fa fa-trophy" aria-hidden="true"></i> Share
+                    </p>
                   </div>
                 </div>
               </div>
