@@ -20,19 +20,6 @@ router.post(
     const { errors, isValid } = validatePost(req);
     if (!isValid) return res.status(400).json(errors);
 
-    // saving function
-    const savePost = newPost => {
-      newPost
-        .save()
-        .then(post => {
-          Community.findOne({ _id: body.community }).then(community => {
-            community.posts.push(newPost._id);
-          });
-          res.json(post.populate("user").populate("community"));
-        })
-        .catch(e => res.json(e));
-    };
-
     // creating object
     const newPost = new Post({
       user: req.user._id,
@@ -44,31 +31,42 @@ router.post(
       comments: []
     });
 
-    switch (body.type) {
-      case "textPost":
-        newPost.body = body.body;
-        savePost(newPost);
-        break;
-      case "mediaPost":
-        newPost.file = {
-          filename: req.files.file.filename,
-          id: req.files.file.uuid
-        };
-        savePost(newPost);
-        break;
-      case "linkPost":
-        const options = { url: body.link };
-        ogs(options)
-          .then(results => {
+    // filling new post accordingly
+    const makePost = new Promise(resolve => {
+      switch (body.type) {
+        case "textPost":
+          newPost.body = body.body;
+          break;
+        case "mediaPost":
+          newPost.file = {
+            filename: req.files.file.filename,
+            id: req.files.file.uuid
+          };
+          break;
+        case "linkPost":
+          const options = { url: body.link };
+          ogs(options).then(results => {
             newPost.metadata = results.data;
-            savePost(newPost);
-          })
-          .catch(error => {
-            newPost.metadata.error = error;
-            savePost(newPost);
+            resolve(newPost);
           });
-        break;
-    }
+          break;
+      }
+      resolve(newPost);
+    });
+
+    // saving
+    makePost.then(newPost => {
+      newPost
+        .save()
+        .then(post => {
+          Community.findOne({ _id: body.community }).then(community => {
+            community.posts.push(newPost._id);
+            community.save();
+          });
+          res.json(post.populate("user").populate("community"));
+        })
+        .catch(e => res.json(e));
+    });
   }
 );
 
