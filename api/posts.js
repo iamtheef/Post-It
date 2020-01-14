@@ -36,22 +36,20 @@ router.post(
       switch (body.type) {
         case "textPost":
           newPost.body = body.body;
-          break;
+          resolve(newPost);
         case "mediaPost":
           newPost.file = {
             filename: req.files.file.filename,
             id: req.files.file.uuid
           };
-          break;
+          resolve(newPost);
         case "linkPost":
           const options = { url: body.link };
           ogs(options).then(results => {
             newPost.metadata = results.data;
             resolve(newPost);
           });
-          break;
       }
-      resolve(newPost);
     });
 
     // saving

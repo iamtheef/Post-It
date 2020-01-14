@@ -4,8 +4,15 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 export default function PostCard1(props) {
-  const post = props.post;
-  console.log(post);
+  const { post } = props;
+
+  if (post.type === "textPost") {
+    const postLength = post.body.length;
+    var postHeight = "100px";
+    if (postLength > 200) {
+      postHeight = "170px";
+    }
+  }
 
   return (
     <Link to={`/posts/${post._id}`}>
@@ -52,28 +59,56 @@ export default function PostCard1(props) {
                     {moment(post.date).fromNow()}
                   </div>
                 </div>
-                <div className="postCard1-body">
-                  <p className="postCard1-title">{post.title}</p>
+
+                <div className="columns">
                   {post.type === "textPost" && (
-                    <div className="postCard1-body">{post.body}</div>
+                    <div className="column is-12">
+                      <p className="postCard1-title">{post.title}</p>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: post.body }}
+                        className="row"
+                        style={{ height: postHeight, overflow: "hidden" }}
+                      />
+                    </div>
                   )}
                   {post.type === "mediaPost" && (
-                    <figure
-                      className="image is-4by5 content"
-                      style={{
-                        width: "30vw",
-                        marginTop: "-10px",
-                        marginLeft: "-7px"
-                      }}
-                    >
-                      <img
-                        src={`uploads/${post.file.id}/file/${post.file.filename}`}
-                      />
-                    </figure>
+                    <div className="column is-14">
+                      <p className="postCard1-title">{post.title}</p>
+                      <figure>
+                        <img
+                          style={{ marginLeft: "-15%", width: "100%" }}
+                          src={`uploads/${post.file.id}/file/${post.file.filename}`}
+                        />
+                      </figure>
+                    </div>
                   )}
 
-                  {post.type === "linkPost" && <img></img>}
+                  {post.type === "linkPost" && (
+                    <div>
+                      <p className="postCard1-title column is-9">
+                        {post.title}
+                      </p>
+                      <div className="link-image column is-4">
+                        <img
+                          style={{
+                            borderRadius: "3px",
+
+                            width: "20vw"
+                          }}
+                          src={post.metadata.ogImage.url}
+                        ></img>
+                      </div>
+
+                      <a href={post.metadata.ogUrl} target="blank">
+                        <div id="blue-fade">
+                          {post.metadata.ogUrl.slice(12, 35) + "...          "}
+                          <i class="fa fa-link" aria-hidden="true"></i>
+                        </div>
+                      </a>
+                    </div>
+                  )}
                 </div>
+
                 <div className="postInfo columns">
                   <div className="postInfoChild column is-3">
                     <p className="infoTitle">
