@@ -114,15 +114,21 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id })
-      .then(profile => {
+      .then(user => {
         Post.findById(req.params.post_id)
           .then(post => {
-            if (!post.upvotes.includes(req.user.id)) {
-              post.upvotes.push(req.user.id);
+            if (!post.upvotes.includes(user._id)) {
+              post.upvotes.push(user._id);
+              post.karma = upvotes.length - downvotes.length;
+              user.upvoted.push(post._id);
+              user.save();
               post.save().then(post => res.json(post));
             } else {
-              let removeIndex = post.upvotes.indexOf(req.user.id);
+              let removeIndex = post.upvotes.indexOf(user._id);
               post.upvotes.splice(removeIndex, 1);
+              post.karma = upvotes.length - downvotes.length;
+              user.upvoted.slice(removeIndex, 1);
+              user.save();
               post.save().then(post => res.json(post));
             }
           })

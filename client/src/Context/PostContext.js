@@ -17,6 +17,8 @@ export function PostProvider(props) {
   const [linkPost, toggleLinkPost] = useToggle(false);
   const [postType, setPostType] = useState("textPost");
   const [community, setCommunity] = useState("");
+  const [upvoteSession, setUpvoteSession] = useState([]);
+  const [downVoteSession, setDownVoteSession] = useState([]);
 
   // inputs
   const [title, changeTitle, resetTitle] = useInputState("");
@@ -49,6 +51,15 @@ export function PostProvider(props) {
         if (!linkPost) toggleLinkPost();
         setPostType("linkPost");
     }
+  };
+
+  const upvote = (e, postId) => {
+    e.preventDefault();
+    axios.post("/:post_id/upvote", postId).then(post => {
+      if (post) {
+        setUpvoteSession(...upvoteSession, post._id);
+      }
+    });
   };
 
   function resetAllFields() {
@@ -91,6 +102,16 @@ export function PostProvider(props) {
       });
   };
 
+  const isUpvoted = id => {
+    if (upvoteSession.includes(id)) return true;
+    return false;
+  };
+
+  const isDownVoted = id => {
+    if (downVoteSession.includes(id)) return true;
+    return false;
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -109,7 +130,14 @@ export function PostProvider(props) {
         changeTitle,
         errors,
         community,
-        setCommunity
+        setCommunity,
+        setUpvoteSession,
+        upvoteSession,
+        isUpvoted,
+        upvote,
+        setDownVoteSession,
+        downVoteSession,
+        isDownVoted
       }}
     >
       {props.children}

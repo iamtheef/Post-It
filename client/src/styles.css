@@ -226,3 +226,10 @@ a:hover {
   top: 0;
   background: linear-gradient(rgba(255, 255, 255, 0) 90px, white);
 }
+
+#postKarma {
+  margin-left: 2px;
+}
+.upvoted {
+  color: green;
+}

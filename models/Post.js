@@ -7,6 +7,11 @@ const Post = new mongoose.Schema({
     ref: "User"
   },
 
+  karma: {
+    type: Number,
+    default: 0
+  },
+
   title: {
     type: String,
     required: true

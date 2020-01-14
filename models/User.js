@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Profile = require("./Profile");
 
 //Creating Schema
 const UserSchema = new mongoose.Schema({

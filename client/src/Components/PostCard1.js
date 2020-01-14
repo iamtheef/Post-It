@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import moment from "moment";
-
 import { Link } from "react-router-dom";
+import { PostContext } from "../Context/PostContext";
 
 export default function PostCard1(props) {
-  const { post } = props;
+  const { post, isUpvoted } = props;
+  const { upvote } = useContext(PostContext);
 
   if (post.type === "textPost") {
     const postLength = post.body.length;
@@ -15,51 +16,60 @@ export default function PostCard1(props) {
   }
 
   return (
-    <Link to={`/posts/${post._id}`}>
-      <div className="is-parent">
-        <div className="column body-column">
-          <div className="columns">
-            <div className="column is-1 sidebar-column is-vcentered">
-              <i className="fa fa-arrow-up arrow" aria-hidden="true"></i>
-              <i id="dot"> • </i>
-              <i className="fa fa-arrow-down arrow" aria-hidden="true"></i>
+    <div className="is-parent">
+      <div className="column body-column">
+        <div className="columns">
+          <div className="column is-1 sidebar-column is-vcentered">
+            <i
+              className="fa fa-arrow-up arrow"
+              aria-hidden="true"
+              onClick={e => upvote(e, post._id)}
+            ></i>
+            <div id="postKarma">
+              {post.karma <= 0 ? <i> • </i> : post.karma}
             </div>
-            <article className="tile notification">
-              <div className="content">
-                <div className="columns">
-                  <div className="column is-1">
-                    <figure className="image">
-                      <img
-                        className="is-rounded community-icon-landing"
-                        src={post.community.img}
-                        alt="community logo"
-                      ></img>
-                    </figure>
-                  </div>
-
-                  <div className="postCard1-header column is-10">
-                    <strong>
-                      <span
-                        style={{
-                          color: "#3f3d3e"
-                        }}
-                      >
-                        <span className="underline">
-                          <Link to={`/communities/${post.community._id}`}>
-                            p/{post.community.name}
-                          </Link>
-                        </span>
-                      </span>
-                    </strong>
-                    {" • "}
-                    Posted by{" "}
-                    <Link to={`/profile/${post.user}`}>
-                      <span className="underline">{post.user.username}</span>
-                    </Link>{" "}
-                    {moment(post.date).fromNow()}
-                  </div>
+            <i
+              className={`fa fa-arrow-down arrow ${isUpvoted && "upvoted"}`}
+              aria-hidden="true"
+            ></i>
+          </div>
+          <article className="tile notification">
+            <div className="content">
+              <div className="columns">
+                <div className="column is-1">
+                  <figure className="image">
+                    <img
+                      className="is-rounded community-icon-landing"
+                      src={post.community.img}
+                      alt="community logo"
+                    ></img>
+                  </figure>
                 </div>
 
+                <div className="postCard1-header column is-10">
+                  <strong>
+                    <span
+                      style={{
+                        color: "#3f3d3e"
+                      }}
+                    >
+                      <span className="underline">
+                        <Link to={`/communities/${post.community._id}`}>
+                          p/{post.community.name}
+                        </Link>
+                      </span>
+                    </span>
+                  </strong>
+                  {" • "}
+                  Posted by{" "}
+                  <Link to={`/profile/${post.user}`}>
+                    <span className="underline">{post.user.username}</span>
+                  </Link>{" "}
+                  {moment(post.date).fromNow()}
+                </div>
+              </div>
+
+              <Link to={`/posts/${post._id}`}>
                 <div className="columns">
                   {post.type === "textPost" && (
                     <div className="column is-12">
@@ -134,11 +144,11 @@ export default function PostCard1(props) {
                     </p>
                   </div>
                 </div>
-              </div>
-            </article>
-          </div>
+              </Link>
+            </div>
+          </article>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
