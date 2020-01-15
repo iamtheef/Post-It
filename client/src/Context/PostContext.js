@@ -18,7 +18,7 @@ export function PostProvider(props) {
   const [postType, setPostType] = useState("textPost");
   const [community, setCommunity] = useState("");
   const [upvoteSession, setUpvoteSession] = useState([]);
-  const [downVoteSession, setDownVoteSession] = useState([]);
+  const [downVoteSession, setDownvoteSession] = useState([]);
 
   // inputs
   const [title, changeTitle, resetTitle] = useInputState("");
@@ -55,13 +55,14 @@ export function PostProvider(props) {
 
   const upvote = (e, postId) => {
     e.preventDefault();
-    axios.post("/:post_id/upvote", postId).then(post => {
+    axios.post(`/${postId}/upvote`, postId).then(post => {
       if (post) {
         setUpvoteSession(...upvoteSession, post._id);
       }
     });
   };
 
+  //reset fields
   function resetAllFields() {
     setCommunity("");
     resetTitle();
@@ -71,6 +72,7 @@ export function PostProvider(props) {
     setErrors({});
   }
 
+  // new post
   const handleSubmit = e => {
     e.preventDefault();
     const formData = new FormData();
@@ -135,7 +137,7 @@ export function PostProvider(props) {
         upvoteSession,
         isUpvoted,
         upvote,
-        setDownVoteSession,
+        setDownvoteSession,
         downVoteSession,
         isDownVoted
       }}

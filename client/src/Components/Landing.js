@@ -11,7 +11,7 @@ export default function Landing() {
   const {
     setUpvoteSession,
     isUpvoted,
-    setDownVoteSession,
+    setDownvoteSession,
     isDownVoted
   } = useContext(PostContext);
 
@@ -26,13 +26,14 @@ export default function Landing() {
     axios
       .get("/api/profile/")
       .then(foundUser => {
-        if (foundUser) {
-          setUpvoteSession(foundUser.upvotes);
-          setDownVoteSession(foundUser.downvoted);
-        }
+        //   if (foundUser) {
+        //     setUpvoteSession(foundUser.data.upvoted);
+        //     setDownvoteSession(foundUser.data.downvoted);
+        //   }
+        console.log(foundUser.data.upvoted, foundUser.data.downvoted);
       })
       .catch(e => {
-        console.log(e);
+        console.log(e.response.data);
       });
   });
 

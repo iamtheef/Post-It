@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const Post = require("../models/Post");
 const Profile = require("../models/Profile");
+const User = require("../models/User");
 const validatePost = require("../validation/post");
 const validateComment = require("../validation/comment");
 const Community = require("../models/Community");
@@ -53,18 +54,26 @@ router.post(
     });
 
     // saving
-    makePost.then(newPost => {
-      newPost
-        .save()
-        .then(post => {
-          Community.findOne({ _id: body.community }).then(community => {
-            community.posts.push(newPost._id);
-            community.save();
-          });
-          res.json(post.populate("user").populate("community"));
-        })
-        .catch(e => res.json(e));
-    });
+    User.findOne({ _id: req.user._id })
+      .then(user => {
+        makePost.then(newPost => {
+          newPost
+            .save()
+            .then(post => {
+              Community.findOne({ _id: body.community }).then(community => {
+                user.posts.push(post._id);
+                user.save();
+                community.posts.push(post._id);
+                community.save();
+              });
+              res.json(post.populate("user").populate("community"));
+            })
+            .catch(e => res.json(e));
+        });
+      })
+      .catch(e => {
+        res.json(e);
+      });
   }
 );
 

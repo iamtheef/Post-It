@@ -30,12 +30,16 @@ router.post("/register", (req, res) => {
           username: req.body.username,
           email: req.body.email,
           avatar,
-          password: req.body.password,
-          profile: new Profile()
+          password: req.body.password
         });
+
+        const profile = new Profile();
+        newUser.profile = profile;
+        profile.save();
 
         let hash = bcrypt.hashSync(req.body.password, 12);
         newUser.password = hash;
+        newUser.profile.user = newUser._id;
         newUser
           .save()
           .then(user => res.json(user))
