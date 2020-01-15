@@ -122,32 +122,36 @@ router.post(
   "/:post_id/upvote",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id })
+    Profile.findOne({ user: req.user._id })
       .then(user => {
         Post.findById(req.params.post_id)
           .then(post => {
-            if (!post.upvotes.includes(user._id)) {
-              post.upvotes.push(user._id);
-              post.karma = upvotes.length - downvotes.length;
+            if (
+              post.upvotes.map(upvote => Object.values(upvote) !== user._id)
+            ) {
               user.upvoted.push(post._id);
               user.save();
-              post.save().then(post => res.json(post));
+              post.upvotes.push(user._id);
+              post.karma = post.upvotes.length - post.downvotes.length;
+              post
+                .save()
+                .then(post => res.json(post))
+                .catch(e => res.status(404).json(e));
             } else {
               let removeIndex = post.upvotes.indexOf(user._id);
               post.upvotes.splice(removeIndex, 1);
-              post.karma = upvotes.length - downvotes.length;
+              post.karma = post.upvotes.length - post.downvotes.length;
               user.upvoted.slice(removeIndex, 1);
               user.save();
-              post.save().then(post => res.json(post));
+              post
+                .save()
+                .then(post => res.json(post))
+                .catch(e => res.json(e));
             }
           })
           .catch(res.status(404).json({ notFound: "Post not found" }));
       })
-      .catch(e =>
-        res
-          .status(401)
-          .json({ unathorized: "You are unauthorized for this action" })
-      );
+      .catch(e => res.status(401).json(e));
   }
 );
 

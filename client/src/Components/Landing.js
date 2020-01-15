@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { PostContext } from "../Context/PostContext";
+import { UserContext } from "../Context/UserContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import PostCard1 from "./PostCard1";
@@ -8,6 +9,7 @@ export default function Landing() {
   const [error, setError] = useState();
   const [posts, setPosts] = useState([]);
 
+  const { user } = useContext(UserContext);
   const {
     setUpvoteSession,
     isUpvoted,
@@ -20,22 +22,12 @@ export default function Landing() {
       .get("/api/posts/all")
       .then(res => setPosts(res.data))
       .catch(e => setError(e));
-  }, [setPosts]);
 
-  useEffect(() => {
-    axios
-      .get("/api/profile/")
-      .then(foundUser => {
-        //   if (foundUser) {
-        //     setUpvoteSession(foundUser.data.upvoted);
-        //     setDownvoteSession(foundUser.data.downvoted);
-        //   }
-        console.log(foundUser.data.upvoted, foundUser.data.downvoted);
-      })
-      .catch(e => {
-        console.log(e.response.data);
-      });
-  });
+    if (user) {
+      setDownvoteSession(user.profile.downvoted);
+      setUpvoteSession(user.profile.upvoted);
+    }
+  }, [setPosts]);
 
   return (
     <div>

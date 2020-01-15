@@ -55,11 +55,15 @@ export function PostProvider(props) {
 
   const upvote = (e, postId) => {
     e.preventDefault();
-    axios.post(`/${postId}/upvote`, postId).then(post => {
-      if (post) {
-        setUpvoteSession(...upvoteSession, post._id);
-      }
-    });
+    axios
+      .post(`/api/posts/${postId}/upvote`, postId)
+      .then(post => {
+        if (post) {
+          console.log(post);
+          setUpvoteSession(...upvoteSession, post._id);
+        }
+      })
+      .catch(e => console.log(e.response.data));
   };
 
   //reset fields

@@ -15,7 +15,6 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     let errors = {};
-
     Profile.findById(req.user.profile)
       .then(profile => {
         if (!profile) {

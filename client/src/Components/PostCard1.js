@@ -19,12 +19,11 @@ export default function PostCard1(props) {
     <div className="is-parent">
       <div className="column body-column">
         <div className="columns">
-          <div className="column is-1 sidebar-column is-vcentered">
-            <i
-              className="fa fa-arrow-up arrow"
-              aria-hidden="true"
-              onClick={e => upvote(e, post._id)}
-            ></i>
+          <div
+            className="column is-1 sidebar-column is-vcentered"
+            onClick={e => upvote(e, post._id)}
+          >
+            <i className="fa fa-arrow-up arrow" aria-hidden="true"></i>
             <div id="postKarma">
               {post.karma <= 0 ? <i> • </i> : post.karma}
             </div>
