@@ -31,30 +31,63 @@ export default function Landing() {
 
   return (
     <div>
-      <div className="container columns is-centered">
+      <footer className="upFooter">
         <p className="help is-danger">{error && error}</p>
-
+        <div>
+          VIEW:
+          <span class="button is-static">
+            <i
+              className="fa fa-square"
+              aria-hidden="true"
+              style={{ marginLeft: "10px" }}
+            ></i>
+          </span>
+          <span class="button is-static">
+            <i
+              className="fa fa-bars"
+              aria-hidden="true"
+              style={{ marginLeft: "10px" }}
+            ></i>
+          </span>
+        </div>
+      </footer>
+      <div className="container columns is-centered">
         <div className="column is-6 is-centered">
-          <Link to="/newpost">
-            <input
-              className="input"
-              type="text"
-              placeholder="Make a new post"
-              style={{ marginTop: "80px" }}
-            ></input>
-          </Link>
-
-          <ul>
-            {posts.map(post => (
-              <li key={post._id}>
-                <PostCard1
-                  post={post}
-                  isUpvoted={isUpvoted(post._id)}
-                  isDownVoted={isDownVoted(post._id)}
-                />
-              </li>
-            ))}
-          </ul>
+          {/* if user */}
+          {user ? (
+            <div>
+              <Link to="/newpost">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Make a new post"
+                ></input>
+              </Link>
+              <ul>
+                {posts.map(post => (
+                  /* all the posts if no one is connected */
+                  <li key={post._id}>
+                    <PostCard1 post={post} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            /* all the posts if no one is connected */
+            <div>
+              <ul>
+                {posts.map(post => (
+                  <li key={post._id}>
+                    <PostCard1
+                      post={post}
+                      isUpvoted={isUpvoted(post._id)}
+                      isDownVoted={isDownVoted(post._id)}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>

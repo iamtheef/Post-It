@@ -6,6 +6,7 @@ import { PostContext } from "../Context/PostContext";
 export default function PostCard1(props) {
   const { post, isUpvoted } = props;
   const { upvote } = useContext(PostContext);
+  console.log(isUpvoted);
 
   if (post.type === "textPost") {
     const postLength = post.body.length;
@@ -15,17 +16,23 @@ export default function PostCard1(props) {
     }
   }
 
+  const error = undefined;
+
   return (
     <div className="is-parent">
       <div className="column body-column">
         <div className="columns">
+          <p>{error && error}</p>
           <div
             className="column is-1 sidebar-column is-vcentered"
             onClick={e => upvote(e, post._id)}
           >
-            <i className="fa fa-arrow-up arrow" aria-hidden="true"></i>
+            <i
+              className={`fa fa-arrow-up arrow ${post.isUpvoted && "upvoted"}`}
+              aria-hidden="true"
+            ></i>
             <div id="postKarma">
-              {post.karma <= 0 ? <i> • </i> : post.karma}
+              {post.karma <= 1 ? <i> • </i> : post.karma}
             </div>
             <i
               className={`fa fa-arrow-down arrow ${isUpvoted && "upvoted"}`}

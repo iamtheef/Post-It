@@ -59,8 +59,7 @@ export function PostProvider(props) {
       .post(`/api/posts/${postId}/upvote`, postId)
       .then(post => {
         if (post) {
-          console.log(post);
-          setUpvoteSession(...upvoteSession, post._id);
+          setUpvoteSession([...upvoteSession, post._id]);
         }
       })
       .catch(e => console.log(e.response.data));
@@ -109,6 +108,8 @@ export function PostProvider(props) {
   };
 
   const isUpvoted = id => {
+    console.log(upvoteSession);
+    console.log(id);
     if (upvoteSession.includes(id)) return true;
     return false;
   };

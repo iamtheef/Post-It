@@ -1,47 +1,57 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import moment from "moment";
 
 export default function Post(props) {
   const postId = props.match.params.id;
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState();
 
   useEffect(() => {
     axios
       .get(`/api/posts/${postId}`)
       .then(res => {
         setPost(res.data);
-        console.log(res);
       })
       .catch(e => console.log(e));
   }, [setPost]);
 
-  // switch (post.type) {
-  //   case "textPost":
-  //     if (linkPost) toggleLinkPost();
-  //     if (mediaPost) toggleMediaPost();
-  //     if (!textPost) toggleTextPost();
-  //     setPostType("textPost");
-  //     break;
-
-  //   case "mediaPost":
-  //     if (textPost) toggleTextPost();
-  //     if (linkPost) toggleLinkPost();
-  //     if (!mediaPost) toggleMediaPost();
-  //     setPostType("mediaPost");
-  //     break;
-  //   case "linkPost":
-  //     if (mediaPost) toggleMediaPost();
-  //     if (textPost) toggleTextPost();
-  //     if (!linkPost) toggleLinkPost();
-  //     setPostType("linkPost");
-  // }
-
   return (
+    // <div>
+    //   <div className="postCard1-header column is-10">
+    //     <strong>
+    //       <span
+    //         style={{
+    //           color: "#3f3d3e"
+    //         }}
+    //       >
+    //         <span className="underline">
+    //           <Link to={`/communities/${post.community._id}`}>
+    //             p/{post.community.name}
+    //           </Link>
+    //         </span>
+    //       </span>
+    //     </strong>
+    //     {" • "}
+    //     Posted by{" "}
+    //     <Link to={`/profile/${post.user._id}`}>
+    //       <span className="underline">{post.user.username}</span>
+    //     </Link>{" "}
+    //     {moment(post.date).fromNow()}
+    //   </div>
+
     <div>
-      <div style={{ display: post ? "block" : "none" }}>
-        <h1 style={{ marginTop: "200px" }}>{post.title}</h1>
-        <h4>{post.body ? post.body : "other type of post"}</h4>
-      </div>
+      {post.type === "textPost" && (
+        <div className="columns">
+          <h1 style={{ marginTop: "200px" }} className="column is-12">
+            {post.title}
+          </h1>
+          <div
+            className="column is-12"
+            dangerouslySetInnerHTML={{ __html: post.body }}
+          ></div>
+        </div>
+      )}
     </div>
   );
 }

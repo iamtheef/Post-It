@@ -7,6 +7,7 @@ const User = require("../models/User");
 const validatePost = require("../validation/post");
 const validateComment = require("../validation/comment");
 const Community = require("../models/Community");
+const ObjectId = require("mongoose").Types.ObjectId;
 
 const ogs = require("open-graph-scraper");
 
@@ -89,7 +90,9 @@ router.get("/all", (req, res) => {
 
 // A specific post
 router.get("/:post_id", (req, res) => {
-  Post.findById(req.params.post_id)
+  Post.findById(new ObjectId(req.params.post_id))
+    .populate("community")
+    .populate("user")
     .then(post => {
       res.json(post);
     })
@@ -125,10 +128,9 @@ router.post(
     Profile.findOne({ user: req.user._id })
       .then(user => {
         Post.findById(req.params.post_id)
+          .populate("post")
           .then(post => {
-            if (
-              post.upvotes.map(upvote => Object.values(upvote) !== user._id)
-            ) {
+            if (post) {
               user.upvoted.push(post._id);
               user.save();
               post.upvotes.push(user._id);
@@ -149,7 +151,7 @@ router.post(
                 .catch(e => res.json(e));
             }
           })
-          .catch(res.status(404).json({ notFound: "Post not found" }));
+          .catch(e => console.log(e));
       })
       .catch(e => res.status(401).json(e));
   }
