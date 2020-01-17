@@ -24,15 +24,14 @@ export default function PostCard1(props) {
             onClick={e => upvote(e, post._id)}
           >
             <i
-              className={`fa fa-arrow-up arrow ${post.isUpvoted && "upvoted"}`}
+              className={`fa fa-arrow-up arrow ${isUpvoted && "upvoted"}`}
               aria-hidden="true"
             ></i>
             <div id="postKarma">
               {post.karma <= 1 ? <i> • </i> : post.karma}
             </div>
             <i
-              className={`fa fa-arrow-down arrow ${post.isDownvoted &&
-                "upvoted"}`}
+              className={`fa fa-arrow-down arrow ${isDownvoted && "downvoted"}`}
               aria-hidden="true"
             ></i>
           </div>

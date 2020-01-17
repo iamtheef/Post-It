@@ -4,10 +4,13 @@ import "./styles.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { UserProvider } from "./Context/UserContext";
+import { ProfileProvider } from "./Context/ProfileContext";
 
 ReactDOM.render(
   <UserProvider>
-    <App />
+    <ProfileProvider>
+      <App />
+    </ProfileProvider>
   </UserProvider>,
   document.getElementById("root")
 );

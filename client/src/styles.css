@@ -237,6 +237,9 @@ a:hover {
 .upvoted {
   color: green;
 }
+.downvoted {
+  color: red;
+}
 
 .upFooter {
   width: 100%;

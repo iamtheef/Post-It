@@ -1,8 +1,9 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import useToggle from "../Hooks/useToggle";
 import useInputState from "../Hooks/useInputState";
 import axios from "axios";
+import { ProfileContext } from "./ProfileContext";
 
 export const PostContext = createContext();
 
@@ -17,8 +18,6 @@ export function PostProvider(props) {
   const [linkPost, toggleLinkPost] = useToggle(false);
   const [postType, setPostType] = useState("textPost");
   const [community, setCommunity] = useState("");
-  const [upvoteSession, setUpvoteSession] = useState([]);
-  const [downVoteSession, setDownvoteSession] = useState([]);
 
   // inputs
   const [title, changeTitle, resetTitle] = useInputState("");
@@ -26,6 +25,7 @@ export function PostProvider(props) {
   const [file, setFile] = useState(null);
   const [link, changeLink, resetLink] = useInputState("");
   const [errors, setErrors] = useState({});
+  const { setUpvoteSession, upvoteSession } = useContext(ProfileContext);
 
   //
   // functions
@@ -57,9 +57,9 @@ export function PostProvider(props) {
     e.preventDefault();
     axios
       .post(`/api/posts/${postId}/upvote`, postId)
-      .then(newVotes => {
-        if (newVotes) {
-          setUpvoteSession(newVotes);
+      .then(added => {
+        if (added) {
+          setUpvoteSession(...upvoteSession, added);
         }
       })
       .catch(e => console.log(e.response.data));
@@ -91,8 +91,6 @@ export function PostProvider(props) {
       case "linkPost":
         newPost.link = link;
         break;
-      default:
-        console.log("No post type selected!");
     }
     formData.append("data", JSON.stringify(newPost));
 
@@ -105,16 +103,6 @@ export function PostProvider(props) {
       .catch(e => {
         setErrors(e.response.data);
       });
-  };
-
-  const isUpvoted = id => {
-    if (upvoteSession.includes(id)) return true;
-    return false;
-  };
-
-  const isDownVoted = id => {
-    if (downVoteSession.includes(id)) return true;
-    return false;
   };
 
   return (
@@ -136,13 +124,8 @@ export function PostProvider(props) {
         errors,
         community,
         setCommunity,
-        setUpvoteSession,
-        upvoteSession,
-        isUpvoted,
-        upvote,
-        setDownvoteSession,
-        downVoteSession,
-        isDownVoted
+
+        upvote
       }}
     >
       {props.children}

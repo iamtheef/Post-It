@@ -8,12 +8,16 @@ import PublicProfile from "./Components/PublicProfile";
 import NewPost from "./Components/NewPost";
 import Post from "./Components/Post";
 import { UserContext } from "./Context/UserContext";
+import { ProfileContext } from "./Context/ProfileContext";
 import { PostProvider } from "./Context/PostContext";
 
 function App() {
   const { setUser, initialUser } = useContext(UserContext);
+  const { initializeProfile } = useContext(ProfileContext);
+
   useEffect(() => {
     initialUser();
+    initializeProfile();
   }, [setUser]);
 
   return (

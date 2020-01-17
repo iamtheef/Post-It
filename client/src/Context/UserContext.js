@@ -15,15 +15,6 @@ export function UserProvider(props) {
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
       const decoded = jwt_decode(localStorage.jwtToken);
-      axios
-        .get("/api/profile/")
-        .then(profile => {
-          decoded.profile = profile.data;
-        })
-        .catch(e => {
-          decoded.profile = e;
-        });
-
       setUser(decoded);
 
       //check for expired token (if so, lougout)
@@ -68,7 +59,7 @@ export function UserProvider(props) {
   const logout = () => {
     delete localStorage.jwtToken;
     setAuthToken(null);
-    setUser(null);
+    setUser();
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { PostContext } from "../Context/PostContext";
+import { ProfileContext } from "../Context/ProfileContext";
 import { UserContext } from "../Context/UserContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -10,12 +10,7 @@ export default function Landing() {
   const [posts, setPosts] = useState([]);
 
   const { user } = useContext(UserContext);
-  const {
-    setUpvoteSession,
-    isUpvoted,
-    setDownvoteSession,
-    upvoteSession
-  } = useContext(PostContext);
+  const { profile, isUpvoted, isDownvoted } = useContext(ProfileContext);
 
   useEffect(() => {
     axios
@@ -48,7 +43,6 @@ export default function Landing() {
       </footer>
       <div className="container columns is-centered">
         <div className="column is-6 is-centered">
-          {/* if user */}
           {user ? (
             <div>
               <Link to="/newpost">
@@ -60,9 +54,9 @@ export default function Landing() {
               </Link>
               <ul>
                 {posts.map(post => (
-                  /* all the posts if no one is connected */
+                  /* all the posts if someone is connected */
                   <li key={post._id}>
-                    <PostCard1 post={post} />
+                    <PostCard1 post={post} isUpvoted={isUpvoted(post._id)} />
                   </li>
                 ))}
               </ul>
@@ -73,7 +67,7 @@ export default function Landing() {
               <ul>
                 {posts.map(post => (
                   <li key={post._id}>
-                    <PostCard1 post={post} isUpvoted={isUpvoted(post._id)} />
+                    <PostCard1 post={post} />
                   </li>
                 ))}
               </ul>
