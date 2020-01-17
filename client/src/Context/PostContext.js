@@ -57,9 +57,9 @@ export function PostProvider(props) {
     e.preventDefault();
     axios
       .post(`/api/posts/${postId}/upvote`, postId)
-      .then(post => {
-        if (post) {
-          setUpvoteSession([...upvoteSession, post._id]);
+      .then(newVotes => {
+        if (newVotes) {
+          setUpvoteSession(newVotes);
         }
       })
       .catch(e => console.log(e.response.data));
@@ -108,8 +108,6 @@ export function PostProvider(props) {
   };
 
   const isUpvoted = id => {
-    console.log(upvoteSession);
-    console.log(id);
     if (upvoteSession.includes(id)) return true;
     return false;
   };

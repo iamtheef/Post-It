@@ -14,7 +14,7 @@ export default function Landing() {
     setUpvoteSession,
     isUpvoted,
     setDownvoteSession,
-    isDownVoted
+    upvoteSession
   } = useContext(PostContext);
 
   useEffect(() => {
@@ -22,11 +22,6 @@ export default function Landing() {
       .get("/api/posts/all")
       .then(res => setPosts(res.data))
       .catch(e => setError(e));
-
-    if (user) {
-      setDownvoteSession(user.profile.downvoted);
-      setUpvoteSession(user.profile.upvoted);
-    }
   }, [setPosts]);
 
   return (
@@ -35,14 +30,14 @@ export default function Landing() {
         <p className="help is-danger">{error && error}</p>
         <div>
           VIEW:
-          <span class="button is-static">
+          <span className="button is-static">
             <i
               className="fa fa-square"
               aria-hidden="true"
               style={{ marginLeft: "10px" }}
             ></i>
           </span>
-          <span class="button is-static">
+          <span className="button is-static">
             <i
               className="fa fa-bars"
               aria-hidden="true"
@@ -78,11 +73,7 @@ export default function Landing() {
               <ul>
                 {posts.map(post => (
                   <li key={post._id}>
-                    <PostCard1
-                      post={post}
-                      isUpvoted={isUpvoted(post._id)}
-                      isDownVoted={isDownVoted(post._id)}
-                    />
+                    <PostCard1 post={post} isUpvoted={isUpvoted(post._id)} />
                   </li>
                 ))}
               </ul>

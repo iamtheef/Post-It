@@ -137,7 +137,7 @@ router.post(
               post.karma = post.upvotes.length - post.downvotes.length;
               post
                 .save()
-                .then(post => res.json(post))
+                .then(post => res.json(post.upvotes))
                 .catch(e => res.status(404).json(e));
             } else {
               let removeIndex = post.upvotes.indexOf(user._id);

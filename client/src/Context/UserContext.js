@@ -6,15 +6,24 @@ import jwt_decode from "jwt-decode";
 export const UserContext = createContext();
 
 export function UserProvider(props) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
   const [errors, setErrors] = useState({});
 
   // initial user
   const initialUser = () => {
     // check for valid token (if so, give persmissions)
     if (localStorage.jwtToken) {
-      const decoded = jwt_decode(localStorage.jwtToken);
       setAuthToken(localStorage.jwtToken);
+      const decoded = jwt_decode(localStorage.jwtToken);
+      axios
+        .get("/api/profile/")
+        .then(profile => {
+          decoded.profile = profile.data;
+        })
+        .catch(e => {
+          decoded.profile = e;
+        });
+
       setUser(decoded);
 
       //check for expired token (if so, lougout)
@@ -31,8 +40,18 @@ export function UserProvider(props) {
       .then(user => {
         const token = user.data.token;
         localStorage.setItem("jwtToken", token);
-        setAuthToken(token);
-        setUser(jwt_decode(token));
+        const decoded = jwt_decode(localStorage.jwtToken);
+        setAuthToken(localStorage.jwtToken);
+
+        axios
+          .get("/api/profile/")
+          .then(profile => {
+            decoded.profile = profile.data;
+          })
+          .catch(e => {
+            decoded.profile = e;
+          });
+        setUser(decoded);
       })
       .catch(e => setErrors(e.response.data));
   };
