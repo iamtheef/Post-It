@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { PostContext } from "../Context/PostContext";
 
 export default function PostCard1(props) {
-  const { post, isUpvoted, isDownvoted } = props;
+  const { post, upvoted } = props;
   const { upvote } = useContext(PostContext);
 
   if (post.type === "textPost") {
@@ -24,14 +24,15 @@ export default function PostCard1(props) {
             onClick={e => upvote(e, post._id)}
           >
             <i
-              className={`fa fa-arrow-up arrow ${isUpvoted && "upvoted"}`}
+              className={`fa fa-arrow-up arrow ${upvoted && "upvoted"}`}
               aria-hidden="true"
             ></i>
-            <div id={`postKarma ${isUpvoted && "upvoted"}`}>
+            <div id={`postKarma ${upvoted && "upvoted"}`}>
               {post.karma <= 1 ? <i> • </i> : post.karma}
             </div>
             <i
-              className={`fa fa-arrow-down arrow ${isDownvoted && "downvoted"}`}
+              className={`fa fa-arrow-down arrow ${props.isDownvoted &&
+                "downvoted"}`}
               aria-hidden="true"
             ></i>
           </div>

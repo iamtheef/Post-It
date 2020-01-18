@@ -89,7 +89,7 @@ router.get("/all", (req, res) => {
 });
 
 // A specific post
-router.get("/:post_id", (req, res) => {
+router.get("/:post_id/", (req, res) => {
   Post.findById(new ObjectId(req.params.post_id))
     .populate("community")
     .populate("user")
@@ -131,7 +131,16 @@ router.post(
           .populate("post")
           .then(post => {
             if (post) {
-              if (!user.upvoted.includes(post._id)) {
+              if (user.upvoted.includes(post._id)) {
+                user.upvoted.splice(user.upvoted.indexOf(post._id), 1);
+                user.save();
+                post.upvotes.splice(post.upvotes.indexOf(user._id), 1);
+                post.karma = post.upvotes.length - post.downvotes.length;
+                post
+                  .save()
+                  .then(post => res.json(-1))
+                  .catch(e => res.json(e));
+              } else {
                 user.upvoted.push(post._id);
                 user.save();
                 post.upvotes.push(user._id);
@@ -140,16 +149,6 @@ router.post(
                   .save()
                   .then(post => res.json(post.upvotes[post.upvotes.length - 1]))
                   .catch(e => res.status(404).json(e));
-              } else {
-                let removeIndex = post.upvotes.indexOf(user._id);
-                post.upvotes.splice(removeIndex, 1);
-                post.karma = post.upvotes.length - post.downvotes.length;
-                user.upvoted.slice(removeIndex, 1);
-                user.save();
-                post
-                  .save()
-                  .then(post => res.json(-1))
-                  .catch(e => res.json(e));
               }
             }
           })

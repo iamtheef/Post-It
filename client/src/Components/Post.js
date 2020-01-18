@@ -8,14 +8,17 @@ export default function Post(props) {
   const [post, setPost] = useState();
 
   useEffect(() => {
-    console.log(post);
     axios
       .get(`/api/posts/${postId}`)
-      .then(post => {
-        setPost(post);
+      .then(res => {
+        setPost(res.data);
       })
-      .catch(e => console.log(e));
-  }, [post]);
+      .catch(e => console.log(e.response.data));
+  }, [postId]);
+
+  if (!post) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>

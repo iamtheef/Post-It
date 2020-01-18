@@ -14,7 +14,7 @@ export function ProfileProvider(props) {
 
   useEffect(() => {
     if (!user) {
-      setProfile();
+      setProfile([]);
       setUpvoteSession([]);
       setDownvoteSession([]);
     } else {
@@ -23,13 +23,11 @@ export function ProfileProvider(props) {
   }, [user]);
 
   const isUpvoted = id => {
-    if (upvoteSession.includes(id)) return true;
-    return false;
+    return upvoteSession.includes(id);
   };
 
   const isDownvoted = id => {
-    if (downvoteSession.includes(id)) return true;
-    return false;
+    return downvoteSession.includes(id);
   };
 
   const initializeProfile = () => {

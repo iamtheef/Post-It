@@ -10,9 +10,12 @@ export default function Landing() {
   const [posts, setPosts] = useState([]);
 
   const { user } = useContext(UserContext);
-  const { profile, initializeProfile, isUpvoted, isDownvoted } = useContext(
-    ProfileContext
-  );
+  const {
+    initializeProfile,
+    isUpvoted,
+    isDownvoted,
+    upvoteSession
+  } = useContext(ProfileContext);
 
   useEffect(() => {
     axios
@@ -22,6 +25,7 @@ export default function Landing() {
 
     initializeProfile();
   }, [user]);
+  console.log(upvoteSession);
 
   return (
     <div>
@@ -60,7 +64,7 @@ export default function Landing() {
                 {posts.map(post => (
                   /* all the posts if someone is connected */
                   <li key={post._id}>
-                    <PostCard1 post={post} isUpvoted={isUpvoted(post._id)} />
+                    <PostCard1 post={post} upvoted={isUpvoted(post._id)} />
                   </li>
                 ))}
               </ul>

@@ -58,18 +58,16 @@ export function PostProvider(props) {
     axios
       .post(`/api/posts/${postId}/upvote`, postId)
       .then(added => {
-        if (added.length) {
-          console.log("post voted!");
+        if (added.data !== -1) {
           setUpvoteSession(...upvoteSession, added);
         } else {
           const newUpvoteSession = upvoteSession.filter(
-            vote => vote !== added._id
+            vote => vote !== postId
           );
-          console.log("post unvoted!");
           setUpvoteSession(newUpvoteSession);
         }
       })
-      .catch(e => console.log(e.response.data));
+      .catch(e => console.log(e));
   };
 
   //reset fields
