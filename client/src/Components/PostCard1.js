@@ -27,7 +27,7 @@ export default function PostCard1(props) {
               className={`fa fa-arrow-up arrow ${isUpvoted && "upvoted"}`}
               aria-hidden="true"
             ></i>
-            <div id="postKarma">
+            <div id={`postKarma ${isUpvoted && "upvoted"}`}>
               {post.karma <= 1 ? <i> • </i> : post.karma}
             </div>
             <i
@@ -103,20 +103,16 @@ export default function PostCard1(props) {
                       <div className="link-image column is-4">
                         <img
                           style={{
-                            borderRadius: "3px",
-
-                            width: "20vw"
+                            borderRadius: "3px"
                           }}
                           src={post.metadata.ogImage.url}
                         ></img>
                       </div>
 
-                      <a href={post.metadata.ogUrl} target="blank">
-                        <div id="blue-fade">
-                          {post.metadata.ogUrl.slice(12, 35) + "...          "}
-                          <i class="fa fa-link" aria-hidden="true"></i>
-                        </div>
-                      </a>
+                      <div id="blue-fade">
+                        {post.metadata.ogUrl.slice(12, 35) + "...          "}
+                        <i className="fa fa-link" aria-hidden="true"></i>
+                      </div>
                     </div>
                   )}
                 </div>

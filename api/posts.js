@@ -131,24 +131,26 @@ router.post(
           .populate("post")
           .then(post => {
             if (post) {
-              user.upvoted.push(post._id);
-              user.save();
-              post.upvotes.push(user._id);
-              post.karma = post.upvotes.length - post.downvotes.length;
-              post
-                .save()
-                .then(post => res.json(post.upvotes[post.upvotes - 1]))
-                .catch(e => res.status(404).json(e));
-            } else {
-              let removeIndex = post.upvotes.indexOf(user._id);
-              post.upvotes.splice(removeIndex, 1);
-              post.karma = post.upvotes.length - post.downvotes.length;
-              user.upvoted.slice(removeIndex, 1);
-              user.save();
-              post
-                .save()
-                .then(post => res.json(post))
-                .catch(e => res.json(e));
+              if (!user.upvoted.includes(post._id)) {
+                user.upvoted.push(post._id);
+                user.save();
+                post.upvotes.push(user._id);
+                post.karma = post.upvotes.length - post.downvotes.length;
+                post
+                  .save()
+                  .then(post => res.json(post.upvotes[post.upvotes.length - 1]))
+                  .catch(e => res.status(404).json(e));
+              } else {
+                let removeIndex = post.upvotes.indexOf(user._id);
+                post.upvotes.splice(removeIndex, 1);
+                post.karma = post.upvotes.length - post.downvotes.length;
+                user.upvoted.slice(removeIndex, 1);
+                user.save();
+                post
+                  .save()
+                  .then(post => res.json(-1))
+                  .catch(e => res.json(e));
+              }
             }
           })
           .catch(e => console.log(e));

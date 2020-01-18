@@ -58,8 +58,15 @@ export function PostProvider(props) {
     axios
       .post(`/api/posts/${postId}/upvote`, postId)
       .then(added => {
-        if (added) {
+        if (added.length) {
+          console.log("post voted!");
           setUpvoteSession(...upvoteSession, added);
+        } else {
+          const newUpvoteSession = upvoteSession.filter(
+            vote => vote !== added._id
+          );
+          console.log("post unvoted!");
+          setUpvoteSession(newUpvoteSession);
         }
       })
       .catch(e => console.log(e.response.data));
@@ -101,7 +108,7 @@ export function PostProvider(props) {
         history.push(`/posts/${post.data._id}`);
       })
       .catch(e => {
-        setErrors(e.response.data);
+        setErrors(e);
       });
   };
 

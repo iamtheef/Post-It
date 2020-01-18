@@ -10,14 +10,18 @@ export default function Landing() {
   const [posts, setPosts] = useState([]);
 
   const { user } = useContext(UserContext);
-  const { profile, isUpvoted, isDownvoted } = useContext(ProfileContext);
+  const { profile, initializeProfile, isUpvoted, isDownvoted } = useContext(
+    ProfileContext
+  );
 
   useEffect(() => {
     axios
       .get("/api/posts/all")
       .then(res => setPosts(res.data))
       .catch(e => setError(e));
-  }, [setPosts]);
+
+    initializeProfile();
+  }, [user]);
 
   return (
     <div>

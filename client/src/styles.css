@@ -214,15 +214,15 @@ a:hover {
 }
 
 .link-image {
-  margin-left: 400px;
+  margin-left: auto;
   margin-top: -100px;
-  height: 170px;
-  margin-bottom: 30px;
+  margin-bottom: auto;
+  height: 30vh auto;
+  min-height: auto;
 }
 
 .row:after {
   content: "";
-
   width: 100%;
   height: 100%;
   position: absolute;
@@ -231,11 +231,11 @@ a:hover {
   background: linear-gradient(rgba(255, 255, 255, 0) 90px, white);
 }
 
-#postKarma {
+.postKarma {
   margin-left: 2px;
 }
 .upvoted {
-  color: green;
+  color: #88fcab;
 }
 .downvoted {
   color: red;

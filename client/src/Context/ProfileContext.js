@@ -12,8 +12,17 @@ export function ProfileProvider(props) {
   const [profile, setProfile] = useState();
   const { user } = useContext(UserContext);
 
+  useEffect(() => {
+    if (!user) {
+      setProfile();
+      setUpvoteSession([]);
+      setDownvoteSession([]);
+    } else {
+      initializeProfile();
+    }
+  }, [user]);
+
   const isUpvoted = id => {
-    console.log(upvoteSession);
     if (upvoteSession.includes(id)) return true;
     return false;
   };
