@@ -12,9 +12,10 @@ export default function Landing() {
   const { user } = useContext(UserContext);
   const {
     initializeProfile,
+    setProfile,
     isUpvoted,
-    isDownvoted,
-    upvoteSession
+    setDownvoteSession,
+    setUpvoteSession
   } = useContext(ProfileContext);
 
   useEffect(() => {
@@ -22,10 +23,8 @@ export default function Landing() {
       .get("/api/posts/all")
       .then(res => setPosts(res.data))
       .catch(e => setError(e));
-
     initializeProfile();
-  }, [user]);
-  console.log(upvoteSession);
+  }, [setUpvoteSession, setDownvoteSession]);
 
   return (
     <div>
