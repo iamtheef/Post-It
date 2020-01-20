@@ -5,7 +5,7 @@ import Login from "../Login";
 import Register from "../Register";
 import { UserContext } from "../../Context/UserContext";
 
-function Navbar() {
+export default function Navbar() {
   const { user, logout } = useContext(UserContext);
   const [regModal, toggleRegModal] = useToggle(false);
   const [logModal, toggleLogModal] = useToggle(false);
@@ -132,5 +132,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;

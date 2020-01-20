@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { PostContext } from "../Context/PostContext";
 
 export default function PostCard1(props) {
-  const { post, upvoted, downvoted } = props;
+  const { post } = props;
   const { upvote } = useContext(PostContext);
-  const [isUV, setUV] = useState(upvoted);
-  // const [isDV, setDV] = useState();
+  const [isUV, setUV] = useState(props.upvoted);
+  const [isDV, setDV] = useState(props.downvoted);
 
   if (post.type === "textPost") {
     const postLength = post.body.length;
@@ -18,31 +18,32 @@ export default function PostCard1(props) {
   }
 
   const handleUpvote = e => {
-    upvote(e, post._id);
+    if (isDV) setDV(!isDV);
     setUV(!isUV);
-    console.log(isUV);
+    upvote(e, post._id);
+  };
+
+  const handleDownvote = e => {
+    if (isUV) setUV(!isUV);
+    setDV(!isDV);
+    upvote(e, post._id);
   };
 
   return (
     <div className="is-parent">
       <div className="column body-column">
         <div className="columns">
-          <div
-            className="column is-1 sidebar-column is-vcentered"
-            onClick={e => handleUpvote(e)}
-          >
-            <i
-              className={`fa fa-arrow-up arrow ${isUV && "upvoted"}`}
-              aria-hidden="true"
-            ></i>
-            <div id={`postKarma ${isUV && "upvoted"}`}>
-              {post.karma <= 1 ? <i> • </i> : post.karma}
+          <div className="column is-1 sidebar-column is-vcentered">
+            <div className="arrow-shadow" onClick={handleUpvote}>
+              <i className={`arrow up arrow-up ${isUV && "upvoted"}`}></i>
             </div>
-            <i
-              className={`fa fa-arrow-down arrow ${props.isDownvoted &&
-                "downvoted"}`}
-              aria-hidden="true"
-            ></i>
+
+            <div id={` ${isUV && "upvoted"}`}>
+              {post.karma <= 1 ? <i className="postKarma"> • </i> : post.karma}
+            </div>
+            <div className="arrow-shadow" onClick={handleDownvote}>
+              <i className={`arrow down arrow-down ${isDV && "downvoted"}`}></i>
+            </div>
           </div>
           <article className="tile notification">
             <div className="content">

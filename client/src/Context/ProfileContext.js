@@ -10,23 +10,22 @@ export function ProfileProvider(props) {
   const [upvoteSession, setUpvoteSession] = useState([]);
   const [downvoteSession, setDownvoteSession] = useState([]);
   const [profile, setProfile] = useState();
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     if (!user) {
       setProfile([]);
       setUpvoteSession([]);
       setDownvoteSession([]);
-    } else {
-      initializeProfile();
     }
-  }, [user]);
+  }, [setUser]);
 
   const initializeProfile = () => {
     axios
       .get("/api/profile/")
       .then(profile => {
         setProfile(profile.data);
+        console.log(profile.data.upvoted);
         setUpvoteSession(profile.data.upvoted);
         setDownvoteSession(profile.data.downvoted);
       })

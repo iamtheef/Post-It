@@ -120,36 +120,30 @@ router.post(
   "/:post_id/upvote",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user._id })
-      .then(user => {
-        Post.findById(req.params.post_id)
-          .populate("post")
-          .then(post => {
-            if (post) {
-              if (user.upvoted.includes(post._id)) {
-                user.upvoted.splice(user.upvoted.indexOf(post._id), 1);
-                user.save();
-                post.upvotes.splice(post.upvotes.indexOf(user._id), 1);
-                post.karma = post.upvotes.length - post.downvotes.length;
-                post
-                  .save()
-                  .then(post => res.json(-1))
-                  .catch(e => res.json(e));
-              } else {
-                user.upvoted.push(post._id);
-                user.save();
-                post.upvotes.push(user._id);
-                post.karma = post.upvotes.length - post.downvotes.length;
-                post
-                  .save()
-                  .then(post => res.json(post.upvotes[post.upvotes.length - 1]))
-                  .catch(e => res.status(404).json(e));
-              }
-            }
-          })
-          .catch(e => console.log(e));
+    Promise.all([
+      Profile.findOne({ user: req.user._id }),
+      Post.findById(req.params.post_id).populate("post")
+    ])
+      .then(([user, post]) => {
+        if (user.upvoted.includes(post._id)) {
+          console.log("revoke!");
+          user.upvoted.splice(user.upvoted.indexOf(post._id), 1);
+          user.save();
+          post.upvotes.splice(post.upvotes.indexOf(user._id), 1);
+          post.karma = post.upvotes.length - post.downvotes.length;
+          post.save();
+          res.json(-1);
+        } else {
+          console.log("upvote!");
+          user.upvoted.push(post._id);
+          user.save();
+          post.upvotes.push(user._id);
+          post.karma = post.upvotes.length - post.downvotes.length;
+          post.save();
+          res.json(+1);
+        }
       })
-      .catch(e => res.status(401).json(e));
+      .catch(e => res.json(e));
   }
 );
 

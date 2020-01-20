@@ -50,21 +50,24 @@ export function PostProvider(props) {
         if (textPost) toggleTextPost();
         if (!linkPost) toggleLinkPost();
         setPostType("linkPost");
+        break;
     }
   };
 
   const upvote = (e, postId) => {
     e.preventDefault();
     axios
-      .post(`/api/posts/${postId}/upvote`, postId)
+      .post(`/api/posts/${postId}/upvote`)
       .then(added => {
-        if (added.data !== -1) {
-          setUpvoteSession(...upvoteSession, added.data);
+        if (added.data > 0) {
+          console.log("upvote route");
+          setUpvoteSession([...upvoteSession, postId]);
+          console.log(upvoteSession);
         } else {
-          const newUpvoteSession = upvoteSession.filter(
-            vote => vote !== postId
-          );
-          setUpvoteSession(newUpvoteSession);
+          console.log("revoke route");
+          const newSession = upvoteSession.filter(id => id !== postId);
+          setUpvoteSession(newSession);
+          console.log(upvoteSession);
         }
       })
       .catch(e => console.log(e));

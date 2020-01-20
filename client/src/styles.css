@@ -189,15 +189,6 @@ a:hover {
   border-bottom-right-radius: 4px;
 }
 
-.arrow {
-  margin-left: -2px;
-}
-
-.arrow:hover {
-  color: grey;
-  font-size: 21px;
-}
-
 .share-icon {
   margin-left: -120px;
 }
@@ -231,15 +222,54 @@ a:hover {
   background: linear-gradient(rgba(255, 255, 255, 0) 90px, white);
 }
 
+/* arrows */
+.arrow {
+  border: solid rgb(142, 129, 129);
+  border-width: 0 4px 4px 0;
+  display: inline-block;
+  padding: 3px;
+
+  margin-top: 8px;
+  margin-left: 6px;
+}
+
+.arrow-up:hover {
+  border-color: #60b179;
+}
+.arrow-down:hover {
+  border-color: rgb(186, 105, 35);
+}
+.arrow-shadow {
+  margin-left: -6px;
+  width: 25px;
+  height: 25px;
+}
+.arrow-shadow:hover {
+  background-color: rgb(203, 201, 201);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.upvoted {
+  border-color: #88fcab;
+}
+.downvoted {
+  border-color: rgb(255, 144, 47);
+}
+
 .postKarma {
   margin-left: 2px;
 }
-.upvoted {
-  color: #88fcab;
-}
-.downvoted {
-  color: red;
-}
+
+/* upFooter */
 
 .upFooter {
   width: 100%;
