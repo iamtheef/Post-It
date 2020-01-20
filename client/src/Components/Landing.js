@@ -10,21 +10,23 @@ export default function Landing() {
   const [posts, setPosts] = useState([]);
 
   const { user } = useContext(UserContext);
-  const {
-    initializeProfile,
-    setProfile,
-    isUpvoted,
-    setDownvoteSession,
-    setUpvoteSession
-  } = useContext(ProfileContext);
+  const { initializeProfile, upvoteSession, downvoteSession } = useContext(
+    ProfileContext
+  );
+  const isUpvoted = id => {
+    return upvoteSession.includes(id);
+  };
 
+  const isDownvoted = id => {
+    return downvoteSession.includes(id);
+  };
   useEffect(() => {
     axios
       .get("/api/posts/all")
       .then(res => setPosts(res.data))
       .catch(e => setError(e));
     initializeProfile();
-  }, [setUpvoteSession, setDownvoteSession]);
+  }, [user]);
 
   return (
     <div>
@@ -63,7 +65,11 @@ export default function Landing() {
                 {posts.map(post => (
                   /* all the posts if someone is connected */
                   <li key={post._id}>
-                    <PostCard1 post={post} upvoted={isUpvoted(post._id)} />
+                    <PostCard1
+                      post={post}
+                      upvoted={() => isUpvoted(post._id)}
+                      downvoted={() => isDownvoted(post._id)}
+                    />
                   </li>
                 ))}
               </ul>

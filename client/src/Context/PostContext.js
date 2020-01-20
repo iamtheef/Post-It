@@ -59,7 +59,7 @@ export function PostProvider(props) {
       .post(`/api/posts/${postId}/upvote`, postId)
       .then(added => {
         if (added.data !== -1) {
-          setUpvoteSession(...upvoteSession, added);
+          setUpvoteSession(...upvoteSession, added.data);
         } else {
           const newUpvoteSession = upvoteSession.filter(
             vote => vote !== postId

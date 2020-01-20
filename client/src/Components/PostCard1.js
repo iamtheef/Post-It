@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { PostContext } from "../Context/PostContext";
 
 export default function PostCard1(props) {
-  const { post, upvoted } = props;
+  const { post, upvoted, downvoted } = props;
   const { upvote } = useContext(PostContext);
+  const [isUV, setUV] = useState(upvoted);
+  // const [isDV, setDV] = useState();
 
   if (post.type === "textPost") {
     const postLength = post.body.length;
@@ -15,19 +17,25 @@ export default function PostCard1(props) {
     }
   }
 
+  const handleUpvote = e => {
+    upvote(e, post._id);
+    setUV(!isUV);
+    console.log(isUV);
+  };
+
   return (
     <div className="is-parent">
       <div className="column body-column">
         <div className="columns">
           <div
             className="column is-1 sidebar-column is-vcentered"
-            onClick={e => upvote(e, post._id)}
+            onClick={e => handleUpvote(e)}
           >
             <i
-              className={`fa fa-arrow-up arrow ${upvoted && "upvoted"}`}
+              className={`fa fa-arrow-up arrow ${isUV && "upvoted"}`}
               aria-hidden="true"
             ></i>
-            <div id={`postKarma ${upvoted && "upvoted"}`}>
+            <div id={`postKarma ${isUV && "upvoted"}`}>
               {post.karma <= 1 ? <i> • </i> : post.karma}
             </div>
             <i

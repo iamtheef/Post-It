@@ -107,7 +107,7 @@ function Navbar() {
         </div>
       ) : (
         <div className="navbar-item has-dropdown is-hoverable">
-          <Link className="navbar-link" to="">
+          <Link className="navbar-link" to="#">
             <img
               alt="user logo"
               className="user-avatar"
@@ -120,12 +120,12 @@ function Navbar() {
             <Link className="navbar-item" to="/profile">
               Profile
             </Link>
-            <Link className="navbar-item" to="/">
+            <Link className="navbar-item" to="#">
               Settings
             </Link>
-            <Link onClick={logout} className="navbar-item" to="/">
+            <a onClick={logout} className="navbar-item">
               Logout
-            </Link>
+            </a>
           </div>
         </div>
       )}

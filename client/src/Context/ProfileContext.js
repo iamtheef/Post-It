@@ -22,14 +22,6 @@ export function ProfileProvider(props) {
     }
   }, [user]);
 
-  const isUpvoted = id => {
-    return upvoteSession.includes(id);
-  };
-
-  const isDownvoted = id => {
-    return downvoteSession.includes(id);
-  };
-
   const initializeProfile = () => {
     axios
       .get("/api/profile/")
@@ -52,10 +44,9 @@ export function ProfileProvider(props) {
         initializeProfile,
         upvoteSession,
         setUpvoteSession,
-        isUpvoted,
+
         downvoteSession,
-        setDownvoteSession,
-        isDownvoted
+        setDownvoteSession
       }}
     >
       {props.children}

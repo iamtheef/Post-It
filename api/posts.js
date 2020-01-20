@@ -38,43 +38,38 @@ router.post(
       switch (body.type) {
         case "textPost":
           newPost.body = body.body;
-          resolve(newPost);
+          return resolve(newPost);
+
         case "mediaPost":
           newPost.file = {
             filename: req.files.file.filename,
             id: req.files.file.uuid
           };
-          resolve(newPost);
+          return resolve(newPost);
+
         case "linkPost":
           const options = { url: body.link };
           ogs(options).then(results => {
             newPost.metadata = results.data;
-            resolve(newPost);
+            return resolve(newPost);
           });
       }
     });
 
     // saving
-    User.findOne({ _id: req.user._id })
-      .then(user => {
-        makePost.then(newPost => {
-          newPost
-            .save()
-            .then(post => {
-              Community.findOne({ _id: body.community }).then(community => {
-                user.posts.push(post._id);
-                user.save();
-                community.posts.push(post._id);
-                community.save();
-              });
-              res.json(post.populate("user").populate("community"));
-            })
-            .catch(e => res.json(e));
-        });
+    Promise.all([
+      User.findOne({ _id: req.user._id }),
+      makePost.then(post => post.save()),
+      Community.findOne({ _id: body.community })
+    ])
+      .then(([user, post, community]) => {
+        user.posts.push(post._id);
+        user.save();
+        community.posts.push(post._id);
+        community.save();
+        post => res.json(post.populate("user").populate("community"));
       })
-      .catch(e => {
-        res.json(e);
-      });
+      .catch(e => res.json(e));
   }
 );
 
@@ -89,7 +84,7 @@ router.get("/all", (req, res) => {
 });
 
 // A specific post
-router.get("/:post_id/", (req, res) => {
+router.get("/:post_id", (req, res) => {
   Post.findById(new ObjectId(req.params.post_id))
     .populate("community")
     .populate("user")
