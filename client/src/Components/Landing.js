@@ -7,7 +7,7 @@ import PostCard1 from "./PostCard1";
 import UpperFooter from "./UpperFooter";
 
 export default function Landing() {
-  const [setError] = useState();
+  const [error, setError] = useState();
   const [posts, setPosts] = useState([]);
 
   const { user } = useContext(UserContext);
@@ -32,7 +32,7 @@ export default function Landing() {
   return (
     <div>
       <UpperFooter />
-
+      <p className="is-danger help">{error && error}</p>
       <div className="container columns is-centered">
         <div className="column is-6 is-centered">
           {user ? (

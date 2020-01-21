@@ -25,7 +25,12 @@ export function PostProvider(props) {
   const [file, setFile] = useState(null);
   const [link, changeLink, resetLink] = useInputState("");
   const [errors, setErrors] = useState({});
-  const { setUpvoteSession, upvoteSession } = useContext(ProfileContext);
+  const {
+    setUpvoteSession,
+    upvoteSession,
+    downvoteSession,
+    setDownvoteSession
+  } = useContext(ProfileContext);
 
   //
   // functions
@@ -64,9 +69,28 @@ export function PostProvider(props) {
       .then(added => {
         if (added.data > 0) {
           setUpvoteSession([...upvoteSession, postId]);
+          console.log(upvoteSession);
         } else {
           const newSession = upvoteSession.filter(id => id !== postId);
           setUpvoteSession(newSession);
+          console.log(upvoteSession);
+        }
+      })
+      .catch(e => console.log(e));
+  };
+
+  const downvote = (e, postId) => {
+    e.preventDefault();
+    axios
+      .post(`/api/posts/${postId}/downvote`)
+      .then(added => {
+        if (added.data > 0) {
+          setDownvoteSession([...downvoteSession, postId]);
+          console.log(downvoteSession);
+        } else {
+          const newSession = downvoteSession.filter(id => id !== postId);
+          setDownvoteSession(newSession);
+          console.log(downvoteSession);
         }
       })
       .catch(e => console.log(e));
@@ -135,7 +159,8 @@ export function PostProvider(props) {
         community,
         setCommunity,
 
-        upvote
+        upvote,
+        downvote
       }}
     >
       {props.children}

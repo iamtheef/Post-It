@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import { PostContext } from "../Context/PostContext";
 
-export default function Votings(element) {
-  const { upvote } = useContext(PostContext);
-  const [isUV, setUV] = useState(element.upvoted);
-  const [isDV, setDV] = useState(element.downvoted);
+export default function Votings(props) {
+  const { upvote, downvote } = useContext(PostContext);
+  const { element, upvoted, downvoted } = { ...props };
+  const [isUV, setUV] = useState(upvoted);
+  const [isDV, setDV] = useState(downvoted);
 
   const handleUpvote = e => {
     if (isDV) setDV(!isDV);
@@ -15,7 +16,7 @@ export default function Votings(element) {
   const handleDownvote = e => {
     if (isUV) setUV(!isUV);
     setDV(!isDV);
-    upvote(e, element._id);
+    downvote(e, element._id);
   };
 
   return (

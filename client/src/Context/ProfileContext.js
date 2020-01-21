@@ -33,8 +33,6 @@ export function ProfileProvider(props) {
       .catch(e => {
         setProfile(e.response);
       });
-
-    return profile;
   };
 
   return (

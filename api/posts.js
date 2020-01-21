@@ -120,6 +120,7 @@ router.post(
   "/:post_id/upvote",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("upvoting!");
     Promise.all([
       Profile.findOne({ user: req.user._id }).populate("user"),
       Post.findById(req.params.post_id).populate("post")
@@ -133,9 +134,46 @@ router.post(
           post.save();
           res.json(-1);
         } else {
+          if (user.downvoted.includes(post._id)) {
+            user.downvoted.splice(user.downvoted.indexOf(post._id), 1);
+          }
           user.upvoted.push(post._id);
           user.save();
           post.upvotes.push(user._id);
+          post.karma = post.upvotes.length - post.downvotes.length;
+          post.save();
+          res.json(+1);
+        }
+      })
+      .catch(e => res.json(e));
+  }
+);
+
+// Downvote/revoke downvote post
+router.post(
+  "/:post_id/downvote",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    console.log("downvoting!");
+    Promise.all([
+      Profile.findOne({ user: req.user._id }).populate("user"),
+      Post.findById(req.params.post_id).populate("post")
+    ])
+      .then(([user, post]) => {
+        if (user.downvoted.includes(post._id)) {
+          user.downvoted.splice(user.downvoted.indexOf(post._id), 1);
+          user.save();
+          post.downvotes.splice(post.downvotes.indexOf(user._id), 1);
+          post.karma = post.upvotes.length - post.downvotes.length;
+          post.save();
+          res.json(-1);
+        } else {
+          if (user.upvoted.includes(post._id)) {
+            user.upvoted.splice(user.upvoted.indexOf(post._id), 1);
+          }
+          user.downvoted.push(post._id);
+          user.save();
+          post.downvotes.push(user._id);
           post.karma = post.upvotes.length - post.downvotes.length;
           post.save();
           res.json(+1);
