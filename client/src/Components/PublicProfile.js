@@ -3,7 +3,7 @@ import axios from "axios";
 
 function PrivProfile(props) {
   const userId = props.match.params.id;
-  const [profile, setProfile] = useState();
+  const [setProfile] = useState();
   useEffect(() => {
     axios
       .get(`/profiles/${userId}`)

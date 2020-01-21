@@ -17,6 +17,8 @@ export function ProfileProvider(props) {
       setProfile([]);
       setUpvoteSession([]);
       setDownvoteSession([]);
+    } else {
+      initializeProfile();
     }
   }, [setUser]);
 
@@ -25,7 +27,6 @@ export function ProfileProvider(props) {
       .get("/api/profile/")
       .then(profile => {
         setProfile(profile.data);
-        console.log(profile.data.upvoted);
         setUpvoteSession(profile.data.upvoted);
         setDownvoteSession(profile.data.downvoted);
       })

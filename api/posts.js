@@ -121,12 +121,11 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Promise.all([
-      Profile.findOne({ user: req.user._id }),
+      Profile.findOne({ user: req.user._id }).populate("user"),
       Post.findById(req.params.post_id).populate("post")
     ])
       .then(([user, post]) => {
         if (user.upvoted.includes(post._id)) {
-          console.log("revoke!");
           user.upvoted.splice(user.upvoted.indexOf(post._id), 1);
           user.save();
           post.upvotes.splice(post.upvotes.indexOf(user._id), 1);
@@ -134,7 +133,6 @@ router.post(
           post.save();
           res.json(-1);
         } else {
-          console.log("upvote!");
           user.upvoted.push(post._id);
           user.save();
           post.upvotes.push(user._id);

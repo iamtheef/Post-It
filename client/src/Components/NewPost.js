@@ -25,7 +25,7 @@ function NewPost() {
         <p className="header3">Create Post</p>
         <hr style={{ marginBottom: "60px" }}></hr>
         <div className="columns" style={{ marginBottom: "10px" }}>
-          <div className="column">
+          <div className="column is-9">
             <input
               className="input"
               type="text"
@@ -36,8 +36,8 @@ function NewPost() {
             <p className="help is-danger">{errors.title && errors.title}</p>
           </div>
           <div
-            className="column"
-            style={{ marginTop: "-15px", marginRight: "-50%" }}
+            className="column is-3"
+            style={{ marginTop: "-15px", marginRight: "-20vw" }}
           >
             <CommunitySelector />
           </div>
@@ -81,7 +81,7 @@ function NewPost() {
         Text post*/}
         <div style={{ display: textPost ? "block" : "none" }}>
           <TextEditor />
-          <ul>
+          <ul style={{ marginTop: "50px" }}>
             <li>
               <p className="help is-danger">{errors.body && errors.body}</p>
             </li>

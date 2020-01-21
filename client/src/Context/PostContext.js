@@ -51,6 +51,9 @@ export function PostProvider(props) {
         if (!linkPost) toggleLinkPost();
         setPostType("linkPost");
         break;
+
+      default:
+        break;
     }
   };
 
@@ -60,14 +63,10 @@ export function PostProvider(props) {
       .post(`/api/posts/${postId}/upvote`)
       .then(added => {
         if (added.data > 0) {
-          console.log("upvote route");
           setUpvoteSession([...upvoteSession, postId]);
-          console.log(upvoteSession);
         } else {
-          console.log("revoke route");
           const newSession = upvoteSession.filter(id => id !== postId);
           setUpvoteSession(newSession);
-          console.log(upvoteSession);
         }
       })
       .catch(e => console.log(e));
@@ -99,6 +98,9 @@ export function PostProvider(props) {
       case "linkPost":
         newPost.link = link;
         break;
+
+      default:
+        break;
     }
     formData.append("data", JSON.stringify(newPost));
 
@@ -109,7 +111,7 @@ export function PostProvider(props) {
         history.push(`/posts/${post.data._id}`);
       })
       .catch(e => {
-        setErrors(e);
+        setErrors(e.response.data);
       });
   };
 

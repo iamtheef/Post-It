@@ -1,13 +1,11 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { PostContext } from "../Context/PostContext";
+import Votings from "./Votings";
+import PostFooter from "./PostFooter";
 
 export default function PostCard1(props) {
   const { post } = props;
-  const { upvote } = useContext(PostContext);
-  const [isUV, setUV] = useState(props.upvoted);
-  const [isDV, setDV] = useState(props.downvoted);
 
   if (post.type === "textPost") {
     const postLength = post.body.length;
@@ -17,34 +15,11 @@ export default function PostCard1(props) {
     }
   }
 
-  const handleUpvote = e => {
-    if (isDV) setDV(!isDV);
-    setUV(!isUV);
-    upvote(e, post._id);
-  };
-
-  const handleDownvote = e => {
-    if (isUV) setUV(!isUV);
-    setDV(!isDV);
-    upvote(e, post._id);
-  };
-
   return (
     <div className="is-parent">
       <div className="column body-column">
         <div className="columns">
-          <div className="column is-1 sidebar-column is-vcentered">
-            <div className="arrow-shadow" onClick={handleUpvote}>
-              <i className={`arrow up arrow-up ${isUV && "upvoted"}`}></i>
-            </div>
-
-            <div id={` ${isUV && "upvoted"}`}>
-              {post.karma <= 1 ? <i className="postKarma"> • </i> : post.karma}
-            </div>
-            <div className="arrow-shadow" onClick={handleDownvote}>
-              <i className={`arrow down arrow-down ${isDV && "downvoted"}`}></i>
-            </div>
-          </div>
+          <Votings element={post} />
           <article className="tile notification">
             <div className="content">
               <div className="columns">
@@ -100,6 +75,7 @@ export default function PostCard1(props) {
                         <img
                           style={{ marginLeft: "-15%", width: "100%" }}
                           src={`uploads/${post.file.id}/file/${post.file.filename}`}
+                          alt="postimg"
                         />
                       </figure>
                     </div>
@@ -115,6 +91,7 @@ export default function PostCard1(props) {
                           style={{
                             borderRadius: "3px"
                           }}
+                          alt="metadata"
                           src={post.metadata.ogImage.url}
                         ></img>
                       </div>
@@ -127,31 +104,7 @@ export default function PostCard1(props) {
                   )}
                 </div>
 
-                <div className="postInfo columns">
-                  <div className="postInfoChild column is-3">
-                    <p className="infoTitle">
-                      <i className="fa fa-comment" aria-hidden="true"></i>{" "}
-                      {post.comments.length} comments
-                    </p>
-                  </div>
-                  <div className="postInfoChild column is-3">
-                    <p className="infoTitle">
-                      <i className="fa fa-trophy" aria-hidden="true"></i> Give
-                      Award
-                    </p>
-                  </div>
-
-                  <div className="postInfoChild column is-2">
-                    <p className="infoTitle">
-                      <i className="fa fa-bookmark" aria-hidden="true"></i> Save
-                    </p>
-                  </div>
-                  <div className="postInfoChild column is-3">
-                    <p className="infoTitle" id="share-icon">
-                      <i className="fa fa-share" aria-hidden="true"></i> Share
-                    </p>
-                  </div>
-                </div>
+                <PostFooter post={post} />
               </Link>
             </div>
           </article>

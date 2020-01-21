@@ -4,9 +4,10 @@ import { UserContext } from "../Context/UserContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import PostCard1 from "./PostCard1";
+import UpperFooter from "./UpperFooter";
 
 export default function Landing() {
-  const [error, setError] = useState();
+  const [setError] = useState();
   const [posts, setPosts] = useState([]);
 
   const { user } = useContext(UserContext);
@@ -30,26 +31,8 @@ export default function Landing() {
 
   return (
     <div>
-      <footer className="upFooter">
-        <p className="help is-danger">{error && error}</p>
-        <div>
-          VIEW:
-          <span className="button is-static">
-            <i
-              className="fa fa-square"
-              aria-hidden="true"
-              style={{ marginLeft: "10px" }}
-            ></i>
-          </span>
-          <span className="button is-static">
-            <i
-              className="fa fa-bars"
-              aria-hidden="true"
-              style={{ marginLeft: "10px" }}
-            ></i>
-          </span>
-        </div>
-      </footer>
+      <UpperFooter />
+
       <div className="container columns is-centered">
         <div className="column is-6 is-centered">
           {user ? (
@@ -67,8 +50,8 @@ export default function Landing() {
                   <li key={post._id}>
                     <PostCard1
                       post={post}
-                      upvoted={() => isUpvoted(post._id)}
-                      downvoted={() => isDownvoted(post._id)}
+                      upvoted={isUpvoted(post._id)}
+                      downvoted={isDownvoted(post._id)}
                     />
                   </li>
                 ))}
