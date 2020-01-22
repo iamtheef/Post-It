@@ -28,7 +28,6 @@ function App() {
           <Route exact path="/profile" component={PrivProfile} />
           <Route exact path="/profile/:id" component={PublicProfile} />
           <Route exact path="/newpost" component={NewPost} />
-          <Route exact path="/posts/:id" component={Post} />
 
           <Route exact path="/" component={Landing} />
         </div>

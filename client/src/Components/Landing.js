@@ -1,4 +1,5 @@
-import React, { useEffect, useContext, useState, useToggle } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import useToggle from "../Hooks/useToggle";
 import { ProfileContext } from "../Context/ProfileContext";
 import { UserContext } from "../Context/UserContext";
 import { Link } from "react-router-dom";
@@ -6,11 +7,13 @@ import axios from "axios";
 import PostCard1 from "./PostCard1";
 import UpperFooter from "./UpperFooter";
 import Post from "./Post";
+import { Redirect } from "react-router";
 
 export default function Landing() {
   const [error, setError] = useState();
   const [posts, setPosts] = useState([]);
   const [postModal, togglePostModal] = useToggle(false);
+
   const { user } = useContext(UserContext);
   const { initializeProfile, upvoteSession, downvoteSession } = useContext(
     ProfileContext
@@ -22,9 +25,6 @@ export default function Landing() {
   const isDownvoted = id => {
     return downvoteSession.includes(id);
   };
-  const showPost = () => {
-    togglePostModal();
-  };
 
   useEffect(() => {
     axios
@@ -34,6 +34,10 @@ export default function Landing() {
     initializeProfile();
   }, [user]);
 
+  const showPost = post => {
+    togglePostModal();
+    return <Redirect to={`/posts/${post._id}`} />;
+  };
   return (
     <div>
       <UpperFooter />
@@ -53,14 +57,13 @@ export default function Landing() {
                 {posts.map(post => (
                   /* all the posts if someone is connected */
                   <li key={post._id}>
-                    <div onClick={showPost}>
-                      <Link to={`/posts/${post._id}`}>
-                        <PostCard1
-                          post={post}
-                          upvoted={isUpvoted(post._id)}
-                          downvoted={isDownvoted(post._id)}
-                        />
-                      </Link>
+                    <div onClick={post => showPost(post)}>
+                      <PostCard1
+                        post={post}
+                        upvoted={isUpvoted(post._id)}
+                        downvoted={isDownvoted(post._id)}
+                      />
+
                       <div
                         className="modal"
                         style={{ display: postModal ? "block" : "none" }}
