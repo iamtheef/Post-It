@@ -120,7 +120,6 @@ router.post(
   "/:post_id/upvote",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("upvoting!");
     Promise.all([
       Profile.findOne({ user: req.user._id }).populate("user"),
       Post.findById(req.params.post_id).populate("post")
@@ -154,7 +153,6 @@ router.post(
   "/:post_id/downvote",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("downvoting!");
     Promise.all([
       Profile.findOne({ user: req.user._id }).populate("user"),
       Post.findById(req.params.post_id).populate("post")

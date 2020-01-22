@@ -56,56 +56,52 @@ export default function PostCard1(props) {
                 </div>
               </div>
 
-              <Link to={`/posts/${post._id}`}>
-                <div className="columns">
-                  {post.type === "textPost" && (
-                    <div className="column is-12">
-                      <p className="postCard1-title">{post.title}</p>
-                      <div
-                        dangerouslySetInnerHTML={{ __html: post.body }}
-                        className="row"
-                        style={{ height: postHeight, overflow: "hidden" }}
+              <div className="columns">
+                {post.type === "textPost" && (
+                  <div className="column is-12">
+                    <p className="postCard1-title">{post.title}</p>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: post.body }}
+                      className="row"
+                      style={{ height: postHeight, overflow: "hidden" }}
+                    />
+                  </div>
+                )}
+                {post.type === "mediaPost" && (
+                  <div className="column is-14">
+                    <p className="postCard1-title">{post.title}</p>
+                    <figure>
+                      <img
+                        style={{ marginLeft: "-15%", width: "100%" }}
+                        src={`uploads/${post.file.id}/file/${post.file.filename}`}
+                        alt="postimg"
                       />
-                    </div>
-                  )}
-                  {post.type === "mediaPost" && (
-                    <div className="column is-14">
-                      <p className="postCard1-title">{post.title}</p>
-                      <figure>
-                        <img
-                          style={{ marginLeft: "-15%", width: "100%" }}
-                          src={`uploads/${post.file.id}/file/${post.file.filename}`}
-                          alt="postimg"
-                        />
-                      </figure>
-                    </div>
-                  )}
+                    </figure>
+                  </div>
+                )}
 
-                  {post.type === "linkPost" && (
-                    <div>
-                      <p className="postCard1-title column is-9">
-                        {post.title}
-                      </p>
-                      <div className="link-image column is-4">
-                        <img
-                          style={{
-                            borderRadius: "3px"
-                          }}
-                          alt="metadata"
-                          src={post.metadata.ogImage.url}
-                        ></img>
-                      </div>
-
-                      <div id="blue-fade">
-                        {post.metadata.ogUrl.slice(12, 35) + "...          "}
-                        <i className="fa fa-link" aria-hidden="true"></i>
-                      </div>
+                {post.type === "linkPost" && (
+                  <div>
+                    <p className="postCard1-title column is-9">{post.title}</p>
+                    <div className="link-image column is-4">
+                      <img
+                        style={{
+                          borderRadius: "3px"
+                        }}
+                        alt="metadata"
+                        src={post.metadata.ogImage.url}
+                      ></img>
                     </div>
-                  )}
-                </div>
 
-                <PostFooter post={post} />
-              </Link>
+                    <div id="blue-fade">
+                      {post.metadata.ogUrl.slice(12, 35) + "...          "}
+                      <i className="fa fa-link" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <PostFooter post={post} />
             </div>
           </article>
         </div>
