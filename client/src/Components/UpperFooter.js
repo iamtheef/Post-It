@@ -5,7 +5,7 @@ export default function UpperFooter() {
     <footer className="upFooter">
       <div>
         VIEW:
-        <span className="button is-static">
+        <span className=" is-static">
           <i
             className="fa fa-square"
             aria-hidden="true"

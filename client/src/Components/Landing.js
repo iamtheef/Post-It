@@ -2,17 +2,17 @@ import React, { useEffect, useContext, useState } from "react";
 import useToggle from "../Hooks/useToggle";
 import { ProfileContext } from "../Context/ProfileContext";
 import { UserContext } from "../Context/UserContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 import PostCard1 from "./PostCard1";
 import UpperFooter from "./UpperFooter";
 import Post from "./Post";
-import { Redirect } from "react-router";
 
 export default function Landing() {
   const [error, setError] = useState();
   const [posts, setPosts] = useState([]);
   const [postModal, togglePostModal] = useToggle(false);
+  const history = useHistory();
 
   const { user } = useContext(UserContext);
   const { initializeProfile, upvoteSession, downvoteSession } = useContext(
@@ -34,10 +34,16 @@ export default function Landing() {
     initializeProfile();
   }, [user]);
 
-  const showPost = post => {
+  const showPost = id => {
     togglePostModal();
-    return <Redirect to={`/posts/${post._id}`} />;
+    window.history.pushState({ urlPath: "" }, "", `/posts/${id}`);
   };
+
+  const closePostModal = () => {
+    window.history.pushState({ urlPath: "" }, "", `/`);
+    togglePostModal();
+  };
+
   return (
     <div>
       <UpperFooter />
@@ -57,33 +63,28 @@ export default function Landing() {
                 {posts.map(post => (
                   /* all the posts if someone is connected */
                   <li key={post._id}>
-                    <div onClick={post => showPost(post)}>
+                    <div onClick={() => showPost(post._id)}>
                       <PostCard1
                         post={post}
                         upvoted={isUpvoted(post._id)}
                         downvoted={isDownvoted(post._id)}
                       />
+                    </div>
 
+                    <div
+                      className="modal"
+                      style={{ display: postModal ? "block" : "none" }}
+                    >
                       <div
-                        className="modal"
-                        style={{ display: postModal ? "block" : "none" }}
-                      >
-                        <div
-                          className="modal-background"
-                          onClick={togglePostModal}
-                        ></div>
-                        <div
-                          className="modal-content has-background-white is-centered"
-                          onClick={() => {
-                            if (postModal) togglePostModal();
-                          }}
-                        >
-                          <Post
-                            post={post}
-                            upvoted={isUpvoted(post._id)}
-                            downvoted={isDownvoted(post._id)}
-                          />
-                        </div>
+                        className="modal-background"
+                        onClick={closePostModal}
+                      ></div>
+                      <div className="modal-content has-background-white is-centered">
+                        <Post
+                          post={post}
+                          upvoted={isUpvoted(post._id)}
+                          downvoted={isDownvoted(post._id)}
+                        />
                       </div>
                     </div>
                   </li>
@@ -92,10 +93,11 @@ export default function Landing() {
             </div>
           ) : (
             /* all the posts if no one is connected */
-            <div>
-              <ul>
-                {posts.map(post => (
-                  <li key={post._id}>
+
+            <ul>
+              {posts.map(post => (
+                <li key={post._id}>
+                  <div onClick={showPost}>
                     <Link to={`/posts/${post._id}`}>
                       <PostCard1
                         post={post}
@@ -103,10 +105,10 @@ export default function Landing() {
                         downvoted={isDownvoted(post._id)}
                       />
                     </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           )}
         </div>
       </div>

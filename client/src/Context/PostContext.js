@@ -69,11 +69,9 @@ export function PostProvider(props) {
       .then(added => {
         if (added.data > 0) {
           setUpvoteSession([...upvoteSession, postId]);
-          console.log(upvoteSession);
         } else {
           const newSession = upvoteSession.filter(id => id !== postId);
           setUpvoteSession(newSession);
-          console.log(upvoteSession);
         }
       })
       .catch(e => console.log(e));
@@ -86,11 +84,9 @@ export function PostProvider(props) {
       .then(added => {
         if (added.data > 0) {
           setDownvoteSession([...downvoteSession, postId]);
-          console.log(downvoteSession);
         } else {
           const newSession = downvoteSession.filter(id => id !== postId);
           setDownvoteSession(newSession);
-          console.log(downvoteSession);
         }
       })
       .catch(e => console.log(e));

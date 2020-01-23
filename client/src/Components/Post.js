@@ -1,32 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Votings from "./Votings";
-// import { ProfileContext } from "../Context/ProfileContext";
 
 export default function Post(props) {
-  // const postId = props.match.params.id;
-  // const [post, setPost] = useState();
-  // const { upvoteSession, downvoteSession } = useContext(ProfileContext);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`/api/posts/${postId}`)
-  //     .then(res => {
-  //       setPost(res.data);
-  //     })
-  //     .catch(e => console.log(e.response.data));
-  // }, [postId]);
-
-  // const isUpvoted = id => {
-  //   return upvoteSession.includes(id);
-  // };
-
-  // const isDownvoted = id => {
-  //   return downvoteSession.includes(id);
-  // };
-
   const { post, upvoted, downvoted } = props;
 
   if (!post) {
@@ -34,7 +11,7 @@ export default function Post(props) {
   }
 
   return (
-    <div className="is-parent" style={{ marginTop: "200px" }}>
+    <div className="is-parent">
       <div className="column body-column">
         <div className="columns">
           <Votings element={post} upvoted={upvoted} downvoted={downvoted} />
