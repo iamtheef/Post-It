@@ -6,7 +6,7 @@ import { Link, useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 import PostCard1 from "./PostCard1";
 import UpperFooter from "./UpperFooter";
-import Post from "./Post";
+import ModalPost from "./ModalPost";
 
 export default function Landing() {
   const [error, setError] = useState();
@@ -35,8 +35,8 @@ export default function Landing() {
   }, [user]);
 
   const showPost = id => {
-    togglePostModal();
     window.history.pushState({ urlPath: "" }, "", `/posts/${id}`);
+    togglePostModal();
   };
 
   const closePostModal = () => {
@@ -80,7 +80,7 @@ export default function Landing() {
                         onClick={closePostModal}
                       ></div>
                       <div className="modal-content has-background-white is-centered">
-                        <Post
+                        <ModalPost
                           post={post}
                           upvoted={isUpvoted(post._id)}
                           downvoted={isDownvoted(post._id)}
