@@ -79,7 +79,7 @@ export default function Landing() {
                         className="modal-background"
                         onClick={closePostModal}
                       ></div>
-                      <div className="modal-content has-background-white is-centered">
+                      <div className="modal-content has-background-white modal-unzoom modalPost">
                         <ModalPost
                           post={post}
                           upvoted={isUpvoted(post._id)}

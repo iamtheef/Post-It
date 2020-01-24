@@ -72,6 +72,7 @@ export default function PostCard1(props) {
                     <p className="postCard1-title">{post.title}</p>
                     <figure>
                       <img
+                        className="img"
                         style={{ marginLeft: "-15%", width: "100%" }}
                         src={`uploads/${post.file.id}/file/${post.file.filename}`}
                         alt="postimg"

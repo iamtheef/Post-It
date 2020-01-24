@@ -22,13 +22,13 @@ export default function Votings(props) {
   return (
     <div className="modal-votings">
       <div className="columns">
-        <div className="column is-3">
+        <div className="modal-vote-arrows">
           <div className="arrow-shadow" onClick={handleUpvote}>
             <i className={`arrow up arrow-up ${isUV && "upvoted"}`}></i>
           </div>
         </div>
 
-        <div className="column is-3">
+        <div className="arrow-spacing">
           <div id={` ${isUV && "upvoted"}`}>
             {element.karma <= 1 ? (
               <i className="postKarma"> • </i>
@@ -38,11 +38,13 @@ export default function Votings(props) {
           </div>
         </div>
 
-        <div className="column is-3">
+        <div className="arrow-spacing">
           <div className="arrow-shadow" onClick={handleDownvote}>
             <i className={`arrow down arrow-down ${isDV && "downvoted"}`}></i>
           </div>
         </div>
+        <div className="vertical-divider"></div>
+        <p className="arrow-spacing modal-uptitle">{element.title}</p>
       </div>
     </div>
   );
