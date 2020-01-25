@@ -1,12 +1,12 @@
 import React from "react";
 import ModalVotings from "./ModalVotings";
-import Post from "./PostCard1";
+import Post from "./Post";
 
 export default function ModalPost(props) {
   const { post, upvoted, downvoted } = props;
 
   return (
-    <div className="is-parent" style={{ minWidth: "1200px" }}>
+    <div>
       <ModalVotings
         className="modal-votings"
         element={post}

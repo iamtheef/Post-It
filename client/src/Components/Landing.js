@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import useToggle from "../Hooks/useToggle";
 import { ProfileContext } from "../Context/ProfileContext";
 import { UserContext } from "../Context/UserContext";
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import PostCard1 from "./PostCard1";
 import UpperFooter from "./UpperFooter";
@@ -11,8 +11,8 @@ import ModalPost from "./ModalPost";
 export default function Landing() {
   const [error, setError] = useState();
   const [posts, setPosts] = useState([]);
+  const [currentPost, setCurrentPost] = useState(posts[0]);
   const [postModal, togglePostModal] = useToggle(false);
-  const history = useHistory();
 
   const { user } = useContext(UserContext);
   const { initializeProfile, upvoteSession, downvoteSession } = useContext(
@@ -34,8 +34,9 @@ export default function Landing() {
     initializeProfile();
   }, [user]);
 
-  const showPost = id => {
-    window.history.pushState({ urlPath: "" }, "", `/posts/${id}`);
+  const showPost = post => {
+    setCurrentPost(post);
+    window.history.pushState({ urlPath: "" }, "", `/posts/${post._id}`);
     togglePostModal();
   };
 
@@ -63,29 +64,12 @@ export default function Landing() {
                 {posts.map(post => (
                   /* all the posts if someone is connected */
                   <li key={post._id}>
-                    <div onClick={() => showPost(post._id)}>
+                    <div onClick={() => showPost(post)}>
                       <PostCard1
                         post={post}
                         upvoted={isUpvoted(post._id)}
                         downvoted={isDownvoted(post._id)}
                       />
-                    </div>
-
-                    <div
-                      className="modal"
-                      style={{ display: postModal ? "block" : "none" }}
-                    >
-                      <div
-                        className="modal-background"
-                        onClick={closePostModal}
-                      ></div>
-                      <div className="modal-content has-background-white modal-unzoom modalPost">
-                        <ModalPost
-                          post={post}
-                          upvoted={isUpvoted(post._id)}
-                          downvoted={isDownvoted(post._id)}
-                        />
-                      </div>
                     </div>
                   </li>
                 ))}
@@ -93,22 +77,35 @@ export default function Landing() {
             </div>
           ) : (
             /* all the posts if no one is connected */
-
             <ul>
               {posts.map(post => (
                 <li key={post._id}>
-                  <div onClick={showPost}>
-                    <Link to={`/posts/${post._id}`}>
-                      <PostCard1
-                        post={post}
-                        upvoted={isUpvoted(post._id)}
-                        downvoted={isDownvoted(post._id)}
-                      />
-                    </Link>
+                  <div onClick={() => showPost(post)}>
+                    <PostCard1
+                      post={post}
+                      upvoted={isUpvoted(post._id)}
+                      downvoted={isDownvoted(post._id)}
+                    />
                   </div>
                 </li>
               ))}
             </ul>
+          )}
+
+          {currentPost && (
+            <div
+              className="modal"
+              style={{ display: postModal ? "block" : "none" }}
+            >
+              <div className="modal-background" onClick={closePostModal}></div>
+              <div className="modal-content modalPost">
+                <ModalPost
+                  post={currentPost}
+                  upvoted={isUpvoted(currentPost._id)}
+                  downvoted={isDownvoted(currentPost._id)}
+                />
+              </div>
+            </div>
           )}
         </div>
       </div>
