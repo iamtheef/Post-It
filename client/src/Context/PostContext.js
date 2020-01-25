@@ -63,6 +63,7 @@ export function PostProvider(props) {
   };
 
   const upvote = (e, postId) => {
+    e.stopPropagation();
     e.preventDefault();
     axios
       .post(`/api/posts/${postId}/upvote`)
@@ -78,6 +79,7 @@ export function PostProvider(props) {
   };
 
   const downvote = (e, postId) => {
+    e.stopPropagation();
     e.preventDefault();
     axios
       .post(`/api/posts/${postId}/downvote`)

@@ -6,7 +6,7 @@ import Landing from "./Components/Landing";
 import PrivProfile from "./Components/PrivProfile";
 import PublicProfile from "./Components/PublicProfile";
 import NewPost from "./Components/NewPost";
-import Post from "./Components/Post";
+import PostHandler from "./Components/PostHandler";
 import { UserContext } from "./Context/UserContext";
 import { ProfileContext } from "./Context/ProfileContext";
 import { PostProvider } from "./Context/PostContext";
@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/profile" component={PrivProfile} />
           <Route exact path="/profile/:id" component={PublicProfile} />
           <Route exact path="/newpost" component={NewPost} />
-          <Route exact path="/posts/:id" component={Post} />
+          <Route exact path="/posts/:id" component={PostHandler} />
           <Route exact path="/" component={Landing} />
         </div>
       </PostProvider>

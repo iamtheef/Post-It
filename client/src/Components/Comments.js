@@ -1,0 +1,27 @@
+import React, { useContext } from "react";
+import TextEditor from "./TextEditor";
+import { UserContext } from "../Context/UserContext";
+
+export default function Comments(props) {
+  const { comments } = props;
+  const { user } = useContext(UserContext);
+
+  return (
+    <div className="columns">
+      <div className="column is-8">
+        <div className="comment-as">
+          Comment as {user.username}
+          <TextEditor />
+          <hr id="hr"></hr>
+          <ul>
+            {comments.forEach(comment => (
+              <li key={comment._id}>
+                <div dangerouslySetInnerHTML={{ __html: comment }}></div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}

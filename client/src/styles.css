@@ -56,6 +56,9 @@ html {
 .modal-content {
   overflow-y: hidden;
   overflow-x: hidden;
+
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
 .login-prompts {
@@ -119,6 +122,7 @@ html {
   font-weight: bold;
 }
 .is-parent {
+  position: relative;
   margin-top: 15px;
   width: 100%;
   height: 100%;
@@ -133,9 +137,6 @@ html {
   margin-top: -14px;
   min-width: 30px;
   margin-left: -70px;
-}
-
-.postCard1-body {
 }
 
 a {
@@ -216,7 +217,7 @@ a:hover {
 .row:after {
   content: "";
   width: 100%;
-  height: 100%;
+  height: 90%;
   position: absolute;
   left: 0;
   top: 0;
@@ -292,26 +293,25 @@ a:hover {
 }
 
 .modal-votings {
+  width: 74.5vw;
+  height: 4vh;
+  position: fixed !important;
   top: 0;
-  position: fixed;
+  margin-left: -25px;
   padding-left: 10px;
-  width: 77vw;
-  margin-left: -2px;
-  height: 3vh;
-  padding-top: 10px;
   margin-top: 47px;
-
+  padding-top: 10px;
   background-color: rgb(0, 0, 0);
+}
+
+.modalPost {
+  overflow-y: auto;
+  margin-top: 46px;
+  min-width: 1100px;
 }
 
 .modal {
   width: auto;
-}
-.modalPost {
-  overflow-y: auto;
-
-  margin-top: 46px;
-  min-width: 1100px;
 }
 
 .modal-vote-arrows {
@@ -344,6 +344,18 @@ a:hover {
   border-left: 1px solid rgba(172, 162, 162, 0.479);
 }
 
-.modal-background {
+.modalPost-mt {
   margin-top: 46px;
+}
+
+.comment-as {
+  font-weight: 500;
+  color: rgb(152, 142, 142);
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+#hr {
+  height: 1px;
+  color: #040404;
 }

@@ -97,7 +97,10 @@ export default function Landing() {
               className="modal"
               style={{ display: postModal ? "block" : "none" }}
             >
-              <div className="modal-background" onClick={closePostModal}></div>
+              <div
+                className="modal-background modalPost-mt"
+                onClick={closePostModal}
+              ></div>
               <div className="modal-content modalPost">
                 <ModalPost
                   post={currentPost}

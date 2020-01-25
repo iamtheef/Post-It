@@ -123,9 +123,9 @@ export default function Navbar() {
             <Link className="navbar-item" to="/">
               Settings
             </Link>
-            <a onClick={logout} className="navbar-item" href="/">
+            <Link onClick={logout} className="navbar-item" href="/">
               Logout
-            </a>
+            </Link>
           </div>
         </div>
       )}
