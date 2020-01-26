@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
 import useToggle from "../Hooks/useToggle";
-import { ProfileContext } from "../Context/ProfileContext";
 import { UserContext } from "../Context/UserContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -14,9 +13,8 @@ export default function Landing() {
   const [currentPost, setCurrentPost] = useState(posts[0]);
   const [postModal, togglePostModal] = useToggle(false);
 
-  const { user } = useContext(UserContext);
-  const { initializeProfile, upvoteSession, downvoteSession } = useContext(
-    ProfileContext
+  const { user, upvoteSession, downvoteSession, profile } = useContext(
+    UserContext
   );
 
   const isUpvoted = id => {
@@ -31,8 +29,7 @@ export default function Landing() {
       .get("/api/posts/all")
       .then(res => setPosts(res.data))
       .catch(e => setError(e));
-    initializeProfile();
-  }, [user]);
+  }, [profile]);
 
   const showPost = post => {
     setCurrentPost(post);

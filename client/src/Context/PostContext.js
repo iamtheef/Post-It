@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import useToggle from "../Hooks/useToggle";
 import useInputState from "../Hooks/useInputState";
 import axios from "axios";
-import { ProfileContext } from "./ProfileContext";
+import { UserContext } from "./UserContext";
 
 export const PostContext = createContext();
 
@@ -30,7 +30,7 @@ export function PostProvider(props) {
     upvoteSession,
     downvoteSession,
     setDownvoteSession
-  } = useContext(ProfileContext);
+  } = useContext(UserContext);
 
   //
   // functions

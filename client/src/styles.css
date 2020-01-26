@@ -294,7 +294,7 @@ a:hover {
 
 .modal-votings {
   width: 74.5vw;
-  height: 4vh;
+  height: 5vh;
   position: fixed !important;
   top: 0;
   margin-left: -25px;
@@ -305,6 +305,8 @@ a:hover {
 }
 
 .modalPost {
+  background-color: transparent;
+  position: relative;
   overflow-y: auto;
   margin-top: 46px;
   min-width: 1100px;

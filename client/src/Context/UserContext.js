@@ -8,14 +8,18 @@ export const UserContext = createContext();
 export function UserProvider(props) {
   const [user, setUser] = useState();
   const [errors, setErrors] = useState({});
+  const [upvoteSession, setUpvoteSession] = useState([]);
+  const [downvoteSession, setDownvoteSession] = useState([]);
+  const [profile, setProfile] = useState();
 
   // initial user
-  const initialUser = () => {
+  const initializeUser = () => {
     // check for valid token (if so, give persmissions)
     if (localStorage.jwtToken) {
       setAuthToken(localStorage.jwtToken);
       const decoded = jwt_decode(localStorage.jwtToken);
       setUser(decoded);
+      initializeProfile();
 
       //check for expired token (if so, lougout)
       if (decoded.exp < Date.now() / 1000) {
@@ -33,16 +37,8 @@ export function UserProvider(props) {
         localStorage.setItem("jwtToken", token);
         const decoded = jwt_decode(localStorage.jwtToken);
         setAuthToken(localStorage.jwtToken);
-
-        axios
-          .get("/api/profile/")
-          .then(profile => {
-            decoded.profile = profile.data;
-          })
-          .catch(e => {
-            decoded.profile = e;
-          });
         setUser(decoded);
+        initializeProfile();
       })
       .catch(e => setErrors(e.response.data));
   };
@@ -60,11 +56,46 @@ export function UserProvider(props) {
     delete localStorage.jwtToken;
     setAuthToken(null);
     setUser();
+    initializeProfile();
+  };
+
+  const initializeProfile = () => {
+    if (user) {
+      axios
+        .get("api/profile/")
+        .then(profile => {
+          setProfile(profile.data);
+          setUpvoteSession(profile.data.upvoted);
+          setDownvoteSession(profile.data.downvoted);
+        })
+        .catch(e => {
+          setProfile(e.response);
+        });
+    } else {
+      setProfile([]);
+      setUpvoteSession([]);
+      setDownvoteSession([]);
+    }
   };
 
   return (
     <UserContext.Provider
-      value={{ user, login, register, errors, logout, initialUser }}
+      value={{
+        user,
+        login,
+        register,
+        errors,
+        logout,
+        initializeUser,
+
+        profile,
+        setProfile,
+        initializeProfile,
+        upvoteSession,
+        setUpvoteSession,
+        downvoteSession,
+        setDownvoteSession
+      }}
     >
       {props.children}
     </UserContext.Provider>

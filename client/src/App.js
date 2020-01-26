@@ -8,17 +8,14 @@ import PublicProfile from "./Components/PublicProfile";
 import NewPost from "./Components/NewPost";
 import PostHandler from "./Components/PostHandler";
 import { UserContext } from "./Context/UserContext";
-import { ProfileContext } from "./Context/ProfileContext";
 import { PostProvider } from "./Context/PostContext";
 
 function App() {
-  const { setUser, initialUser } = useContext(UserContext);
-  const { initializeProfile } = useContext(ProfileContext);
+  const { initializeUser } = useContext(UserContext);
 
   useEffect(() => {
-    initialUser();
-    initializeProfile();
-  }, [setUser]);
+    initializeUser();
+  }, []);
 
   return (
     <Router>

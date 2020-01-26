@@ -123,7 +123,7 @@ export default function Navbar() {
             <Link className="navbar-item" to="/">
               Settings
             </Link>
-            <Link onClick={logout} className="navbar-item" href="/">
+            <Link onClick={logout} className="navbar-item" to="/">
               Logout
             </Link>
           </div>

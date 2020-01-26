@@ -10,8 +10,12 @@ export default function Comments(props) {
     <div className="columns">
       <div className="column is-8">
         <div className="comment-as">
-          Comment as {user.username}
-          <TextEditor />
+          {user && (
+            <div>
+              <p>Comment as {user.username}</p>
+              <TextEditor />
+            </div>
+          )}
           <hr id="hr"></hr>
           <ul>
             {comments.forEach(comment => (
