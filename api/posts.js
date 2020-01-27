@@ -8,7 +8,6 @@ const validatePost = require("../validation/post");
 const validateComment = require("../validation/comment");
 const Community = require("../models/Community");
 const ObjectId = require("mongoose").Types.ObjectId;
-
 const ogs = require("open-graph-scraper");
 
 router.post(

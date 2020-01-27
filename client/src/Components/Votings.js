@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { PostContext } from "../Context/PostContext";
 
 export default function Votings(props) {
   const { upvote, downvote } = useContext(PostContext);
-  const { element, upvoted, downvoted } = { ...props };
+  const { element, upvoted, downvoted } = props;
   const [isUV, setUV] = useState(upvoted);
   const [isDV, setDV] = useState(downvoted);
 
@@ -22,7 +22,9 @@ export default function Votings(props) {
   return (
     <div className="column is-1 sidebar-column is-vcentered">
       <div className="arrow-shadow" onClick={handleUpvote}>
-        <i className={`arrow up arrow-up ${isUV && "upvoted"}`}></i>
+        <i
+          className={`arrow up arrow-up ${isUV || (upvoted && "upvoted")}`}
+        ></i>
       </div>
 
       <div id={` ${isUV && "upvoted"}`}>

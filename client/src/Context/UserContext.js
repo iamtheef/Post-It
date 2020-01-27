@@ -19,7 +19,7 @@ export function UserProvider(props) {
       setAuthToken(localStorage.jwtToken);
       const decoded = jwt_decode(localStorage.jwtToken);
       setUser(decoded);
-      initializeProfile();
+      initializeProfile(decoded);
 
       //check for expired token (if so, lougout)
       if (decoded.exp < Date.now() / 1000) {
@@ -38,7 +38,7 @@ export function UserProvider(props) {
         const decoded = jwt_decode(localStorage.jwtToken);
         setAuthToken(localStorage.jwtToken);
         setUser(decoded);
-        initializeProfile();
+        initializeProfile(decoded);
       })
       .catch(e => setErrors(e.response.data));
   };
@@ -59,10 +59,10 @@ export function UserProvider(props) {
     initializeProfile();
   };
 
-  const initializeProfile = () => {
+  const initializeProfile = user => {
     if (user) {
       axios
-        .get("api/profile/")
+        .get("/api/profile/")
         .then(profile => {
           setProfile(profile.data);
           setUpvoteSession(profile.data.upvoted);

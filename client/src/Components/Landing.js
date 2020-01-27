@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
-import useToggle from "../Hooks/useToggle";
-import { UserContext } from "../Context/UserContext";
 import { Link } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
+import useToggle from "../Hooks/useToggle";
 import axios from "axios";
 import PostCard1 from "./PostCard1";
 import UpperFooter from "./UpperFooter";
@@ -13,9 +13,7 @@ export default function Landing() {
   const [currentPost, setCurrentPost] = useState(posts[0]);
   const [postModal, togglePostModal] = useToggle(false);
 
-  const { user, upvoteSession, downvoteSession, profile } = useContext(
-    UserContext
-  );
+  const { user, upvoteSession, downvoteSession } = useContext(UserContext);
 
   const isUpvoted = id => {
     return upvoteSession.includes(id);
@@ -29,7 +27,7 @@ export default function Landing() {
       .get("/api/posts/all")
       .then(res => setPosts(res.data))
       .catch(e => setError(e));
-  }, [profile]);
+  }, [user]);
 
   const showPost = post => {
     setCurrentPost(post);
