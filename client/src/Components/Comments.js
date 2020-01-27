@@ -25,6 +25,17 @@ export default function Comments(props) {
             ))}
           </ul>
         </div>
+        <hr></hr>
+        <hr></hr>
+        <hr></hr>
+        <hr></hr>
+        <hr></hr>
+        <hr></hr>
+        <hr></hr>
+        <hr></hr>
+        <hr></hr>
+        <hr></hr>
+        <hr></hr>
       </div>
     </div>
   );

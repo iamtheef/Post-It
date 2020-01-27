@@ -8,7 +8,7 @@ export default function PostHeader(props) {
   return (
     <div className="columns">
       <div className="column is-1">
-        <figure className="image">
+        <figure className="image pr">
           <img
             className="is-rounded community-icon-landing"
             src={post.community.img}

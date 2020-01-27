@@ -12,7 +12,7 @@ export default function Post(props) {
   return (
     <div className="columns">
       <Votings element={post} upvoted={upvoted} downvoted={downvoted} />
-      <article className="tile notification">
+      <article className="tile notification pr">
         <div className="content">
           <PostHeader post={post} />
 

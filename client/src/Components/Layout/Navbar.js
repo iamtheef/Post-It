@@ -4,6 +4,11 @@ import useToggle from "../../Hooks/useToggle";
 import Login from "../Login";
 import Register from "../Register";
 import { UserContext } from "../../Context/UserContext";
+import env from "../../icons/env.png";
+import chat from "../../icons/chat.png";
+import chart from "../../icons/chart.png";
+import pen from "../../icons/pen.svg";
+import coin from "../../icons/coin.png";
 
 export default function Navbar() {
   const { user, logout } = useContext(UserContext);
@@ -54,6 +59,31 @@ export default function Navbar() {
       </div>
 
       <input type="text" id="search" placeholder="Search for a post"></input>
+
+      <div id="icons" className="columns is-pulled-right">
+        <div className="column is-1">
+          <img src={env} className="icon"></img>
+        </div>
+        <div className="column is-1">
+          <img src={chat} className="icon"></img>
+        </div>
+
+        <div className="column is-1">
+          <img src={pen} className="icon"></img>
+        </div>
+
+        <div
+          className="vertical-divider"
+          style={{ marginTop: "3.1vh", marginLeft: "2vw" }}
+        ></div>
+        <div className="column is-1">
+          <img src={chart} className="icon"></img>
+        </div>
+
+        <div className="column is-1">
+          <img src={coin} className="icon"></img>
+        </div>
+      </div>
 
       {!user ? (
         <div className="navbar-end">

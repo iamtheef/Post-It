@@ -27,7 +27,7 @@ export default function Votings(props) {
         ></i>
       </div>
 
-      <div id={` ${isUV && "upvoted"}`}>
+      <div className={` ${isUV && "upvoted"}`}>
         {element.karma <= 1 ? <i className="postKarma"> • </i> : element.karma}
       </div>
       <div className="arrow-shadow" onClick={handleDownvote}>

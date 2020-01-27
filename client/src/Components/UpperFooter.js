@@ -5,10 +5,10 @@ export default function UpperFooter() {
     <footer className="upFooter">
       <div>
         VIEW
-        <span className="button is-static">
+        <span className="button is-static" style={{ marginTop: "-3px" }}>
           <i className="fa fa-square" style={{ marginLeft: "10px" }}></i>
         </span>
-        <span style={{}}>
+        <span>
           <i
             className="fa fa-bars"
             style={{ marginLeft: "10px", marginTop: "3px" }}
@@ -17,7 +17,7 @@ export default function UpperFooter() {
       </div>
       <div
         className="vertical-divider"
-        style={{ marginLeft: "10vw", marginTop: "-3vh", height: "25px" }}
+        style={{ marginLeft: "10vw", marginTop: "-3.5vh" }}
       ></div>
     </footer>
   );

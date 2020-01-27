@@ -293,14 +293,14 @@ a:hover {
 }
 
 .modal-votings {
-  width: 74.5vw;
+  width: 74.4vw;
   height: 5vh;
   position: fixed !important;
   top: 0;
   margin-left: -25px;
   padding-left: 10px;
-  margin-top: 47px;
-  padding-top: 10px;
+  margin-top: 55px;
+  padding-top: 15px;
   background-color: rgb(0, 0, 0);
 }
 
@@ -308,11 +308,12 @@ a:hover {
   background-color: transparent;
   position: relative;
   overflow-y: auto;
-  margin-top: 46px;
+  margin-top: 50px;
   min-width: 1100px;
 }
 
 .modal {
+  margin-top: 7px;
   width: auto;
 }
 
@@ -340,9 +341,7 @@ a:hover {
 }
 
 .vertical-divider {
-  margin-top: 9px;
-  margin-left: 15px;
-  height: 15px;
+  height: 25px;
   border-left: 1px solid rgba(172, 162, 162, 0.479);
 }
 
@@ -360,4 +359,23 @@ a:hover {
 #hr {
   height: 1px;
   color: #040404;
+}
+.pr {
+  position: static !important;
+}
+
+#search {
+  margin-left: 4vw;
+  width: 50vw;
+}
+#icons {
+  margin-right: -14vw;
+}
+
+.icon {
+  max-width: 20px;
+  max-height: 20px;
+  margin-right: 2vw;
+  margin-left: 1vw;
+  margin-bottom: -2vh;
 }
