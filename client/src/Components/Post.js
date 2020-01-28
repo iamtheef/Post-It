@@ -28,8 +28,8 @@ export default function Post(props) {
                 <p className="postCard1-title">{post.title}</p>
                 <figure>
                   <img
-                    style={{ marginLeft: "-15%", width: "100%" }}
-                    src={`uploads/${post.file.id}/file/${post.file.filename}`}
+                    style={{ marginLeft: "-20vw", width: "35vw" }}
+                    src={`../uploads/${post.file.id}/file/${post.file.filename}`}
                     alt="postimg"
                   />
                 </figure>

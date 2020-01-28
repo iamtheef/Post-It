@@ -3,6 +3,8 @@ import ModalVotings from "./ModalVotings";
 import Post from "./Post";
 import PostFooter from "./PostFooter";
 import Comments from "./Comments";
+import CommunityFooter from "./CommunityFooter";
+import Footer from "./Footer";
 
 export default function ModalPost(props) {
   const { post, upvoted, downvoted } = props;
@@ -13,7 +15,7 @@ export default function ModalPost(props) {
         className="columns is-parent tile notification"
         style={{ marginTop: "40px" }}
       >
-        <div className="column is-10">
+        <div className="column is-12">
           <ModalVotings
             className="modal-votings"
             element={post}
@@ -23,18 +25,11 @@ export default function ModalPost(props) {
           <Post post={post} />
           <PostFooter post={post} />
           <Comments comments={post.comments} />
-        </div>
-        <div className="tile is-3 modalfooter pr">
-          <div className="tile pr">
-            <div className="tile is-parent pr">
-              <article className="tile notification pr">
-                <img
-                  src={post.community.img}
-                  alt="comImage"
-                  className="modal-tile-image"
-                ></img>
-              </article>
-            </div>
+          <div className="tile modalfooter is-1">
+            <CommunityFooter post={post} />
+          </div>
+          <div className="tile modalfooter is-1">
+            <Footer />
           </div>
         </div>
       </div>

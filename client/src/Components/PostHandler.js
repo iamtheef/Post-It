@@ -3,6 +3,8 @@ import axios from "axios";
 import Post from "./Post";
 import PostFooter from "./PostFooter";
 import Comments from "./Comments";
+import CommunityFooter from "./CommunityFooter";
+import Footer from "./Footer";
 
 export default function PostHandler() {
   const [post, setPost] = useState();
@@ -21,7 +23,7 @@ export default function PostHandler() {
   return (
     <div className="container">
       <div className="columns is-centered" style={{ marginTop: "60px" }}>
-        <div className="column is-8">
+        <div className="column is-9">
           <div className="is-parent tile notification">
             <div className="is-centered">
               <Post post={post} />
@@ -30,16 +32,9 @@ export default function PostHandler() {
             </div>
           </div>
         </div>
-
-        <div class="tile is-vertical is-4">
-          <div class="tile">
-            <div class="tile is-parent is-vertical">
-              <article class="tile notification">
-                <img src={post.community.image} alt="comImage"></img>
-                <p class="subtitle">Top tile</p>
-              </article>
-            </div>
-          </div>
+        <div className="column is-3">
+          <CommunityFooter post={post} />
+          <Footer />
         </div>
       </div>
     </div>

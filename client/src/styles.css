@@ -388,5 +388,12 @@ a:hover {
 }
 
 .modalfooter {
-  margin-left: -100px;
+  position: sticky;
+  top: 0;
+  margin-left: 45vw;
+  margin-bottom: auto;
+}
+ul {
+  font-size: 13px;
+  list-style-type: none !important;
 }
