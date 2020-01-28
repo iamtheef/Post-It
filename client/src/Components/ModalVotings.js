@@ -43,7 +43,7 @@ export default function Votings(props) {
             <i className={`arrow down arrow-down ${isDV && "downvoted"}`}></i>
           </div>
         </div>
-        <div className="vertical-divider"></div>
+        <div className="vertical-divider" style={{ marginLeft: "2vw" }}></div>
         <p className="arrow-spacing modal-uptitle">{element.title}</p>
       </div>
     </div>

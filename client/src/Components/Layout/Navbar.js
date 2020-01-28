@@ -62,14 +62,14 @@ export default function Navbar() {
 
       <div id="icons" className="columns is-pulled-right">
         <div className="column is-1">
-          <img src={env} className="icon"></img>
+          <img src={env} className="navbar-icon" alt="envelope"></img>
         </div>
         <div className="column is-1">
-          <img src={chat} className="icon"></img>
+          <img src={chat} className="navbar-icon" alt="chat"></img>
         </div>
 
         <div className="column is-1">
-          <img src={pen} className="icon"></img>
+          <img src={pen} className="icon navbar-icon" alt="pen"></img>
         </div>
 
         <div
@@ -77,11 +77,11 @@ export default function Navbar() {
           style={{ marginTop: "3.1vh", marginLeft: "2vw" }}
         ></div>
         <div className="column is-1">
-          <img src={chart} className="icon"></img>
+          <img src={chart} className="navbar-icon" alt="chart"></img>
         </div>
 
         <div className="column is-1">
-          <img src={coin} className="icon"></img>
+          <img src={coin} className="navbar-icon" alt="coin"></img>
         </div>
       </div>
 

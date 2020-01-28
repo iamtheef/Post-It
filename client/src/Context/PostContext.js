@@ -127,13 +127,13 @@ export function PostProvider(props) {
     formData.append("data", JSON.stringify(newPost));
 
     axios
-      .post("/api/posts/new", formData)
+      .post("api/posts/new", formData)
       .then(post => {
-        resetAllFields();
         history.push(`/posts/${post.data._id}`);
+        resetAllFields();
       })
       .catch(e => {
-        setErrors(e.response.data);
+        setErrors(e);
       });
   };
 

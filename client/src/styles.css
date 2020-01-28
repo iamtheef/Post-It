@@ -166,7 +166,7 @@ a:hover {
 }
 
 .postInfo {
-  margin-left: 5px;
+  margin-left: 15px;
   margin-top: 10px;
   margin-bottom: -30px;
   opacity: 0.5;
@@ -369,13 +369,24 @@ a:hover {
   width: 50vw;
 }
 #icons {
+  padding-top: 0.5vh;
   margin-right: -14vw;
 }
 
-.icon {
+.navbar-icon {
   max-width: 20px;
   max-height: 20px;
   margin-right: 2vw;
   margin-left: 1vw;
   margin-bottom: -2vh;
+}
+
+.modal-tile-image {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: 20%;
+}
+
+.modalfooter {
+  margin-left: -100px;
 }

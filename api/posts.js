@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require("passport");
 const Post = require("../models/Post");
 const Profile = require("../models/Profile");
-const User = require("../models/User");
 const validatePost = require("../validation/post");
 const validateComment = require("../validation/comment");
 const Community = require("../models/Community");
@@ -15,6 +14,7 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     //extracting data from the form
+
     const body = JSON.parse(req.body.data);
 
     //validation
@@ -57,16 +57,16 @@ router.post(
 
     // saving
     Promise.all([
-      User.findOne({ _id: req.user._id }),
+      Profile.findOne({ _id: req.user.profile }),
       makePost.then(post => post.save()),
-      Community.findOne({ _id: body.community })
+      Community.findById(body.community)
     ])
       .then(([user, post, community]) => {
         user.posts.push(post._id);
         user.save();
         community.posts.push(post._id);
         community.save();
-        post => res.json(post.populate("user").populate("community"));
+        res.json(post.populate("user").populate("community"));
       })
       .catch(e => res.json(e));
   }
