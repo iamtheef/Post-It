@@ -11,7 +11,7 @@ export default function RulesFooter(props) {
             <div className="column is-12 com-footer-upper"></div>
             <article className="tile is-child notification content pr rule-font">
               <div className="tile is-child pr">
-                <h3>{post.community.name} RULES</h3>
+                <h4>{post.community.name} RULES</h4>
                 <ol>
                   <li>Respect everyone</li>
                   <hr

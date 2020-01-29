@@ -28,7 +28,7 @@ export default function Post(props) {
                 <p className="postCard1-title">{post.title}</p>
                 <figure>
                   <img
-                    style={{ marginLeft: "-20vw", width: "35vw" }}
+                    style={{ marginLeft: "-10vw", width: "35vw" }}
                     src={`../uploads/${post.file.id}/file/${post.file.filename}`}
                     alt="postimg"
                   />
@@ -39,10 +39,11 @@ export default function Post(props) {
             {post.type === "linkPost" && (
               <div>
                 <p className="postCard1-title column is-9">{post.title}</p>
-                <div className="link-image column is-4">
+                <div className="link-image column is-3">
                   <img
                     style={{
-                      borderRadius: "3px"
+                      borderRadius: "3px",
+                      marginLeft: "12vw"
                     }}
                     alt="metadata"
                     src={post.metadata.ogImage.url}

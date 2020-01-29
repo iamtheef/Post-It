@@ -8,7 +8,7 @@ export default function Comments(props) {
 
   return (
     <div className="columns">
-      <div className="column is-7">
+      <div className="column is-10">
         <div className="comment-as">
           {user && (
             <div>

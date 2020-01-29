@@ -1,11 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { PostContext } from "../Context/PostContext";
+import { UserContext } from "../Context/UserContext";
 
 export default function Votings(props) {
   const { upvote, downvote } = useContext(PostContext);
-  const { element, upvoted, downvoted } = { ...props };
-  const [isUV, setUV] = useState(upvoted);
-  const [isDV, setDV] = useState(downvoted);
+  const { element } = props;
+  const [isUV, setUV] = useState(props.upvoted);
+  const [isDV, setDV] = useState(props.downvoted);
+  const { isUpvoted, isDownvoted } = useContext(UserContext);
+  const { currentPost } = useContext(PostContext);
+
+  useEffect(() => {
+    setUV(isUpvoted(currentPost._id));
+    setDV(isDownvoted(currentPost._id));
+  }, [currentPost]);
 
   const handleUpvote = e => {
     if (isDV) setDV(!isDV);
@@ -29,9 +37,9 @@ export default function Votings(props) {
         </div>
 
         <div className="arrow-spacing">
-          <div id={` ${isUV && "upvoted"}`}>
+          <div>
             {element.karma <= 1 ? (
-              <i className="postKarma"> • </i>
+              <i className={`postKarma ${isUV && "upvoted"}`}> • </i>
             ) : (
               element.karma
             )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Post from "./Post";
 import PostFooter from "./PostFooter";
@@ -6,9 +6,11 @@ import RulesFooter from "./RulesFooter";
 import Comments from "./Comments";
 import CommunityFooter from "./CommunityFooter";
 import Footer from "./Footer";
+import { UserContext } from "../Context/UserContext";
 
 export default function PostHandler() {
   const [post, setPost] = useState();
+  const { isUpvoted, isDownvoted } = useContext(UserContext);
 
   useEffect(() => {
     axios
@@ -34,7 +36,11 @@ export default function PostHandler() {
           </div>
         </div>
         <div className="column is-3">
-          <CommunityFooter post={post} />
+          <CommunityFooter
+            post={post}
+            upvoted={() => isUpvoted(post._id)}
+            downvoted={() => isDownvoted(post._id)}
+          />
           <RulesFooter post={post} />
           <Footer />
         </div>

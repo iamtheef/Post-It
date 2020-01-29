@@ -25,6 +25,7 @@ export function PostProvider(props) {
   const [file, setFile] = useState(null);
   const [link, changeLink, resetLink] = useInputState("");
   const [errors, setErrors] = useState({});
+  const [currentPost, setCurrentPost] = useState(undefined);
   const {
     setUpvoteSession,
     upvoteSession,
@@ -158,7 +159,9 @@ export function PostProvider(props) {
         setCommunity,
 
         upvote,
-        downvote
+        downvote,
+        currentPost,
+        setCurrentPost
       }}
     >
       {props.children}

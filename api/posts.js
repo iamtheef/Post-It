@@ -6,6 +6,7 @@ const Profile = require("../models/Profile");
 const validatePost = require("../validation/post");
 const validateComment = require("../validation/comment");
 const Community = require("../models/Community");
+const Comment = require("../models/Comment");
 const ObjectId = require("mongoose").Types.ObjectId;
 const ogs = require("open-graph-scraper");
 
@@ -190,14 +191,34 @@ router.post(
 
     Post.findById(req.params.post_id)
       .then(post => {
-        const newComment = {
+        const newComment = new Comment({
           username: req.user.username,
-          user: req.user.id,
           body: req.body.body,
-          avatar: req.user.avatar
-        };
+          children: []
+        });
         post.comments.unshift(newComment);
-        post.save().then(post => res.json(post));
+        post.save().then(post => res.json(post.comments));
+      })
+      .catch(e => res.json(e));
+  }
+);
+//children comment (reply)
+router.post(
+  "/:post_id/:comm_id/reply",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateComment(req.body);
+    if (!isValid) return res.status(400).json(errors);
+
+    Comment.findById(req.params.comm_id)
+      .then(comment => {
+        const newComment = new Comment({
+          username: req.user.username,
+          body: req.body.body,
+          children: []
+        });
+        comment.children.unshift(newComment);
+        comment.save().then(comment => res.json(comment));
       })
       .catch(e => res.json(e));
   }

@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
+import { PostContext } from "../Context/PostContext";
 import useToggle from "../Hooks/useToggle";
 import axios from "axios";
 import PostCard1 from "./PostCard1";
@@ -10,17 +11,10 @@ import ModalPost from "./ModalPost";
 export default function Landing() {
   const [error, setError] = useState();
   const [posts, setPosts] = useState([]);
-  const [currentPost, setCurrentPost] = useState(posts[0]);
   const [postModal, togglePostModal] = useToggle(false);
 
-  const { user, upvoteSession, downvoteSession } = useContext(UserContext);
-
-  const isUpvoted = id => {
-    return upvoteSession.includes(id);
-  };
-  const isDownvoted = id => {
-    return downvoteSession.includes(id);
-  };
+  const { user, isUpvoted, isDownvoted } = useContext(UserContext);
+  const { currentPost, setCurrentPost } = useContext(PostContext);
 
   useEffect(() => {
     axios
@@ -46,8 +40,8 @@ export default function Landing() {
       <p className="is-danger help">{error && error}</p>
       <div className="container columns is-centered">
         <div className="column is-6 is-centered">
-          {user ? (
-            <div>
+          <div>
+            {user && (
               <Link to="/newpost">
                 <input
                   className="input"
@@ -55,25 +49,10 @@ export default function Landing() {
                   placeholder="Make a new post"
                 ></input>
               </Link>
-              <ul>
-                {posts.map(post => (
-                  /* all the posts if someone is connected */
-                  <li key={post._id}>
-                    <div onClick={() => showPost(post)}>
-                      <PostCard1
-                        post={post}
-                        upvoted={isUpvoted(post._id)}
-                        downvoted={isDownvoted(post._id)}
-                      />
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            /* all the posts if no one is connected */
+            )}
             <ul>
               {posts.map(post => (
+                /* all the posts (subs to be implemented) */
                 <li key={post._id}>
                   <div onClick={() => showPost(post)}>
                     <PostCard1
@@ -85,7 +64,7 @@ export default function Landing() {
                 </li>
               ))}
             </ul>
-          )}
+          </div>
 
           {currentPost && (
             <div
@@ -97,11 +76,7 @@ export default function Landing() {
                 onClick={closePostModal}
               ></div>
               <div className="modal-content modalPost">
-                <ModalPost
-                  post={currentPost}
-                  upvoted={isUpvoted(currentPost._id)}
-                  downvoted={isDownvoted(currentPost._id)}
-                />
+                <ModalPost />
               </div>
             </div>
           )}

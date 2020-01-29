@@ -78,6 +78,13 @@ export function UserProvider(props) {
     }
   };
 
+  const isUpvoted = id => {
+    return upvoteSession.includes(id);
+  };
+  const isDownvoted = id => {
+    return downvoteSession.includes(id);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -87,6 +94,8 @@ export function UserProvider(props) {
         errors,
         logout,
         initializeUser,
+        isUpvoted,
+        isDownvoted,
 
         profile,
         setProfile,
