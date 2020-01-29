@@ -40,7 +40,7 @@ export function UserProvider(props) {
         setUser(decoded);
         initializeProfile(decoded);
       })
-      .catch(e => setErrors(e.response.data));
+      .catch(e => setErrors(e));
   };
 
   //handling register

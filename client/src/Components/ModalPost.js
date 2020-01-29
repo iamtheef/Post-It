@@ -5,6 +5,7 @@ import PostFooter from "./PostFooter";
 import Comments from "./Comments";
 import CommunityFooter from "./CommunityFooter";
 import Footer from "./Footer";
+import RulesFooter from "./RulesFooter";
 
 export default function ModalPost(props) {
   const { post, upvoted, downvoted } = props;
@@ -24,12 +25,17 @@ export default function ModalPost(props) {
           />
           <Post post={post} />
           <PostFooter post={post} />
-          <Comments comments={post.comments} />
-          <div className="tile modalfooter is-1">
-            <CommunityFooter post={post} />
-          </div>
-          <div className="tile modalfooter is-1">
-            <Footer />
+          <div className="content columns">
+            <Comments comments={post.comments} />
+            <div className="column is-4 modalfooter">
+              <CommunityFooter post={post} />
+            </div>
+            <div className="column is-4 modalfooter">
+              <RulesFooter post={post} />
+            </div>
+            <div className="column is-4 modalfooter">
+              <Footer />
+            </div>
           </div>
         </div>
       </div>

@@ -356,9 +356,10 @@ a:hover {
   margin-bottom: 20px;
 }
 
-#hr {
+.hr {
+  margin: auto;
   height: 1px;
-  color: #040404;
+  background-color: #8c868643;
 }
 .pr {
   position: static !important;
@@ -388,12 +389,30 @@ a:hover {
 }
 
 .modalfooter {
-  position: sticky;
-  top: 0;
-  margin-left: 45vw;
   margin-bottom: auto;
 }
 ul {
   font-size: 13px;
   list-style-type: none !important;
+}
+.com-footer-upper {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: 30px;
+  background-color: #54564d;
+}
+
+.join-btn {
+  margin-top: 2vh;
+  width: 100%;
+  background-color: transparent;
+  text-decoration: #1ba0d7;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 10px;
+}
+
+.rule-font {
+  font-weight: bolder;
+  font-size: 15px;
 }

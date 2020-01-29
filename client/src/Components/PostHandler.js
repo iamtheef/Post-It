@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Post from "./Post";
 import PostFooter from "./PostFooter";
+import RulesFooter from "./RulesFooter";
 import Comments from "./Comments";
 import CommunityFooter from "./CommunityFooter";
 import Footer from "./Footer";
@@ -34,6 +35,7 @@ export default function PostHandler() {
         </div>
         <div className="column is-3">
           <CommunityFooter post={post} />
+          <RulesFooter post={post} />
           <Footer />
         </div>
       </div>
