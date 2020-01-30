@@ -45,7 +45,13 @@ export default function Votings(props) {
             {element.karma <= 1 ? (
               <i className={`postKarma ${isUV && "upvoted"}`}> • </i>
             ) : (
-              element.karma
+              <p
+                style={{ marginTop: "3px" }}
+                className={`postKarma ${isUV && "upvoted"} ${isDV &&
+                  "downvoted"}`}
+              >
+                {element.karma}
+              </p>
             )}
           </div>
         </div>

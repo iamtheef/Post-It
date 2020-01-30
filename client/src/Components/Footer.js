@@ -3,13 +3,13 @@ import React from "react";
 export default function Footer() {
   return (
     <div
-      className="tile is-ancestor pr is-marginless"
-      style={{ marginTop: "20px" }}
+      className="tile is-ancestor is-marginless sticky"
+      style={{ marginTop: "140px" }}
     >
-      <div className="is-vertical is-4 pr">
-        <div className="pr">
-          <div className="is-parent is-vertical pr">
-            <article className="tile is-child notification content pr">
+      <div className="is-vertical is-4">
+        <div className="">
+          <div className="is-parent is-vertical">
+            <article className="tile is-child notification content">
               <div className="columns">
                 <div className="column is-6">
                   <ul>

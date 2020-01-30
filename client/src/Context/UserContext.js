@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
-import axios from "axios";
 import setAuthToken from "../AxiosRequestAuthUtil";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 export const UserContext = createContext();
 
@@ -40,14 +40,21 @@ export function UserProvider(props) {
         setUser(decoded);
         initializeProfile(decoded);
       })
-      .catch(e => setErrors(e));
+      .catch(e => setErrors(e.response.data));
   };
 
   //handling register
   const register = newUser => {
     axios
       .post("/api/users/register", newUser)
-      .then(res => setUser(res.data))
+      .then(user => {
+        const token = user.data.token;
+        localStorage.setItem("jwtToken", token);
+        const decoded = jwt_decode(localStorage.jwtToken);
+        setAuthToken(localStorage.jwtToken);
+        setUser(decoded);
+        initializeProfile(decoded);
+      })
       .catch(e => setErrors(e.response.data));
   };
 

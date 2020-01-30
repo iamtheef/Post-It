@@ -8,6 +8,7 @@ function TextEditor() {
 
   return (
     <ReactQuill
+      className="pr"
       value={body}
       style={{ height: "80px" }}
       onChange={setBody}

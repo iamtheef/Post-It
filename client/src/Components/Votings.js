@@ -10,25 +10,21 @@ export default function Votings(props) {
   const [isDV, setDV] = useState();
 
   const handleUpvote = e => {
+    upvote(element._id);
     e.stopPropagation();
     e.preventDefault();
-    if (isDV) setDV(!isDV);
-    setUV(!isUV);
-    upvote(element._id);
   };
 
   const handleDownvote = e => {
+    downvote(element._id);
     e.stopPropagation();
     e.preventDefault();
-    if (isUV) setUV(!isUV);
-    setDV(!isDV);
-    downvote(element._id);
   };
 
   useEffect(() => {
     setUV(isUpvoted(element._id));
     setDV(isDownvoted(element._id));
-  }, [handleDownvote, handleUpvote]);
+  }, [handleUpvote, handleDownvote]);
 
   return (
     <div className="column is-1 sidebar-column is-vcentered">
@@ -40,7 +36,11 @@ export default function Votings(props) {
         {element.karma <= 1 ? (
           <i className={`postKarma ${isUV && "upvoted"}`}> • </i>
         ) : (
-          element.karma
+          <p
+            className={`postKarma ${isUV && "upvoted"} ${isDV && "downvoted"}`}
+          >
+            {element.karma}
+          </p>
         )}
       </div>
       <div className="arrow-shadow" onClick={e => handleDownvote(e)}>

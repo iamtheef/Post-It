@@ -7,7 +7,7 @@ export default function Comments(props) {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="columns">
+    <div className="columns pr">
       <div className="column is-10">
         <div className="comment-as">
           {user && (

@@ -6,6 +6,7 @@ import useToggle from "../Hooks/useToggle";
 import axios from "axios";
 import PostCard1 from "./PostCard1";
 import UpperFooter from "./UpperFooter";
+import Footer from "./Footer";
 import ModalPost from "./ModalPost";
 
 export default function Landing() {
@@ -13,10 +14,9 @@ export default function Landing() {
   const [posts, setPosts] = useState([]);
   const [postModal, togglePostModal] = useToggle(false);
 
-  const { user, isUpvoted, isDownvoted } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const { currentPost, setCurrentPost } = useContext(PostContext);
 
-  setCurrentPost(posts[0]);
   useEffect(() => {
     axios
       .get("/api/posts/all")
@@ -40,47 +40,50 @@ export default function Landing() {
       <UpperFooter />
       <p className="is-danger help">{error && error}</p>
       <div className="container columns is-centered">
-        <div className="column is-6 is-centered">
-          <div>
-            {user && (
-              <Link to="/newpost">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Make a new post"
-                ></input>
-              </Link>
-            )}
-            <ul>
-              {posts.map(post => (
-                /* all the posts (subs to be implemented) */
-                <li key={post._id}>
-                  <div onClick={() => showPost(post)}>
-                    <PostCard1
-                      post={post}
-                      upvoted={isUpvoted(post._id)}
-                      downvoted={isDownvoted(post._id)}
-                    />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {currentPost && (
-            <div
-              className="modal"
-              style={{ display: postModal ? "block" : "none" }}
-            >
-              <div
-                className="modal-background modalPost-mt"
-                onClick={closePostModal}
-              ></div>
-              <div className="modal-content modalPost">
-                <ModalPost />
+        <div className="column is-6">
+          <div className="columns">
+            <div className="column is-12">
+              <div>
+                {user && (
+                  <Link to="/newpost">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="Make a new post"
+                    ></input>
+                  </Link>
+                )}
+                <ul>
+                  {posts.map(post => (
+                    /* all the posts (subs to be implemented) */
+                    <li key={post._id}>
+                      <div onClick={() => showPost(post)}>
+                        <PostCard1 post={post} />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
+
+              {currentPost && (
+                <div
+                  className="modal"
+                  style={{ display: postModal ? "block" : "none" }}
+                >
+                  <div
+                    className="modal-background modalPost-mt"
+                    onClick={closePostModal}
+                  ></div>
+                  <div className="modal-content modalPost">
+                    <ModalPost />
+                  </div>
+                </div>
+              )}
             </div>
-          )}
+            <div className="column is-1">
+              <Footer />
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -64,6 +64,9 @@ export function PostProvider(props) {
   };
 
   const upvote = postId => {
+    if (downvoteSession.includes(postId)) {
+      downvoteSession.splice(upvoteSession.indexOf(postId), 1);
+    }
     axios
       .post(`/api/posts/${postId}/upvote`)
       .then(added => {
@@ -78,6 +81,9 @@ export function PostProvider(props) {
   };
 
   const downvote = postId => {
+    if (upvoteSession.includes(postId)) {
+      upvoteSession.splice(upvoteSession.indexOf(postId), 1);
+    }
     axios
       .post(`/api/posts/${postId}/downvote`)
       .then(added => {
