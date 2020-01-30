@@ -29,7 +29,11 @@ export default function PostHandler() {
         <div className="column is-9">
           <div className="is-parent tile notification">
             <div className="is-centered">
-              <Post post={post} />
+              <Post
+                post={post}
+                upvoted={isUpvoted(post._id)}
+                downvoted={isDownvoted(post._id)}
+              />
               <PostFooter post={post} />
               <Comments comments={post.comments} />
             </div>

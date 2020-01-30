@@ -16,6 +16,7 @@ export default function Landing() {
   const { user, isUpvoted, isDownvoted } = useContext(UserContext);
   const { currentPost, setCurrentPost } = useContext(PostContext);
 
+  setCurrentPost(posts[0]);
   useEffect(() => {
     axios
       .get("/api/posts/all")

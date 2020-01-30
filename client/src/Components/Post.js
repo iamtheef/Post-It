@@ -8,7 +8,6 @@ export default function Post(props) {
   if (!post) {
     return <div>Loading...</div>;
   }
-
   return (
     <div className="columns">
       <Votings element={post} upvoted={upvoted} downvoted={downvoted} />

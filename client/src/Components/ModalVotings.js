@@ -3,35 +3,39 @@ import { PostContext } from "../Context/PostContext";
 import { UserContext } from "../Context/UserContext";
 
 export default function Votings(props) {
-  const { upvote, downvote } = useContext(PostContext);
-  const { element } = props;
-  const [isUV, setUV] = useState(props.upvoted);
-  const [isDV, setDV] = useState(props.downvoted);
+  const { currentPost, upvote, downvote } = useContext(PostContext);
   const { isUpvoted, isDownvoted } = useContext(UserContext);
-  const { currentPost } = useContext(PostContext);
-
-  useEffect(() => {
-    setUV(isUpvoted(currentPost._id));
-    setDV(isDownvoted(currentPost._id));
-  }, [currentPost]);
+  const { element } = props;
+  const [isUV, setUV] = useState();
+  const [isDV, setDV] = useState();
 
   const handleUpvote = e => {
+    e.stopPropagation();
+    e.preventDefault();
     if (isDV) setDV(!isDV);
     setUV(!isUV);
-    upvote(e, element._id);
+    upvote(element._id);
   };
 
   const handleDownvote = e => {
+    e.stopPropagation();
+    e.preventDefault();
     if (isUV) setUV(!isUV);
     setDV(!isDV);
-    downvote(e, element._id);
+    downvote(element._id);
   };
+
+  useEffect(() => {
+    console.log("boom rendering");
+    setUV(isUpvoted(currentPost._id));
+    setDV(isDownvoted(currentPost._id));
+  }, [handleDownvote, handleUpvote]);
 
   return (
     <div className="modal-votings">
       <div className="columns">
         <div className="modal-vote-arrows">
-          <div className="arrow-shadow" onClick={handleUpvote}>
+          <div className="arrow-shadow" onClick={e => handleUpvote(e)}>
             <i className={`arrow up arrow-up ${isUV && "upvoted"}`}></i>
           </div>
         </div>
@@ -47,7 +51,7 @@ export default function Votings(props) {
         </div>
 
         <div className="arrow-spacing">
-          <div className="arrow-shadow" onClick={handleDownvote}>
+          <div className="arrow-shadow" onClick={e => handleDownvote(e)}>
             <i className={`arrow down arrow-down ${isDV && "downvoted"}`}></i>
           </div>
         </div>

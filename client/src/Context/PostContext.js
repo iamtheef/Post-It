@@ -63,9 +63,7 @@ export function PostProvider(props) {
     }
   };
 
-  const upvote = (e, postId) => {
-    e.stopPropagation();
-    e.preventDefault();
+  const upvote = postId => {
     axios
       .post(`/api/posts/${postId}/upvote`)
       .then(added => {
@@ -79,9 +77,7 @@ export function PostProvider(props) {
       .catch(e => console.log(e));
   };
 
-  const downvote = (e, postId) => {
-    e.stopPropagation();
-    e.preventDefault();
+  const downvote = postId => {
     axios
       .post(`/api/posts/${postId}/downvote`)
       .then(added => {

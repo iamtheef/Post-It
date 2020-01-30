@@ -4,7 +4,7 @@ import PostFooter from "./PostFooter";
 import PostHeader from "./PostHeader";
 
 export default function PostCard1(props) {
-  const { post, upvoted, downvoted } = props;
+  const { post } = props;
 
   if (post.type === "textPost") {
     const postLength = post.body.length;
@@ -18,7 +18,7 @@ export default function PostCard1(props) {
     <div className="is-parent">
       <div className="column body-column">
         <div className="columns">
-          <Votings element={post} upvoted={upvoted} downvoted={downvoted} />
+          <Votings element={post} />
           <article className="tile notification">
             <div className="content">
               <PostHeader post={post} />
