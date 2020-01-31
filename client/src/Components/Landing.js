@@ -16,6 +16,7 @@ export default function Landing() {
 
   const { user } = useContext(UserContext);
   const { currentPost, setCurrentPost } = useContext(PostContext);
+  const { setCurrentComments } = useContext(PostContext);
 
   useEffect(() => {
     axios
@@ -26,6 +27,7 @@ export default function Landing() {
 
   const showPost = post => {
     setCurrentPost(post);
+    setCurrentComments(post.comments);
     window.history.pushState({ urlPath: "" }, "", `/posts/${post._id}`);
     togglePostModal();
   };

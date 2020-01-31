@@ -186,16 +186,14 @@ router.post(
   "/:post_id/comment",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateComment(req.body);
-    if (!isValid) return res.status(400).json(errors);
+    const newComment = new Comment({
+      username: req.user.username,
+      body: req.body.body,
+      children: []
+    });
 
     Post.findById(req.params.post_id)
       .then(post => {
-        const newComment = new Comment({
-          username: req.user.username,
-          body: req.body.body,
-          children: []
-        });
         post.comments.unshift(newComment);
         post.save().then(post => res.json(post.comments));
       })

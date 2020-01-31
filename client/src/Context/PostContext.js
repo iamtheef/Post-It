@@ -26,7 +26,11 @@ export function PostProvider(props) {
   const [link, changeLink, resetLink] = useInputState("");
   const [errors, setErrors] = useState({});
   const [currentPost, setCurrentPost] = useState(undefined);
+  const [currentComments, setCurrentComments] = useState(undefined);
+  const [comment, setComment] = useState("");
+
   const {
+    user,
     setUpvoteSession,
     upvoteSession,
     downvoteSession,
@@ -140,6 +144,28 @@ export function PostProvider(props) {
       });
   };
 
+  // add comments
+  const addComment = () => {
+    const newComment = {
+      username: user.username,
+      body: comment
+    };
+
+    axios
+      .post(
+        `/api/posts/${
+          currentPost
+            ? currentPost._id
+            : window.location.pathname.replace("/posts/", "")
+        }/comment`,
+        newComment
+      )
+      .then(comments => {
+        setCurrentComments(comments);
+      })
+      .catch(e => console.log(e));
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -163,7 +189,12 @@ export function PostProvider(props) {
         upvote,
         downvote,
         currentPost,
-        setCurrentPost
+        setCurrentPost,
+        comment,
+        setComment,
+        addComment,
+        currentComments,
+        setCurrentComments
       }}
     >
       {props.children}

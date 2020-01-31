@@ -1,10 +1,23 @@
-import React, { useContext } from "react";
-import TextEditor from "./TextEditor";
+import React, { useContext, useEffect, useState } from "react";
+import ComAdder from "./ComAdder";
+import Comment from "./Comment";
 import { UserContext } from "../Context/UserContext";
+import { PostContext } from "../Context/PostContext";
 
 export default function Comments(props) {
-  const { comments } = props;
   const { user } = useContext(UserContext);
+  const { addComment, currentComments } = useContext(PostContext);
+
+  const [comments, setComments] = useState();
+
+  useEffect(() => {
+    if (currentComments === undefined) {
+      setComments(props.comments);
+    } else {
+      setComments(currentComments);
+    }
+    console.log(comments);
+  }, [currentComments]);
 
   return (
     <div className="columns pr">
@@ -13,38 +26,24 @@ export default function Comments(props) {
           {user && (
             <div>
               <p>Comment as {user.username}</p>
-              <TextEditor />
+              {/* <ComAdder /> */}
             </div>
           )}
           <hr id="hr"></hr>
-          <ul>
-            {comments.forEach(comment => (
-              <li key={comment._id}>
-                <div dangerouslySetInnerHTML={{ __html: comment }}></div>
-              </li>
-            ))}
-          </ul>
         </div>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
-        <hr></hr>
+
         <hr></hr>
       </div>
+      <ul>
+        {comments &&
+          comments.forEach(comment => (
+            <li key={comment._id}>
+              <h1>should be a comment</h1>
+              <p>{comment.body}</p>
+            </li>
+          ))}
+      </ul>
+      <h1>you even printing bro?</h1>
     </div>
   );
 }
