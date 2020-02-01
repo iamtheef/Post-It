@@ -2,11 +2,8 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div
-      className="tile is-ancestor is-marginless sticky"
-      style={{ marginTop: "140px" }}
-    >
-      <div className="is-vertical is-4">
+    <div className="tile is-ancestor is-marginless sticky">
+      <div className="is-vertical is-10">
         <div className="">
           <div className="is-parent is-vertical">
             <article className="tile is-child notification content">
@@ -14,56 +11,56 @@ export default function Footer() {
                 <div className="column is-6">
                   <ul>
                     <li>
-                      <a>Help</a>
+                      <a href="/">Help</a>
                     </li>
                     <li>
-                      <a>App</a>
+                      <a href="/">App</a>
                     </li>
                     <li>
-                      <a>Coins</a>
+                      <a href="/">Coins</a>
                     </li>
                     <li>
-                      <a>Premium</a>
+                      <a href="/">Premium</a>
                     </li>
                     <li>
-                      <a>Gifts</a>
+                      <a href="/">Gifts</a>
                     </li>
                     <li>
-                      <a>Communities</a>
+                      <a href="/">Communities</a>
                     </li>
                     <li>
-                      <a>Top Posts</a>
+                      <a href="/">Top Posts</a>
                     </li>
                     <li>
-                      <a>Topics</a>
+                      <a href="/">Topics</a>
                     </li>
                   </ul>
                 </div>
                 <div className="column is-6">
                   <ul>
                     <li>
-                      <a>About</a>
+                      <a href="/">About</a>
                     </li>
                     <li>
-                      <a>Carrer</a>
+                      <a href="/">Carrer</a>
                     </li>
                     <li>
-                      <a>Press</a>
+                      <a href="/">Press</a>
                     </li>
                     <li>
-                      <a>Advertise</a>
+                      <a href="/">Advertise</a>
                     </li>
                     <li>
-                      <a>Blog</a>
+                      <a href="/">Blog</a>
                     </li>
                     <li>
-                      <a>Terms</a>
+                      <a href="/">Terms</a>
                     </li>
                     <li>
-                      <a>Content Policy</a>
+                      <a href="/">Content Policy</a>
                     </li>
                     <li>
-                      <a>Privacy Policy</a>
+                      <a href="/">Privacy Policy</a>
                     </li>
                   </ul>
                 </div>

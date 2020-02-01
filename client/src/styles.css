@@ -430,3 +430,19 @@ ul {
 .comment {
   margin-bottom: 30px !important;
 }
+
+.top-com-footer-upper {
+  background-image: url("http://3.bp.blogspot.com/-0_SAKkJkOcE/Tf4BFylwxMI/AAAAAAAAB_g/fqEZ5VGSx38/s1600/smile4.jpg");
+  height: 13vh;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.top-com {
+  min-width: 21vw !important;
+}
+
+.top-com-font {
+  font-weight: bold;
+  font-size: 14px;
+}

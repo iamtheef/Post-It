@@ -8,6 +8,7 @@ import PostCard1 from "./PostCard1";
 import UpperFooter from "./UpperFooter";
 import Footer from "./Footer";
 import ModalPost from "./ModalPost";
+import TopCommunities from "./TopCommunities";
 
 export default function Landing() {
   const [error, setError] = useState();
@@ -20,9 +21,9 @@ export default function Landing() {
 
   useEffect(() => {
     axios
-      .get("/api/posts/all")
+      .get("http://localhost:3000/api/posts/all")
       .then(res => setPosts(res.data))
-      .catch(e => setError(e));
+      .catch(e => setError(e.response.data));
   }, [user]);
 
   const showPost = post => {
@@ -41,10 +42,10 @@ export default function Landing() {
     <div>
       <UpperFooter />
       <p className="is-danger help">{error && error}</p>
-      <div className="container columns is-centered">
-        <div className="column is-6">
+      <div className=" columns is-centered">
+        <div className="column is-7">
           <div className="columns">
-            <div className="column is-12">
+            <div className="column is-10">
               <div>
                 {user && (
                   <Link to="/newpost">
@@ -82,7 +83,8 @@ export default function Landing() {
                 </div>
               )}
             </div>
-            <div className="column is-1">
+            <div className="column is-marginless">
+              <TopCommunities />
               <Footer />
             </div>
           </div>

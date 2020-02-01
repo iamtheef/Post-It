@@ -24,7 +24,7 @@ export default function Votings(props) {
   useEffect(() => {
     setUV(isUpvoted(element._id));
     setDV(isDownvoted(element._id));
-  }, [handleUpvote, handleDownvote]);
+  }, [upvote, downvote]);
 
   return (
     <div className="column is-1 sidebar-column is-vcentered">

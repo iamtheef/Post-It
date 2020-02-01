@@ -16,7 +16,7 @@ export default function Comments(props) {
     } else {
       setComments(currentComments);
     }
-  }, [currentComments]);
+  }, [currentComments, props.comments]);
 
   return (
     <div className="columns pr">

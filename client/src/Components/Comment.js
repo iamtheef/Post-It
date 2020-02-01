@@ -15,7 +15,7 @@ export default function Comment(props) {
             </strong>
             <div dangerouslySetInnerHTML={{ __html: com.body }}></div>
             <small>
-              <a>Reply</a>
+              <a href="#/">Reply</a>
             </small>
           </div>
         </article>
