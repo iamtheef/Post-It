@@ -6,9 +6,9 @@ import { PostContext } from "../Context/PostContext";
 
 export default function Comments(props) {
   const { user } = useContext(UserContext);
-  const { addComment, currentComments } = useContext(PostContext);
+  const { currentComments } = useContext(PostContext);
 
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     if (currentComments === undefined) {
@@ -16,7 +16,6 @@ export default function Comments(props) {
     } else {
       setComments(currentComments);
     }
-    console.log(comments);
   }, [currentComments]);
 
   return (
@@ -26,24 +25,22 @@ export default function Comments(props) {
           {user && (
             <div>
               <p>Comment as {user.username}</p>
-              {/* <ComAdder /> */}
+              <ComAdder />
             </div>
           )}
           <hr id="hr"></hr>
         </div>
 
         <hr></hr>
+        <ul>
+          {comments &&
+            comments.map(com => (
+              <li key={com._id}>
+                <Comment com={com} />
+              </li>
+            ))}
+        </ul>
       </div>
-      <ul>
-        {comments &&
-          comments.forEach(comment => (
-            <li key={comment._id}>
-              <h1>should be a comment</h1>
-              <p>{comment.body}</p>
-            </li>
-          ))}
-      </ul>
-      <h1>you even printing bro?</h1>
     </div>
   );
 }

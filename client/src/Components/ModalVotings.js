@@ -26,7 +26,6 @@ export default function Votings(props) {
   };
 
   useEffect(() => {
-    console.log("boom rendering");
     setUV(isUpvoted(currentPost._id));
     setDV(isDownvoted(currentPost._id));
   }, [handleDownvote, handleUpvote]);

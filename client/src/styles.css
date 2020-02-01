@@ -14,7 +14,7 @@ html {
 }
 
 .navbar {
-  position: fixed;
+  position: relative;
   border-bottom: 1px solid #d6dbdb;
 }
 
@@ -251,6 +251,7 @@ a:hover {
 }
 
 .up {
+  position: static;
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
 }
@@ -298,12 +299,13 @@ a:hover {
 .modal-votings {
   width: 74.4vw;
   height: 5vh;
-  position: fixed !important;
+  position: fixed;
   top: 0;
   margin-left: -25px;
   padding-left: 10px;
   margin-top: 55px;
   padding-top: 15px;
+  color: rgb(0, 0, 0);
   background-color: rgb(0, 0, 0);
 }
 
@@ -423,4 +425,8 @@ ul {
 .sticky {
   top: 50px;
   position: sticky;
+}
+
+.comment {
+  margin-bottom: 30px !important;
 }

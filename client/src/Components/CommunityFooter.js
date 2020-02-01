@@ -55,7 +55,7 @@ export default function CommunityFooter(props) {
 
                 <p>
                   <i
-                    class="fas fa-birthday-cake"
+                    className="fas fa-birthday-cake"
                     style={{ marginRight: "10px" }}
                   ></i>
                   Created Jun 14, 2012

@@ -15,7 +15,11 @@ function ComAdder() {
         placeholder="Write your comment here"
       />
 
-      <button className="button is-pulled-right" onClick={addComment}>
+      <button
+        className="button is-pulled-right is-dark"
+        style={{ marginTop: "10px" }}
+        onClick={addComment}
+      >
         Reply
       </button>
     </div>

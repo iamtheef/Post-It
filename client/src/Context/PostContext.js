@@ -161,7 +161,7 @@ export function PostProvider(props) {
         newComment
       )
       .then(comments => {
-        setCurrentComments(comments);
+        setCurrentComments(comments.data);
       })
       .catch(e => console.log(e));
   };

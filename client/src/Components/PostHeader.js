@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import { PostContext } from "../Context/PostContext";
 
 export default function PostHeader(props) {
   const { post } = props;
+  const { currentPost } = useContext(PostContext);
 
   return (
     <div className="columns">
@@ -11,7 +13,11 @@ export default function PostHeader(props) {
         <figure className="image pr">
           <img
             className="is-rounded community-icon-landing"
-            src={post.community.img}
+            src={
+              post.community.img
+                ? post.community.img
+                : currentPost.community.img
+            }
             alt="community logo"
           ></img>
         </figure>
