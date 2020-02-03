@@ -131,7 +131,7 @@ router.post(
           post.upvotes.splice(post.upvotes.indexOf(user._id), 1);
           post.karma = post.upvotes.length - post.downvotes.length;
           post.save();
-          res.json(-1);
+          res.json(user.upvoted);
         } else {
           if (user.downvoted.includes(post._id)) {
             user.downvoted.splice(user.downvoted.indexOf(post._id), 1);
@@ -141,7 +141,7 @@ router.post(
           post.upvotes.push(user._id);
           post.karma = post.upvotes.length - post.downvotes.length;
           post.save();
-          res.json(+1);
+          res.json(user.upvoted);
         }
       })
       .catch(e => res.json(e));
@@ -164,7 +164,7 @@ router.post(
           post.downvotes.splice(post.downvotes.indexOf(user._id), 1);
           post.karma = post.upvotes.length - post.downvotes.length;
           post.save();
-          res.json(-1);
+          res.json(user.downvoted);
         } else {
           if (user.upvoted.includes(post._id)) {
             user.upvoted.splice(user.upvoted.indexOf(post._id), 1);
@@ -174,7 +174,7 @@ router.post(
           post.downvotes.push(user._id);
           post.karma = post.upvotes.length - post.downvotes.length;
           post.save();
-          res.json(+1);
+          res.json(user.downvoted);
         }
       })
       .catch(e => res.json(e));

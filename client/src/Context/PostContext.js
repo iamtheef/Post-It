@@ -67,36 +67,26 @@ export function PostProvider(props) {
     }
   };
 
-  const upvote = postId => {
-    if (downvoteSession.includes(postId)) {
-      downvoteSession.splice(upvoteSession.indexOf(postId), 1);
-    }
+  const upvote = (e, postId) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     axios
       .post(`/api/posts/${postId}/upvote`)
-      .then(added => {
-        if (added.data > 0) {
-          setUpvoteSession([...upvoteSession, postId]);
-        } else {
-          const newSession = upvoteSession.filter(id => id !== postId);
-          setUpvoteSession(newSession);
-        }
+      .then(newSession => {
+        setUpvoteSession(newSession.data);
       })
       .catch(e => console.log(e));
   };
 
-  const downvote = postId => {
-    if (upvoteSession.includes(postId)) {
-      upvoteSession.splice(upvoteSession.indexOf(postId), 1);
-    }
+  const downvote = (e, postId) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     axios
       .post(`/api/posts/${postId}/downvote`)
-      .then(added => {
-        if (added.data > 0) {
-          setDownvoteSession([...downvoteSession, postId]);
-        } else {
-          const newSession = downvoteSession.filter(id => id !== postId);
-          setDownvoteSession(newSession);
-        }
+      .then(newSession => {
+        setDownvoteSession(newSession.data);
       })
       .catch(e => console.log(e));
   };
