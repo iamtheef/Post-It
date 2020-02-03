@@ -134,7 +134,7 @@ export function PostProvider(props) {
     formData.append("data", JSON.stringify(newPost));
 
     axios
-      .post("api/posts/new", formData)
+      .post("/api/posts/new", formData)
       .then(post => {
         history.push(`/posts/${post.data._id}`);
         resetAllFields();

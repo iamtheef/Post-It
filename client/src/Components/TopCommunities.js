@@ -22,17 +22,15 @@ export default function TopCommunities() {
             <article className="tile is-child notification content pr">
               <div className="columns"></div>
 
-              <div className="is-child pr">
-                <p className="top-com-font">
-                  1
-                  <span>
-                    <img
-                      style={{ borderRadius: "200%" }}
-                      className="image is-24x24"
-                      src="https://steamuserimages-a.akamaihd.net/ugc/781852661624008287/A4DA86E4101D264CC6D4A6BF607DA5D64A287747/?imw=779&imh=1024&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
-                    ></img>
-                  </span>
-                  p/memes
+              <div className="is-child pr columns">
+                <p className="top-com-font column is-12">
+                  <span className="column is-1">1</span>
+                  <img
+                    style={{ borderRadius: "200%" }}
+                    className="image is-24x24 column is-3"
+                    src="https://steamuserimages-a.akamaihd.net/ugc/781852661624008287/A4DA86E4101D264CC6D4A6BF607DA5D64A287747/?imw=779&imh=1024&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+                  ></img>
+                  <span className="column is-8">p/memes</span>
                 </p>
                 <hr
                   className="is-child pr hr"

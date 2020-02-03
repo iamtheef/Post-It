@@ -21,9 +21,9 @@ export default function Landing() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/posts/all")
+      .get("/api/posts/all")
       .then(res => setPosts(res.data))
-      .catch(e => setError(e.response.data));
+      .catch(e => console.log(e.response.data));
   }, [user]);
 
   const showPost = post => {

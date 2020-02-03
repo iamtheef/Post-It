@@ -14,7 +14,7 @@ function CommunitySelector() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/posts/communities/all")
+      .get("/api/posts/communities/all")
       .then(coms => setCommunities(coms.data))
       .catch(e => setError(e.response.data));
   }, [setCommunities]);

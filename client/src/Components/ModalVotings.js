@@ -42,7 +42,13 @@ export default function Votings(props) {
         <div className="arrow-spacing">
           <div>
             {element.karma <= 1 ? (
-              <i className={`postKarma ${isUV && "upvoted"}`}> • </i>
+              <i
+                className={`postKarma ${isUV && "upvoted"} ${isDV &&
+                  "downvoted"}`}
+              >
+                {" "}
+                •{" "}
+              </i>
             ) : (
               <p
                 style={{ marginTop: "3px" }}
