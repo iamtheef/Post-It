@@ -42,9 +42,11 @@ export default function Post(props) {
                   <img
                     style={{
                       borderRadius: "3px",
-                      marginLeft: "-10vw",
+                      marginLeft: "18vw",
                       borderColor: "blue",
-                      border: "solid royalblue 1px"
+                      border: "solid royalblue 1px",
+                      maxWidth: "400px",
+                      maxHeight: "200px"
                     }}
                     alt="metadata"
                     src={post.metadata.ogImage.url}

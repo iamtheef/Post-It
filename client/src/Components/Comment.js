@@ -1,5 +1,6 @@
 import React from "react";
 import Votings from "./Votings";
+import ComFooter from "./ComFooter";
 
 export default function Comment(props) {
   const { com } = props;
@@ -14,11 +15,9 @@ export default function Comment(props) {
               {com.username} · 3 hrs · {com.karma ? com.karma : "12 points"}
             </strong>
             <div dangerouslySetInnerHTML={{ __html: com.body }}></div>
-            <small>
-              <a href="#/">Reply</a>
-            </small>
           </div>
         </article>
+        <ComFooter />
       </div>
     </div>
   );

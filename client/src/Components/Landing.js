@@ -9,6 +9,7 @@ import UpperFooter from "./UpperFooter";
 import Footer from "./Footer";
 import ModalPost from "./ModalPost";
 import TopCommunities from "./TopCommunities";
+import PremiumFooter from "./PremiumFooter";
 
 export default function Landing() {
   const [error, setError] = useState();
@@ -85,6 +86,7 @@ export default function Landing() {
             </div>
             <div className="column is-marginless">
               <TopCommunities />
+              <PremiumFooter />
               <Footer />
             </div>
           </div>

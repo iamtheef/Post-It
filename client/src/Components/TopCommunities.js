@@ -20,8 +20,6 @@ export default function TopCommunities() {
               </h2>
             </div>
             <article className="tile is-child notification content pr">
-              <div className="columns"></div>
-
               <div className="is-child pr">
                 <p className="top-com-font columns">
                   <span className="column is-1">1</span>

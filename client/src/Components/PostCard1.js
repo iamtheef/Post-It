@@ -54,10 +54,13 @@ export default function PostCard1(props) {
                       <img
                         style={{
                           marginTop: "2vh",
-                          marginLeft: "-2vw",
+                          marginLeft: "12vw",
                           borderRadius: "3px",
                           borderColor: "blue",
-                          border: "solid royalblue 1px"
+                          border: "solid royalblue 1px",
+                          minWidth: "100px",
+                          maxWidth: "300px",
+                          maxHeight: "100px"
                         }}
                         alt="metadata"
                         src={post.metadata.ogImage.url}
