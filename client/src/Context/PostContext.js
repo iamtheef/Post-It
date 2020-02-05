@@ -28,7 +28,6 @@ export function PostProvider(props) {
   const [currentPost, setCurrentPost] = useState(undefined);
   const [currentComments, setCurrentComments] = useState(undefined);
   const [comment, setComment] = useState("");
-  const [votingStatus, setVotingStatus] = useState({});
 
   const {
     user,
@@ -76,7 +75,7 @@ export function PostProvider(props) {
       .post(`/api/posts/${postId}/upvote`)
       .then(newSession => {
         setUpvoteSession(newSession.data);
-      })
+      }, [])
       .catch(e => console.log(e));
   };
 
@@ -153,21 +152,22 @@ export function PostProvider(props) {
       )
       .then(comments => {
         setCurrentComments(comments.data);
+        setComment("");
       })
       .catch(e => console.log(e));
   };
 
   function getVotingStatus(id) {
     const status = {}; // unvoted post case
-    if (isUpvoted(id)) {
-      status.upvoted = true;
-      status.downvoted = false;
-      status.cls = "upvoted";
-    }
     if (isDownvoted(id)) {
       status.upvoted = false;
       status.downvoted = true;
       status.cls = "downvoted";
+    }
+    if (isUpvoted(id)) {
+      status.upvoted = true;
+      status.downvoted = false;
+      status.cls = "upvoted";
     }
 
     return status;
@@ -203,7 +203,7 @@ export function PostProvider(props) {
         addComment,
         currentComments,
         setCurrentComments,
-        votingStatus
+        getVotingStatus
       }}
     >
       {props.children}

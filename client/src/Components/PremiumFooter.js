@@ -1,15 +1,12 @@
 import React from "react";
-
+import premiumFooter from "../icons/premiumFooter.png";
 export default function PremiumFooter() {
   return (
     <div className="tile prem-footer-background" style={{ marginTop: "2vh" }}>
       <div className="is-vertical is-12">
-        <img
-          className="prem-footer-img"
-          src="https://data.1freewallpapers.com/download/blue-planet-rising-1024x768.jpg"
-        ></img>
+        <img className="prem-footer-img" src={premiumFooter}></img>
         <div className="pr">
-          <article className="is-child notification">
+          <article className="notification">
             <div className="column is-12">
               <p style={{ fontSize: "15px", fontWeight: "bold" }}>
                 postIt Premium

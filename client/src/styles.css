@@ -238,10 +238,12 @@ a:hover {
 .arrow-up:hover {
   border-color: #60b179;
 }
+
 .arrow-down:hover {
   border-color: rgb(186, 105, 35);
 }
 .arrow-shadow {
+  padding-right: 5px;
   margin-left: -6px;
   width: 25px;
   height: 25px;
@@ -297,7 +299,7 @@ a:hover {
 }
 
 .modal-votings {
-  width: 74.4vw;
+  width: 76.4vw;
   height: 5vh;
   position: fixed;
   top: 0;
@@ -456,9 +458,9 @@ ul {
 .prem-footer-img {
   padding: 0;
   margin: 0;
+  min-height: 250px;
   margin-bottom: -15vh;
-  width: 1400px !important;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  opacity: 0.5;
+  opacity: 0.9;
 }

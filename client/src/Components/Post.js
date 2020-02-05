@@ -3,14 +3,15 @@ import PostHeader from "./PostHeader";
 import Votings from "./Votings";
 
 export default function Post(props) {
-  const { post, upvoted, downvoted } = props;
+  const { post } = props;
 
   if (!post) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="columns">
-      <Votings element={post} upvoted={upvoted} downvoted={downvoted} />
+      <Votings element={post} />
       <article className="tile notification pr">
         <div className="content">
           <PostHeader post={post} />
@@ -42,11 +43,9 @@ export default function Post(props) {
                   <img
                     style={{
                       borderRadius: "3px",
-                      marginLeft: "18vw",
+                      marginLeft: "10%",
                       borderColor: "blue",
-                      border: "solid royalblue 1px",
-                      maxWidth: "400px",
-                      maxHeight: "200px"
+                      border: "solid royalblue 1px"
                     }}
                     alt="metadata"
                     src={post.metadata.ogImage.url}
