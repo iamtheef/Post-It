@@ -22,15 +22,16 @@ export default function TopCommunities() {
             <article className="tile is-child notification content pr">
               <div className="columns"></div>
 
-              <div className="is-child pr columns">
-                <p className="top-com-font column is-12">
+              <div className="is-child pr">
+                <p className="top-com-font columns">
                   <span className="column is-1">1</span>
                   <img
                     style={{ borderRadius: "200%" }}
-                    className="image is-24x24 column is-3"
-                    src="https://steamuserimages-a.akamaihd.net/ugc/781852661624008287/A4DA86E4101D264CC6D4A6BF607DA5D64A287747/?imw=779&imh=1024&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true"
+                    className="image column is-2"
+                    src="https://www.getdigital.eu/web/getdigital/gfx/products/__generated__resized/380x380/Aufkleber_Trollface.jpg"
                   ></img>
-                  <span className="column is-8">p/memes</span>
+
+                  <span className="column is-1">p/memes</span>
                 </p>
                 <hr
                   className="is-child pr hr"
@@ -39,7 +40,15 @@ export default function TopCommunities() {
               </div>
 
               <div className="is-child pr">
-                <p className="top-com-font">2 p/stupidQuestions</p>
+                <p className="top-com-font columns">
+                  <span className="column is-1">2</span>
+                  <img
+                    style={{ borderRadius: "200%" }}
+                    className="image column is-2"
+                    src="https://pics.imgrapid.com/wp-content/uploads/2013/10/08140919/eset-7.jpg"
+                  ></img>
+                  <span className="column is-1">p/technology</span>
+                </p>
                 <hr
                   className="is-child pr hr"
                   style={{ marginBottom: "1vh" }}
@@ -47,7 +56,15 @@ export default function TopCommunities() {
               </div>
 
               <div className="is-child pr">
-                <p className="top-com-font">3 p/science</p>
+                <p className="top-com-font columns">
+                  <span className="column is-1">3</span>
+                  <img
+                    style={{ borderRadius: "200%" }}
+                    className="image column is-2"
+                    src="https://cdn.worldsciencefestival.com/wp-content/uploads/2016/04/Unweave-e1509131688730.jpg"
+                  ></img>
+                  <span className="column is-1">p/science</span>
+                </p>
                 <hr
                   className="is-child pr hr"
                   style={{ marginBottom: "1vh" }}
@@ -55,7 +72,15 @@ export default function TopCommunities() {
               </div>
 
               <div className="is-child pr">
-                <p className="top-com-font">4 p/technology</p>
+                <p className="top-com-font columns">
+                  <span className="column is-1">4</span>
+                  <img
+                    style={{ borderRadius: "200%" }}
+                    className="image column is-2"
+                    src="https://theglobalcoverage.com/wp-content/uploads/2019/11/Netflix-Movies-and-Tv-Shows-List-696x467.png"
+                  ></img>
+                  <span className="column is-1">p/series</span>
+                </p>
                 <hr
                   className="is-child pr hr"
                   style={{ marginBottom: "1vh" }}
@@ -63,7 +88,15 @@ export default function TopCommunities() {
               </div>
 
               <div className="is-child pr">
-                <p className="top-com-font">5 p/synthesizers</p>
+                <p className="top-com-font columns">
+                  <span className="column is-1">4</span>
+                  <img
+                    style={{ borderRadius: "200%" }}
+                    className="image column is-2"
+                    src="https://m.media-amazon.com/images/I/81I8p4nOlNL._SS500_.jpg"
+                  ></img>
+                  <span className="column is-1">p/synthesizers</span>
+                </p>
                 <hr
                   className="is-child pr hr"
                   style={{ marginBottom: "1vh" }}

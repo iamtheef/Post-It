@@ -53,7 +53,8 @@ export default function PostCard1(props) {
                     <div className="link-image column is-4">
                       <img
                         style={{
-                          marginLeft: "3vw",
+                          marginTop: "2vh",
+                          marginLeft: "-2vw",
                           borderRadius: "3px",
                           borderColor: "blue",
                           border: "solid royalblue 1px"

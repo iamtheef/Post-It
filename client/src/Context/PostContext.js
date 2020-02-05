@@ -28,12 +28,13 @@ export function PostProvider(props) {
   const [currentPost, setCurrentPost] = useState(undefined);
   const [currentComments, setCurrentComments] = useState(undefined);
   const [comment, setComment] = useState("");
+  const [votingStatus, setVotingStatus] = useState({});
 
   const {
     user,
     setUpvoteSession,
-    upvoteSession,
-    downvoteSession,
+    isUpvoted,
+    isDownvoted,
     setDownvoteSession
   } = useContext(UserContext);
 
@@ -130,7 +131,7 @@ export function PostProvider(props) {
         resetAllFields();
       })
       .catch(e => {
-        setErrors(e);
+        setErrors(e.response.data);
       });
   };
 
@@ -156,6 +157,22 @@ export function PostProvider(props) {
       .catch(e => console.log(e));
   };
 
+  function getVotingStatus(id) {
+    const status = {}; // unvoted post case
+    if (isUpvoted(id)) {
+      status.upvoted = true;
+      status.downvoted = false;
+      status.cls = "upvoted";
+    }
+    if (isDownvoted(id)) {
+      status.upvoted = false;
+      status.downvoted = true;
+      status.cls = "downvoted";
+    }
+
+    return status;
+  }
+
   return (
     <PostContext.Provider
       value={{
@@ -178,13 +195,15 @@ export function PostProvider(props) {
 
         upvote,
         downvote,
+        getVotingStatus,
         currentPost,
         setCurrentPost,
         comment,
         setComment,
         addComment,
         currentComments,
-        setCurrentComments
+        setCurrentComments,
+        votingStatus
       }}
     >
       {props.children}

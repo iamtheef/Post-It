@@ -446,3 +446,10 @@ ul {
   font-weight: bold;
   font-size: 14px;
 }
+
+.blue-outline {
+  margin-left: "2vw" !important;
+  border-radius: "3px" !important;
+  border-color: "blue" !important;
+  border: "solid royalblue 1px" !important;
+}

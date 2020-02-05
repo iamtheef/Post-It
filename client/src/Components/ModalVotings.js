@@ -23,8 +23,8 @@ export default function Votings(props) {
           <div>
             {element.karma <= 1 ? (
               <i
-                className={`postKarma ${isUpvoted(element._id) &&
-                  "upvoted"} ${isDownvoted(element._id) && "downvoted"}`}
+                className={`postKarma ${(isUpvoted(element._id) && "upvoted") ||
+                  (isDownvoted(element._id) && "downvoted")}`}
               >
                 {" "}
                 •{" "}
@@ -32,8 +32,8 @@ export default function Votings(props) {
             ) : (
               <p
                 style={{ marginTop: "3px" }}
-                className={`postKarma ${isUpvoted(element._id) &&
-                  "upvoted"} ${isDownvoted(element._id) && "downvoted"}`}
+                className={`postKarma ${(isUpvoted(element._id) && "upvoted") ||
+                  (isDownvoted(element._id) && "downvoted")}`}
               >
                 {element.karma}
               </p>
