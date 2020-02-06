@@ -1,5 +1,5 @@
 # Post-It
-A smaller scale reddit made with React
+A smaller scale reddit made with MERN Stack and Bulma.
 
 Every user has to be registered and logged in, in order to use the site.
 Upon registration users have in their desposal the features below:
