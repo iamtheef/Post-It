@@ -14,11 +14,11 @@ All kind of forms and submits to the server have a specific schema and fields th
 Samples of the app can be found below (gifs):
 * [Registration](https://media.giphy.com/media/mEo6agMTzLyuMibWel/source.mp4)
 * [Login](https://media.giphy.com/media/KHiLbboRPxPf3uQnna/source.mp4)
-*[Text Posting](https://media.giphy.com/media/Rm3dZiuFGCC7e6WrBz/source.mp4)
-*[Image uploading/Posting](https://media.giphy.com/media/TeyRIpwdjQ39TbE6yh/source.mp4)
-*[Link Posting/Data Scraping](https://media.giphy.com/media/IfgXh873mF6nlu1jVi/source.mp4)
-*[Votings](https://media.giphy.com/media/WRdB3oz4lRh9AP7KLs/source.mp4)
-*[Commenting](https://media.giphy.com/media/dsXdtjCzOnR57It8pn/source.mp4)
+* [Text Posting](https://media.giphy.com/media/Rm3dZiuFGCC7e6WrBz/source.mp4)
+* [Image uploading/Posting](https://media.giphy.com/media/TeyRIpwdjQ39TbE6yh/source.mp4)
+* [Link Posting/Data Scraping](https://media.giphy.com/media/IfgXh873mF6nlu1jVi/source.mp4)
+* [Votings](https://media.giphy.com/media/WRdB3oz4lRh9AP7KLs/source.mp4)
+* [Commenting](https://media.giphy.com/media/dsXdtjCzOnR57It8pn/source.mp4)
 
 Upcoming features:
 * Editing posts/comments
