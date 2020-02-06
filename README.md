@@ -22,7 +22,7 @@ Samples of the app can be found below (gifs):
 
 Upcoming features:
 * Editing posts/comments
-* Feed/endless scrolling
+* Feed/Subscriptions/Endless scrolling
 * Private messaging
 * User/Communitites profiles
 * Search
