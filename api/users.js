@@ -80,7 +80,7 @@ router.post("/login", (req, res) => {
 
   const { errors, isValid } = ValidateLogin(req.body);
   if (!isValid) {
-    return res.json(errors);
+    return res.status(400).json(errors);
   }
 
   User.findOne({ email }).then(user => {

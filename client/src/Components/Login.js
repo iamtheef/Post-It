@@ -57,6 +57,7 @@ function Login() {
                 value={emailValue}
                 onChange={handleEmailChange}
               ></input>
+              <p className="help is-danger">{errors.email && errors.email}</p>
             </div>
           </div>
 
@@ -71,6 +72,9 @@ function Login() {
                 value={passValue}
                 onChange={handlePassChange}
               ></input>
+              <p className="help is-danger">
+                {errors.password && errors.password}
+              </p>
             </div>
           </div>
 
@@ -82,12 +86,13 @@ function Login() {
               <button className="button is-light">Cancel</button>
             </div>
           </div>
-          <div className="login-prompts label">
-            <a href="/" style={{ marginRight: "4px" }}>
-              Forgot your username? ·
-            </a>
+          <div
+            className="login-prompts label"
+            style={{ marginRight: "4px", marginTop: "170px" }}
+          >
+            <a href="/">Forgot your username? ·</a>
             <a href="/">Forgot your password?</a>
-            <p style={{ marginTop: "20px" }}>
+            <p>
               New here? <a href="/">Create your account</a>
             </p>
           </div>

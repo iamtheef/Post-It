@@ -16,7 +16,7 @@ function ComAdder() {
       />
 
       <button
-        className="button is-pulled-right is-dark"
+        className="button is-pulled-right is-dark pr"
         style={{ marginTop: "10px" }}
         onClick={addComment}
       >

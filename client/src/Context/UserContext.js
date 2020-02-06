@@ -31,7 +31,7 @@ export function UserProvider(props) {
   // hadling login
   const login = credits => {
     axios
-      .post("api/users/login", credits)
+      .post("/api/users/login", credits)
       .then(user => {
         const token = user.data.token;
         localStorage.setItem("jwtToken", token);

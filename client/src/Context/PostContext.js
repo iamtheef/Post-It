@@ -158,7 +158,12 @@ export function PostProvider(props) {
   };
 
   function getVotingStatus(id) {
-    const status = {}; // unvoted post case
+    const status = {
+      upvoted: false,
+      downvoted: false,
+      cls: ""
+    };
+
     if (isDownvoted(id)) {
       status.upvoted = false;
       status.downvoted = true;

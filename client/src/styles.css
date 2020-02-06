@@ -141,7 +141,7 @@ html {
 
 a {
   text-decoration: none !important;
-  color: #040404;
+  color: #ffffff;
 }
 
 a:hover {
@@ -230,7 +230,7 @@ a:hover {
   border-width: 0 4px 4px 0;
   display: inline-block;
   padding: 4px;
-
+  position: static !important;
   margin-top: 8px;
   margin-left: 6px;
 }
@@ -299,13 +299,13 @@ a:hover {
 }
 
 .modal-votings {
-  width: 76.4vw;
+  width: 74.4vw;
   height: 5vh;
   position: fixed;
   top: 0;
   margin-left: -25px;
   padding-left: 10px;
-  margin-top: 55px;
+  margin-top: 53px;
   padding-top: 15px;
   color: rgb(0, 0, 0);
   background-color: rgb(0, 0, 0);
@@ -315,7 +315,7 @@ a:hover {
   background-color: transparent;
   position: relative;
   overflow-y: auto;
-  margin-top: 50px;
+  margin-top: 44px;
   min-width: 1100px;
 }
 

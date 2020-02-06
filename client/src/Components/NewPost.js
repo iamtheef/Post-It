@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import { PostContext } from "../Context/PostContext";
 import CommunitySelector from "./CommunitiesSelector";
 import TextEditor from "./TextEditor";
@@ -140,4 +140,4 @@ function NewPost() {
   );
 }
 
-export default NewPost;
+export default memo(NewPost);
