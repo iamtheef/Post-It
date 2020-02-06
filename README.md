@@ -9,7 +9,7 @@ Upon registration users have in their desposal the features below:
 
 Link posting uses data scraping and supports any link.
 Image posts use additional space because users do actual uploading to the server where the image is stored and recalled.
-All kind of forms and submits to the server have a specific schema and fields that are validated by the server before proceeding.
+All kinds of forms and submits to the server have a specific schema and fields that are validated by the server before proceeding.
 
 Samples of the app can be found below (gifs):
 * [Registration](https://media.giphy.com/media/mEo6agMTzLyuMibWel/source.mp4)
