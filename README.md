@@ -7,9 +7,9 @@ Upon registration users have in their desposal the features below:
 * **Voting** (voting a post and shaping their karma, also helping the post itself to reach to more audience)
 * **Commenting** (leaving comments to posts using a rich text editor
 
-Link posting uses data scraping and supports any link.
-Image posts use additional space because users do actual uploading to the server where the image is stored and recalled.
-All kinds of forms and submits to the server have a specific schema and fields that are validated by the server before proceeding.
+Link posting uses web scraping technology and supports any link.
+Image posts use additional space due to the actual uploading the user does to the server where the image is stored and retrieved.
+All kinds of forms and submits to the server have a specific schema and fields that are validated on the server side before proceeding.
 
 Samples of the app can be found below (gifs):
 * [Registration](https://media.giphy.com/media/mEo6agMTzLyuMibWel/source.mp4)
