@@ -1,8 +1,8 @@
 import React, { useContext, memo } from "react";
-import { PostContext } from "../Context/PostContext";
-import CommunitySelector from "./CommunitiesSelector";
-import TextEditor from "./TextEditor";
-import FileManager from "./FileManager";
+import { PostContext } from "../../Context/PostContext";
+import CommunitySelector from "../CommunitiesSelector";
+import TextEditor from "../TextEditor";
+import FileManager from "../FileManager";
 
 function NewPost() {
   const {

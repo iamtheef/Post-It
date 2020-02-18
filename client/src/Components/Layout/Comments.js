@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import ComAdder from "./ComAdder";
-import Comment from "./Comment";
-import { UserContext } from "../Context/UserContext";
-import { PostContext } from "../Context/PostContext";
+import ComAdder from "../ComAdder";
+import Comment from "../Comment";
+import { UserContext } from "../../Context/UserContext";
+import { PostContext } from "../../Context/PostContext";
 
 export default function Comments(props) {
   const { user } = useContext(UserContext);

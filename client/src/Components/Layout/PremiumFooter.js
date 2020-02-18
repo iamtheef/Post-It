@@ -1,5 +1,6 @@
 import React from "react";
-import premiumFooter from "../icons/premiumFooter.png";
+import premiumFooter from "../../icons/premiumFooter.png";
+
 export default function PremiumFooter() {
   return (
     <div className="tile prem-footer-background" style={{ marginTop: "2vh" }}>

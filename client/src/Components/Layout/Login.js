@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { UserContext } from "../Context/UserContext";
-import useInputState from "../Hooks/useInputState";
+import { UserContext } from "../../Context/UserContext";
+import useInputState from "../../Hooks/useInputState";
 
 function Login() {
   const { login, errors } = useContext(UserContext);

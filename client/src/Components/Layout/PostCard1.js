@@ -1,7 +1,7 @@
 import React from "react";
-import Votings from "./Votings";
-import PostFooter from "./PostFooter";
-import PostHeader from "./PostHeader";
+import Votings from "../Votings";
+import PostFooter from "../PostFooter";
+import PostHeader from "../PostHeader";
 
 export default function PostCard1(props) {
   const { post } = props;

@@ -1,18 +1,18 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../Context/UserContext";
-import { PostContext } from "../Context/PostContext";
-import useToggle from "../Hooks/useToggle";
+import { UserContext } from "../../Context/UserContext";
+import { PostContext } from "../../Context/PostContext";
+import useToggle from "../../Hooks/useToggle";
 import axios from "axios";
 import PostCard1 from "./PostCard1";
-import UpperFooter from "./UpperFooter";
+import UpperFooter from "../UpperFooter";
 import Footer from "./Footer";
 import ModalPost from "./ModalPost";
 import TopCommunities from "./TopCommunities";
 import PremiumFooter from "./PremiumFooter";
 
 export default function Landing() {
-  const [error, setError] = useState();
+  const [error] = useState();
   const [posts, setPosts] = useState([]);
   const [postModal, togglePostModal] = useToggle(false);
 

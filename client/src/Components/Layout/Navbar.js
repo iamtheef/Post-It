@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import useToggle from "../../Hooks/useToggle";
-import Login from "../Login";
-import Register from "../Register";
+import Login from "./Login";
+import Register from "./Register";
 import { UserContext } from "../../Context/UserContext";
 import env from "../../icons/env.png";
 import chat from "../../icons/chat.png";

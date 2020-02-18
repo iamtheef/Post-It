@@ -2,10 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Post from "./Post";
 import PostFooter from "./PostFooter";
-import RulesFooter from "./RulesFooter";
-import Comments from "./Comments";
-import CommunityFooter from "./CommunityFooter";
-import Footer from "./Footer";
+import RulesFooter from "./Layout/RulesFooter";
+import Comments from "./Layout/Comments";
+import CommunityFooter from "./Layout/CommunityFooter";
+import Footer from "./Layout/Footer";
 
 export default function PostHandler() {
   const [post, setPost] = useState();

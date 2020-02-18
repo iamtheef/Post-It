@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import ModalVotings from "./ModalVotings";
-import Post from "./Post";
-import PostFooter from "./PostFooter";
+import ModalVotings from "../ModalVotings";
+import Post from "../Post";
+import PostFooter from "../PostFooter";
 import Comments from "./Comments";
 import CommunityFooter from "./CommunityFooter";
 import Footer from "./Footer";
 import RulesFooter from "./RulesFooter";
-import { PostContext } from "../Context/PostContext";
-import { UserContext } from "../Context/UserContext";
+import { PostContext } from "../../Context/PostContext";
+import { UserContext } from "../../Context/UserContext";
 
 export default function ModalPost() {
   const { isUpvoted, isDownvoted } = useContext(UserContext);
